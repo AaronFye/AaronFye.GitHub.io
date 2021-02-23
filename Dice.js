@@ -13,8 +13,11 @@ var code = document.getElementById("code");
 
 var rc = document.getElementById("rc");
 
+var again = document.getElementById("again");
 
+again.style.display = 'none'; 
 game.style.display = 'none'; 
+
 
 
 result = Math.floor(Math.random()*100000)%6;
@@ -75,7 +78,9 @@ function win(){
     }
 
     if(won){
-        location.reload(true);
+
+        again.style.display = "block";
+        
     }
 
 }
