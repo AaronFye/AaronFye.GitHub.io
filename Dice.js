@@ -4,13 +4,10 @@ let board = new Array(9);
 var turn = 0;
 var won = false;
 board = ['0','1','2','3','4','5','6','7','8'];
-token = [['X','O'],['🐱','🐶'],['❌','⭕'],['EX','OH'],['❄','🔥'],['💩','🚽']];
+token = [['🟧','🟣'],['🐱','🐶'],['❌','⭕'],['🌝','🌞'],['❄','🔥'],['💩','🚽']];
 
 
-result = Math.random();
-result = result*100;
-result = result % 6;
-result = Math.trunc(result);
+result = Math.floor(Math.random()*100000)%6;
 
 function Roll(){
     var lastResult = result;
@@ -64,7 +61,13 @@ function win(){
 
     if(turn == 9 && !won){
         alert("It is a tie!");
+        won = true;
     }
+
+    if(won){
+        location.reload(true);
+    }
+
 }
 
 function Tick(position) {
@@ -96,6 +99,7 @@ function Tick(position) {
     }  }
     }
 
+    
 
 
 
