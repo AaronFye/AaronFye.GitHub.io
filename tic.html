@@ -1,0 +1,39 @@
+<head>
+    <style>
+        td{
+            font-size: 50;
+        }
+        table
+        {
+            table-layout: fixed;
+            width: 500px;
+            height: 500px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body style="text-align:center">
+    <h1 style="text-align:center" id="vs" onclick="Roll()">This page intentionally left blank.</h1>
+    <table border = 1 style="text-align:center">
+        <tr>
+            <td id='0' onclick="Tick(0)">?</td>
+            <td id='1' onclick="Tick(1)">?</td>
+            <td id='2' onclick="Tick(2)">?</td>
+        </tr>
+        <tr>
+            <td id='3' onclick="Tick(3)">?</td>
+            <td id='4' onclick="Tick(4)">?</td>
+            <td id='5' onclick="Tick(5)">?</td>
+        </tr>
+        <tr>
+            <td id='6' onclick="Tick(6)">?</td>
+            <td id='7' onclick="Tick(7)">?</td>
+            <td id='8' onclick="Tick(8)">?</td>
+        </tr>
+    </table>
+
+    <p id='board'></p>
+</body>
+
+<script src="Dice.js"></script>
