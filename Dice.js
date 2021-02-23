@@ -69,6 +69,7 @@ function win(){
 
 function Tick(position) {
     if(!won){
+        
     if(turn%2==0 && board[position]!='X' && board[position]!='O'){
     board[position] = 'X';
     var x = document.getElementById(position);
@@ -79,6 +80,8 @@ function Tick(position) {
         win();
     }
     }
+
+
     else if(turn%2==1 && board[position]!='X' && board[position]!='O'){
     board[position] = 'O';
     var x = document.getElementById(position);
@@ -88,6 +91,8 @@ function Tick(position) {
     if(turn==9){
         win();
     }
+
+
     }  }
     }
 
