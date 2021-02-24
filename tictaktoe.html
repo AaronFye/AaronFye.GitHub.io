@@ -1,0 +1,107 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+
+
+        }
+
+        div>div {
+            width: 100px;
+            height: 100px;
+            border: solid 1px;
+            background-color: #ccc;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 100px
+        }
+    </style>
+<script src="tictaktoe_files/prompt.js"></script></head>
+
+<body>
+    <p>Player 1: <span id="player1"></span> Player 2:<span id="player2"></span></p>
+    <div class="grid">
+        <div id="0,0" onclick="window.click(this)" class="cell"></div>
+        <div id="0,1" onclick="window.click(this)" class="cell"></div>
+        <div id="0,2" onclick="window.click(this)" class="cell"></div>
+        <div id="1,0" onclick="window.click(this)" class="cell"></div>
+        <div id="1,1" onclick="window.click(this)" class="cell"></div>
+        <div id="1,2" onclick="window.click(this)" class="cell"></div>
+        <div id="2,0" onclick="window.click(this)" class="cell"></div>
+        <div id="2,1" onclick="window.click(this)" class="cell"></div>
+        <div id="2,2" onclick="window.click(this)" class="cell"></div>
+    </div>
+
+<script>
+    window.onload = function() {
+        tokens = [["🔥", "💦"], ["🐱", "🐶"], ["🌞", "🌚"]]
+        room = null;
+        function flatten(array){
+            return [].concat.apply([], array);
+        }
+        window.gun = new Gun({
+            localStorage: false,
+            secret: "ejlgsdjlkngdfijlo;imeeljenrfejnkanfisja",
+            portal: "https://siasky.net",
+            debug: false,
+        })
+        gun.get('state').put({ board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]], current: tokens[Math.floor(Math.random()*tokens.length)] } );
+        gun.get('state').on(data => { 
+            current = data["current"]
+            board = data["board"]
+            turn = current[0],
+            document.getElementById("player1").innerText = current[0]
+            document.getElementById("player2").innerText = current[1]
+            gun.get('state').get("turn").put(turn == current[0] ? current[1] : current[0])
+            if (win(board, current[0]) || win(board, current[1])){alert(turn + " Wins"); return }
+        })
+        function win(board, token) {
+            let conditions = []
+            conditions[0] = [[1, 1, 1], [0, 0, 0], [0, 0, 0]]
+            conditions[1] = [[0, 0, 0], [1, 1, 1], [0, 0, 0]]
+            conditions[2] = [[0, 0, 0], [0, 0, 0], [1, 1, 1]]
+            conditions[3] = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+            conditions[4] = [[0, 0, 1], [0, 1, 0], [1, 0, 0]]
+            conditions[5] = [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+            conditions[6] = [[0, 1, 0], [0, 1, 0], [0, 1, 0]]
+            conditions[7] = [[0, 0, 1], [0, 0, 1], [0, 0, 1]]
+            let win = false
+            for(let k = 0; k < conditions.length; k++){
+                win = true
+                flatten(conditions[k]).forEach((element, index) => {
+                    if(element == 1){
+                        if((flatten(board)[index]) != token) { 
+                            win = false
+                        }
+                    }
+                })
+                if(win) break
+            }
+            return win
+
+        }
+        window.click = async function(clicked){
+            let name = clicked.id
+            x = name.split(",")[0]
+            y = name.split(",")[1]
+            gun.get('state').get("board").on(data => {
+                if(data["board"][x][y] == 0){
+                    gun.get('state').get("board").put(data["board"][x][y] = data["turn"]);
+                }
+                else{return}
+                clicked.innerText = data["board"][x][y] || ""
+
+            })
+            //turn = turn == current[0] ? current[1] : current[0]
+        }
+    }
+</script>
+<script src="tictaktoe_files/gun.js"></script>
+<script src="tictaktoe_files/radix.js"></script>
+<script src="tictaktoe_files/radisk.js"></script>
+<script src="tictaktoe_files/store.js"></script>
+<script src="tictaktoe_files/rindexed.js"></script>
+<script src="tictaktoe_files/main.js"></script>
+</body></html>
