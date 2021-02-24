@@ -16,7 +16,8 @@ var rc = document.getElementById("rc");
 var again = document.getElementById("again");
 
 again.style.display = 'none'; 
-game.style.display = 'none'; 
+code.style.display = 'none';
+//game.style.display = 'none'; 
 
 
 
@@ -24,10 +25,7 @@ result = Math.floor(Math.random()*100000)%6;
 
 function Roll(){
     var lastResult = result;
-    result = Math.random();
-    result = result*100;
-    result = result % 6;
-    result = Math.trunc(result);
+    result = Math.floor(Math.random()*100000)%6;
     vs.textContent = token[result][0] + " vs " + token[result][1];
     }
 
@@ -116,8 +114,8 @@ function Tick(position) {
 
 function Switch(){
     room = rc.value;
-    code.style.display = 'none';  
-    game.style.display = "block";
+    //code.style.display = 'none';  
+    //game.style.display = "block";
     }
 
 
