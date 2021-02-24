@@ -120,6 +120,12 @@ function Switch(){
     game.style.display = "block";
     }
 
+window.gun = new Gun({
+    localStorage: false,
+    secret: room,
+    portal: "https://siasky.net",
+    debug: false,
+    })
 
 
 

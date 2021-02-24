@@ -2,9 +2,22 @@ var result = 0;
 var vs = document.getElementById("vs");
 let board = new Array(9);
 var turn = 0;
+var room = "null";
 var won = false;
 board = ['0','1','2','3','4','5','6','7','8'];
 token = [['🟧','🟣'],['🐱','🐶'],['❌','⭕'],['🌝','🌞'],['❄','🔥'],['💩','🚽']];
+
+var game = document.getElementById("game");
+
+var code = document.getElementById("code");
+
+var rc = document.getElementById("rc");
+
+var again = document.getElementById("again");
+
+again.style.display = 'none'; 
+game.style.display = 'none'; 
+
 
 
 result = Math.floor(Math.random()*100000)%6;
@@ -65,7 +78,9 @@ function win(){
     }
 
     if(won){
-        location.reload(true);
+
+        again.style.display = "block";
+        
     }
 
 }
@@ -99,8 +114,11 @@ function Tick(position) {
     }  }
     }
 
-    
-
+function Switch(){
+    room = rc.value;
+    code.style.display = 'none';  
+    game.style.display = "block";
+    }
 
 
 
