@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Mario Game, Do Not Sue</title>
+    <link rel="shortcut icon" type="image/gif" href="Dancing-Mario-01.gif"/>
+</head>
+
+<body onkeydown="move(event)"> 
+        <img id="mario"  src="Dancing-Mario-01.gif">
+</body>
+
+<script>
+    var Mario= null;
+	function init(){
+		Mario=document.getElementById("mario");				
+		Mario.style.position='relative';
+		Mario.style.left='0px';
+	    Mario.style.top='0px';
+	}
+
+    function move(key){
+        var key_code = key.which || key.keyCode;
+        //alert(key_code);
+        if(key_code==37){
+                L();
+        }
+        else if(key_code ==38){
+                U();
+        }
+        else if(key_code ==39){
+                R();
+        }
+        else if(key_code ==40){
+                D();
+        }
+
+    }
+
+    function L(){
+        Mario.style.left=parseInt(Mario.style.left)-5 +'px';
+    }
+    
+    function U(){
+        Mario.style.top=parseInt(Mario.style.top)-5 +'px';
+    }
+    
+    function R(){
+        Mario.style.left=parseInt(Mario.style.left)+5 +'px';
+    }
+    
+    function D(){
+        Mario.style.top=parseInt(Mario.style.top)+5 +'px';
+    }
+
+    window.onload=init;
+</script>
