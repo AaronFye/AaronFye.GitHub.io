@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Hang Man</title>
+
+    <script>
+        window.onload = function() {
+        var context = new AudioContext();
+    }
+    </script>
+
+    <script>
+        var playing = 0;
+        var misses = 0;
+        var dude = ["head","chest","RLeg","LLeg","RArm","LArm","REye","LEye","mouth"];
+        var word = "Aaron";
+        var game = word.toLowerCase().split("");
+
+
+        function guess(letter){
+            if(playing){
+                var char = letter.keyCode;
+
+                if(game[0] == String.fromCharCode(char).toLowerCase()){
+                    alert("yes");
+                }
+                else{
+                    alert(game[0]);
+                    alert(String.fromCharCode(char));
+                    var item = document.getElementById(dude[misses]);
+                    item.style.visibility = "visible";
+                    misses++;
+                    if(misses == 8){
+                        //end
+                    }
+                }
+               
+            }
+        }
+
+        function start(){
+            var art = document.getElementById("art").innerHTML;
+            var body = document.getElementById("body");
+            body.innerHTML ="<div id=\"game\">" + art + "</div>"
+            playing=1;
+            //onkeypress="guess(event)"
+            var letters = document.getElementById("letters");
+         //   letters.innerHTML= "<img src=\"Hangman/Alpha/\">";
+            var test = "C.png";
+            document.getElementById("test").src="Hangman/Alpha/"+test;
+        }
+    </script>
+
+</head>
+
+
+<body id="body" onkeypress="guess(event)">
+    <audio id="player" autoplay><source src="Hangman/BGM.mp3" type="audio/mp3"></audio>
+    <div id="game" onkeypress="guess(event)">
+    <input type="button" value="Start Game" onclick="start()">
+    <div id="art">
+        <div id="letters">
+            <img id="test" src="Hangman/Alpha/A.png">
+        </div>
+
+        <img src="Hangman/gallow.png" style="position: absolute; margin-left: 750px; margin-top: 0px;">
+        <img id="head" src="Hangman/head.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="chest" src="Hangman/body.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="RLeg" src="Hangman/RLeg.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="LLeg" src="Hangman/LLeg.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="RArm" src="Hangman/RArm.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="LArm" src="Hangman/LArm.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="REye" src="Hangman/REye.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="LEye" src="Hangman/LEye.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+        <img id="mouth" src="Hangman/mouth.png" style="position: absolute; margin-left: 900px; margin-top: 325px; visibility: hidden;">
+    </div>
+    </div>
+</body>
+
+
+
