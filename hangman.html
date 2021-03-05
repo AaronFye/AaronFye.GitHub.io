@@ -10,8 +10,10 @@
     </script>
 
     <script>
+        random = Math.floor(((Math.random()*100000)%14));
         var playing = 0;
         var misses = 0;
+        var words = ["aaron","dumbo","revenge","javascript","turpentine","memelord","taskmaster","timelord","massage","robotics","disney","olympics","japanime","xerox"];
         var dude = ["head","chest","RLeg","LLeg","RArm","LArm","REye","LEye","mouth"];
         var word = words[random];
         var game = word.toLowerCase().split("");
