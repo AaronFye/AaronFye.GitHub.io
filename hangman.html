@@ -4,12 +4,6 @@
     <title>Hang Man</title>
 
     <script>
-        window.onload = function() {
-        var context = new AudioContext();
-    }
-    </script>
-
-    <script>
         random = Math.floor(((Math.random()*100000)%14));
         var playing = 0;
         var misses = 0;
@@ -17,7 +11,7 @@
         var dude = ["head","chest","RLeg","LLeg","RArm","LArm","REye","LEye","mouth"];
         var word = words[random];
         var game = word.toLowerCase().split("");
-
+        var counter = 0;
 
         function guess(letter){
             if(playing){
@@ -29,16 +23,21 @@
                         correct = true;     
                         var letr = document.getElementsByClassName(game[l]);
                         for(var k = 0; k< letr.length; k++){
-                            letr[k].style.visibility = "visible";
+                            letr[k].style.visibility = "visible";  
                         };
-                        
+                        counter++;
+                        if(counter == game.length){
+                            alert("You win!");
+                            playing=0;
+                        }
                     }
                     else if(l == game.length-1 && !correct){
                         var item = document.getElementById(dude[misses]);
                         item.style.visibility = "visible";
                         misses++;
-                        if(misses == 8){
-                            //end
+                        if(misses == 9){
+                            playing = 0;
+                            alert("you lose");
                        }
                     }
                     
@@ -59,7 +58,8 @@
             var spaces = letters.innerHTML;
         
             for ( var i =0; i<game.length;i++){
-                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/Alpha/"+ alphabet[(game[i].charCodeAt(0))-97] +"\" style=\"visibility: hidden;\">";
+                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/Alpha/"+ alphabet[(game[i].charCodeAt(0))-97] +"\" style=\"visibility: hidden; margin-top: 500px; margin-left: "+ (i*50+100) +"px; position: absolute;\">";
+                //<br/> <img src=\"Hangman/letter.png\">";
                 //alert("<img src=\"Hangman/Alpha/"+ alphabet[i] +"\">");
                 spaces = letters.innerHTML;
             }
@@ -70,7 +70,7 @@
 
 
 <body id="body" onkeypress="guess(event)">
-    <audio id="player" autoplay><source src="Hangman/BGM.mp3" type="audio/mp3"></audio>
+    <audio id="player" autoplay><source src="Hangman/BGM.mp3" type="audio/mp3"></audio> 
     <div id="game" onkeypress="guess(event)">
     <input type="button" value="Start Game" onclick="start()">
     <div id="art">
