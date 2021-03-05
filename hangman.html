@@ -13,21 +13,25 @@
         var playing = 0;
         var misses = 0;
         var dude = ["head","chest","RLeg","LLeg","RArm","LArm","REye","LEye","mouth"];
-        var word = "Random";
+        var word = words[random];
         var game = word.toLowerCase().split("");
 
 
         function guess(letter){
             if(playing){
                 var char = letter.keyCode;
-                var hit = [0];
+                var correct = false;
                 for(var l = 0; l< game.length; l++){
+                    
                     if(game[l] == String.fromCharCode(char).toLowerCase()){
+                        correct = true;     
                         var letr = document.getElementsByClassName(game[l]);
-                        letr.style.visibility = "visible"; 
+                        for(var k = 0; k< letr.length; k++){
+                            letr[k].style.visibility = "visible";
+                        };
+                        
                     }
-
-                    else{
+                    else if(l == game.length-1 && !correct){
                         var item = document.getElementById(dude[misses]);
                         item.style.visibility = "visible";
                         misses++;
@@ -35,7 +39,7 @@
                             //end
                        }
                     }
-
+                    
                 }
                 
                
@@ -53,7 +57,7 @@
             var spaces = letters.innerHTML;
         
             for ( var i =0; i<game.length;i++){
-                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/Alpha/"+ alphabet[(game[i].charCodeAt(0))-97] +"\">";
+                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/Alpha/"+ alphabet[(game[i].charCodeAt(0))-97] +"\" style=\"visibility: hidden;\">";
                 //alert("<img src=\"Hangman/Alpha/"+ alphabet[i] +"\">");
                 spaces = letters.innerHTML;
             }
