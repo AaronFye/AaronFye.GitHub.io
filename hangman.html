@@ -66,13 +66,40 @@
         }
     </script>
 
+    <style>
+        @font-face {
+            font-family: Aarons;
+            src: url(Hangman/SVG/Aarons.ttf);
+        }
+        button {
+            font-family: Aarons;
+            font-size: xx-large;
+            width: 550px;
+            height: 550px
+        }
+        h3{
+            font-family: Aarons;
+            font-size: xx-large;
+        }
+        h2{
+            font-family: Aarons;
+            font-size:xx-large;
+        }
+
+    </style>
+
+
 </head>
 
 
 <body id="body" onkeypress="guess(event)">
     <audio id="player" autoplay><source src="Hangman/BGM.mp3" type="audio/mp3"></audio> 
     <div id="game" onkeypress="guess(event)">
-    <input type="button" value="Start Game" onclick="start()">
+    <center> 
+        <input type="button" value="Start Game" onclick="start()" style="font-family: Aarons; width:300px;height:30px; font-size: xx-large;" >
+        <h2> Type in your answer using a keyboard </h2>
+        <h3> No mobile support yet </h3>
+    </center>
     <div id="art">
 
         <div id="letters">
