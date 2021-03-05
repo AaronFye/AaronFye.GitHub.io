@@ -12,6 +12,7 @@
         var word = words[random];
         var game = word.toLowerCase().split("");
         var counter = 0;
+        var alphabet = ["A.png","B.png","C.png","D.png","E.png","F.png","G.png","H.png","I.png","J.png","K.png","L.png","M.png","N.png","O.png","P.png","Q.png","R.png","S.png","T.png","U.png","V.png","W.png","X.png","Y.png","Z.png"];
 
         function guess(letter){
             if(playing){
@@ -23,7 +24,8 @@
                         correct = true;     
                         var letr = document.getElementsByClassName(game[l]);
                         for(var k = 0; k< letr.length; k++){
-                            letr[k].style.visibility = "visible";  
+                            letr[k].src = "Hangman/Alpha/"+ alphabet[(game[l].charCodeAt(0))-97];  
+                            letr[k].style.marginTop = "500px";
                         };
                         counter++;
                         if(counter == game.length){
@@ -37,7 +39,7 @@
                         misses++;
                         if(misses == 9){
                             playing = 0;
-                            alert("you lose");
+                            alert("you lose! The word was: " + word);
                        }
                     }
                     
@@ -46,8 +48,7 @@
                
             }
         }
-        var alphabet = ["A.png","B.png","C.png","D.png","E.png","F.png","G.png","H.png","I.png","J.png","K.png","L.png","M.png","N.png","O.png","P.png","Q.png","R.png","S.png","T.png","U.png","V.png","W.png","X.png","Y.png","Z.png"];
-
+        
         function start(){
             var art = document.getElementById("art").innerHTML;
             var body = document.getElementById("body");
@@ -58,9 +59,10 @@
             var spaces = letters.innerHTML;
         
             for ( var i =0; i<game.length;i++){
-                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/Alpha/"+ alphabet[(game[i].charCodeAt(0))-97] +"\" style=\"visibility: hidden; margin-top: 500px; margin-left: "+ (i*50+100) +"px; position: absolute;\">";
+                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/letter.png\" style=\"visibility: visible; margin-top: 550px; margin-left: "+ (i*50+100) +"px; position: absolute;\">";
                 //<br/> <img src=\"Hangman/letter.png\">";
                 //alert("<img src=\"Hangman/Alpha/"+ alphabet[i] +"\">");
+                //"+ alphabet[(game[i].charCodeAt(0))-97] +"
                 spaces = letters.innerHTML;
             }
         }
