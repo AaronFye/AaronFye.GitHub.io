@@ -13,30 +13,35 @@
         var playing = 0;
         var misses = 0;
         var dude = ["head","chest","RLeg","LLeg","RArm","LArm","REye","LEye","mouth"];
-        var word = "Aaron";
+        var word = "Random";
         var game = word.toLowerCase().split("");
 
 
         function guess(letter){
             if(playing){
                 var char = letter.keyCode;
-
-                if(game[0] == String.fromCharCode(char).toLowerCase()){
-                    alert("yes");
-                }
-                else{
-                    alert(game[0]);
-                    alert(String.fromCharCode(char));
-                    var item = document.getElementById(dude[misses]);
-                    item.style.visibility = "visible";
-                    misses++;
-                    if(misses == 8){
-                        //end
+                var hit = [0];
+                for(var l = 0; l< game.length; l++){
+                    if(game[l] == String.fromCharCode(char).toLowerCase()){
+                        var letr = document.getElementsByClassName(game[l]);
+                        letr.style.visibility = "visible"; 
                     }
+
+                    else{
+                        var item = document.getElementById(dude[misses]);
+                        item.style.visibility = "visible";
+                        misses++;
+                        if(misses == 8){
+                            //end
+                       }
+                    }
+
                 }
+                
                
             }
         }
+        var alphabet = ["A.png","B.png","C.png","D.png","E.png","F.png","G.png","H.png","I.png","J.png","K.png","L.png","M.png","N.png","O.png","P.png","Q.png","R.png","S.png","T.png","U.png","V.png","W.png","X.png","Y.png","Z.png"];
 
         function start(){
             var art = document.getElementById("art").innerHTML;
@@ -45,9 +50,13 @@
             playing=1;
             //onkeypress="guess(event)"
             var letters = document.getElementById("letters");
-         //   letters.innerHTML= "<img src=\"Hangman/Alpha/\">";
-            var test = "C.png";
-            document.getElementById("test").src="Hangman/Alpha/"+test;
+            var spaces = letters.innerHTML;
+        
+            for ( var i =0; i<game.length;i++){
+                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/Alpha/"+ alphabet[(game[i].charCodeAt(0))-97] +"\">";
+                //alert("<img src=\"Hangman/Alpha/"+ alphabet[i] +"\">");
+                spaces = letters.innerHTML;
+            }
         }
     </script>
 
@@ -59,8 +68,8 @@
     <div id="game" onkeypress="guess(event)">
     <input type="button" value="Start Game" onclick="start()">
     <div id="art">
+
         <div id="letters">
-            <img id="test" src="Hangman/Alpha/A.png">
         </div>
 
         <img src="Hangman/gallow.png" style="position: absolute; margin-left: 750px; margin-top: 0px;">
