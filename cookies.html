@@ -1,0 +1,33 @@
+
+
+<head>
+    <script>
+        
+        function fire(){      
+            var pass = document.getElementById("input").value;
+            localStorage.setItem("passcode", pass.toLowerCase());
+
+        }
+
+        function check(){
+            var corr = localStorage.getItem("passcode").toLowerCase();
+            var guess = document.getElementById("input").value.toLowerCase();
+            if(corr == guess){
+                alert("you got it, dude.");
+            }
+            else{
+                alert("imposter is sus.");
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <center>
+        <h1>Input Passcode</h1>
+        <input type="password" id="input" onfocus="this.value=''" value="*****"> </br>
+        <input type="button" onclick="fire()" value="set code">
+        <input type="button" onclick="check()" value="check code">
+    </center>
+</body>
