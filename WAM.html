@@ -12,6 +12,7 @@
 
     <body>
         <center>
+            <h1> Score: </h1> <h1 id="score"> 0 </h1>
             <table border = "1" style="text-align:center">
                 <tr>
                     <td id='0' onclick="bop(0)">X</td>
@@ -47,9 +48,13 @@
 
     function despawn(place){
         var desp= setTimeout( function desp(){
+        if(field[place]!='X'){
         field[place] = 'X';
         document.getElementById(place).innerHTML = 'X';
-        score-=100;}, 5000);
+        score-=100;
+        document.getElementById("score").innerHTML = score;
+        }
+        }, 2000);
     }
 
     
@@ -73,9 +78,11 @@
             field[pos] = 'X';
             document.getElementById(pos).innerHTML = 'X';
             score += 500;
+            document.getElementById("score").innerHTML = score;
         }
         else{
             score-=50;
+            document.getElementById("score").innerHTML = score;
         }
     }
 
