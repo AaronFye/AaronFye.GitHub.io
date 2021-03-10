@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            td{
+                width: 150px;
+                height: 150px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center>
+            <table border = "1" style="text-align:center">
+                <tr>
+                    <td id='0' onclick="bop(0)">X</td>
+                    <td id='1' onclick="bop(1)">X</td>
+                    <td id='2' onclick="bop(2)">X</td>
+                </tr>
+                <tr>
+                    <td id='3' onclick="bop(3)">X</td>
+                    <td id='4' onclick="bop(4)">X</td>
+                    <td id='5' onclick="bop(5)">X</td>
+                </tr>
+                <tr>
+                    <td id='6' onclick="bop(6)">X</td>
+                    <td id='7' onclick="bop(7)">X</td>
+                    <td id='8' onclick="bop(8)">X</td>
+                </tr>
+            </table>
+        </center>
+        </table>
+    </body>
+</html>
+
+<script>
+    var score = 0;
+
+    var rando = Math.floor((Math.random()*100000000)%5000)+5000;
+    var field = 
+    [
+    'X','X','X',
+    'X','X','X',
+    'X','X','X'
+    ];
+
+    function despawn(place){
+        var desp= setTimeout( function desp(){
+        field[place] = 'X';
+        document.getElementById(place).innerHTML = 'X';
+        score-=100;}, 5000);
+    }
+
+    
+    window.onload = setInterval(function spawn(){
+        var place = rando%9;
+        if(field[place] == 'X'){
+            field[place] = 'O';
+            document.getElementById(place).innerHTML = 'O';
+         //   alert(field[0] + ", " + field[1] + ", " +field[2] + ", " + field[3] + ", " +field[4] + ", " + field[5] + ", " +field[6] + ", " + field[7] + ", " + field[8]);
+        }
+
+        rando = Math.floor((Math.random()*100000000)%5000)+5000;
+        despawn(place);
+    }, 1000);
+
+
+    
+
+    function bop(pos){
+        if(field[pos] == 'O'){
+            field[pos] = 'X';
+            document.getElementById(pos).innerHTML = 'X';
+            score += 500;
+        }
+        else{
+            score-=50;
+        }
+    }
+
+</script>
