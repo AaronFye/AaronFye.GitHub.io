@@ -48,12 +48,12 @@
 
     function despawn(place){
         var desp= setTimeout( function desp(){
-        if(field[place]!='X'){
-        field[place] = 'X';
-        document.getElementById(place).innerHTML = 'X';
-        score-=100;
-        document.getElementById("score").innerHTML = score;
-        }
+          if(field[place]!='X'){
+                field[place] = 'X';
+                document.getElementById(place).innerHTML = 'X';
+                score-=100;
+                document.getElementById("score").innerHTML = score;
+                }
         }, 2000);
     }
 
