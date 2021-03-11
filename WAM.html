@@ -17,28 +17,29 @@
         // [debug] Show debug output
         window.gun = new Gun({
             localStorage: true,
-            secret: "AaronWAM",
+            secret: "AaronWAM2",
             portal: "https://siasky.net",
             debug: true,
         });
 
-        function Fire(){
+        function Fire(name){
             // Put data into gun. This will store in memory, then localStorage (disabled), then Skynet
             var high = "";
             var sco = document.getElementById("highscore").innerHTML;
             high = document.getElementById("score").innerHTML;
             if(parseInt(high) > parseInt(sco)){
-                gun.get('WAM').put({ high:high});
+                alert(name +" "+ high);
+                gun.get('WAM2').put({ high:high, name:name});
             }
         }
 
 
         
         function reload(){
-            gun.get('WAM').once(data => { 
+            gun.get('WAM2').once(data => { 
                 var hi = data['high'];
-                alert(hi);
                 document.getElementById("highscore").innerHTML = hi;
+                document.getElementById("name").innerHTML = data['name'];
             });
 }
 
@@ -76,7 +77,7 @@
             </table>
             <div id="butts"><input type="button" value="Start!" onclick="start()"></div>
 
-            <h1>High Score: </h1> <h1 id="highscore">0</h1>
+            <h1>High Score: </h1> <h1 id="highscore">0</h1> <h1 id="name"> </h1>
         </center>
         </table>
     </body>
@@ -124,15 +125,19 @@
                 }
             }, 1000);
             var timer = 30;
-            setInterval(function times(){
+            var timpo = setInterval(function times(){
                 document.getElementById("time").innerHTML= timer;
                 if(playing){
                     timer--;
                 }
                 if(timer==0){
                     clearInterval(spawner);
+                    clearInterval(timpo);
                     playing = 0;
-                    Fire();
+                    var name = prompt("ENTER YOUR NAME");
+                    Fire(name);
+                    reload();
+                    
                 }
             }, 1000);
             playing = 1;
