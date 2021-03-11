@@ -25,8 +25,11 @@
         function Fire(){
             // Put data into gun. This will store in memory, then localStorage (disabled), then Skynet
             var high = "";
+            var sco = document.getElementById("highscore").innerHTML;
             high = document.getElementById("score").innerHTML;
-            gun.get('WAM').put({ score:high});
+            if(parseInt(high) > parseInt(sco)){
+                gun.get('WAM').put({ score:high});
+            }
         }
 
 
@@ -34,7 +37,7 @@
         function reload(){
             var high = "";
             gun.get('WAM').once(data => { 
-                document.getElementById("score").innerHTML = data['score'];
+                document.getElementById("highscore").innerHTML = data['score'];
             });
 }
 
@@ -71,6 +74,8 @@
                 </tr>
             </table>
             <div id="butts"><input type="button" value="Start!" onclick="start()"></div>
+
+            <h1>High Score: </h1> <h1 id="highscore">0</h1>
         </center>
         </table>
     </body>
@@ -79,6 +84,8 @@
 <script>
     var score = 0;
     var playing = 0;
+
+    window.onload = reload();
 
     var rando = Math.floor((Math.random()*100000000)%5000)+5000;
     var field = 
@@ -102,33 +109,34 @@
     }
     
     function start(){
-      var spawner = setInterval(function spawn(){
-            if(playing){
-                var place = rando%9;
-                if(field[place] == 'X'){
-                    field[place] = 'O';
-                    document.getElementById(place).innerHTML = 'O';
-                    document.getElementById(place).style.backgroudColor = "blue";
-                }
+        var spawner = setInterval(function spawn(){
+                if(playing){
+                    var place = rando%9;
+                    if(field[place] == 'X'){
+                        field[place] = 'O';
+                        document.getElementById(place).innerHTML = 'O';
+                        document.getElementById(place).style.backgroudColor = "blue";
+                    }
 
-                rando = Math.floor((Math.random()*100000000)%5000)+5000;
-                despawn(place);
-            }
-        }, 1000);
-        var timer = 30;
-        setInterval(function times(){
-            document.getElementById("time").innerHTML= timer;
-            if(playing){
-                timer--;
-            }
-            if(timer==0){
-                clearInterval(spawner);
-                playing = 0;
-            }
-        }, 1000);
-        playing = 1;
-        
-        document.getElementById("butts").innerHTML = "";
+                    rando = Math.floor((Math.random()*100000000)%5000)+5000;
+                    despawn(place);
+                }
+            }, 1000);
+            var timer = 30;
+            setInterval(function times(){
+                document.getElementById("time").innerHTML= timer;
+                if(playing){
+                    timer--;
+                }
+                if(timer==0){
+                    clearInterval(spawner);
+                    playing = 0;
+                    Fire();
+                }
+            }, 1000);
+            playing = 1;
+            
+            document.getElementById("butts").innerHTML = "";
     }
 
     
