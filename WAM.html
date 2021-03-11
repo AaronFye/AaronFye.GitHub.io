@@ -28,7 +28,7 @@
             var sco = document.getElementById("highscore").innerHTML;
             high = document.getElementById("score").innerHTML;
             if(parseInt(high) > parseInt(sco)){
-                gun.get('WAM').put({ score:high});
+                gun.get('WAM').put({ high:high});
             }
         }
 
@@ -37,7 +37,7 @@
         function reload(){
             var high = "";
             gun.get('WAM').once(data => { 
-                document.getElementById("highscore").innerHTML = data['score'];
+                document.getElementById("highscore").innerHTML = data['high'];
             });
 }
 
