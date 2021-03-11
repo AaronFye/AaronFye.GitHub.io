@@ -2,6 +2,45 @@
 
 <html>
     <head>
+        <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gun/lib/radix.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gun/lib/radisk.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gun/lib/store.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gun/lib/rindexed.js"></script>
+        <script src="https://unpkg.com/zenbase@1.0.10/dist/main.js"></script>
+        <script>
+
+        // Initialize gun.
+        // [localStorage] We are turning localStorage to false for testing purposes. Generally, you'd want that to be true
+        // [secret] Secret should be something long and secure. Your data will be saved to Skynet using that secret
+        // [portal] Skynet portal you'd like to use. Use a portal you trust or run your own. They could potentially manipulate your data (although I don't see why) 
+        // [debug] Show debug output
+        window.gun = new Gun({
+            localStorage: true,
+            secret: "AaronWAM",
+            portal: "https://siasky.net",
+            debug: true,
+        });
+
+        function Fire(){
+            // Put data into gun. This will store in memory, then localStorage (disabled), then Skynet
+            var high = "";
+            high = document.getElementById("score").innerHTML;
+            gun.get('WAM').put({ score:high});
+        }
+
+
+        
+        function reload(){
+            var high = "";
+            gun.get('WAM').once(data => { 
+                document.getElementById("score").innerHTML = data['score'];
+            });
+}
+
+        </script>
+
+
         <style>
             td{
                 width: 150px;
@@ -12,6 +51,7 @@
 
     <body>
         <center>
+            <h1> Time: </h1> <h1 id="time"> 30 </h1>
             <h1> Score: </h1> <h1 id="score"> 0 </h1>
             <table border = "1" style="text-align:center">
                 <tr>
@@ -30,6 +70,7 @@
                     <td id='8' onclick="bop(8)">X</td>
                 </tr>
             </table>
+            <div id="butts"><input type="button" value="Start!" onclick="start()"></div>
         </center>
         </table>
     </body>
@@ -37,6 +78,7 @@
 
 <script>
     var score = 0;
+    var playing = 0;
 
     var rando = Math.floor((Math.random()*100000000)%5000)+5000;
     var field = 
@@ -48,40 +90,61 @@
 
     function despawn(place){
         var desp= setTimeout( function desp(){
-          if(field[place]!='X'){
-                field[place] = 'X';
-                document.getElementById(place).innerHTML = 'X';
-                score-=100;
-                document.getElementById("score").innerHTML = score;
+            if(playing){
+                if(field[place]!='X'){
+                    field[place] = 'X';
+                    document.getElementById(place).innerHTML = 'X';
+                    score-=100;
+                    document.getElementById("score").innerHTML = score;
                 }
+            }
         }, 2000);
     }
-
     
-    window.onload = setInterval(function spawn(){
-        var place = rando%9;
-        if(field[place] == 'X'){
-            field[place] = 'O';
-            document.getElementById(place).innerHTML = 'O';
-        }
+    function start(){
+      var spawner = setInterval(function spawn(){
+            if(playing){
+                var place = rando%9;
+                if(field[place] == 'X'){
+                    field[place] = 'O';
+                    document.getElementById(place).innerHTML = 'O';
+                    document.getElementById(place).style.backgroudColor = "blue";
+                }
 
-        rando = Math.floor((Math.random()*100000000)%5000)+5000;
-        despawn(place);
-    }, 1000);
-
+                rando = Math.floor((Math.random()*100000000)%5000)+5000;
+                despawn(place);
+            }
+        }, 1000);
+        var timer = 30;
+        setInterval(function times(){
+            document.getElementById("time").innerHTML= timer;
+            if(playing){
+                timer--;
+            }
+            if(timer==0){
+                clearInterval(spawner);
+                playing = 0;
+            }
+        }, 1000);
+        playing = 1;
+        
+        document.getElementById("butts").innerHTML = "";
+    }
 
     
 
     function bop(pos){
-        if(field[pos] == 'O'){
-            field[pos] = 'X';
-            document.getElementById(pos).innerHTML = 'X';
-            score += 500;
-            document.getElementById("score").innerHTML = score;
-        }
-        else{
-            score-=50;
-            document.getElementById("score").innerHTML = score;
+        if(playing){
+            if(field[pos] == 'O'){
+                field[pos] = 'X';
+                document.getElementById(pos).innerHTML = 'X';
+                score += 500;
+                document.getElementById("score").innerHTML = score;
+            }
+            else{
+                score-=50;
+                document.getElementById("score").innerHTML = score;
+            }
         }
     }
 
