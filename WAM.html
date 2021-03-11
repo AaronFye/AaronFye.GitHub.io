@@ -35,9 +35,10 @@
 
         
         function reload(){
-            var high = "";
             gun.get('WAM').once(data => { 
-                document.getElementById("highscore").innerHTML = data['high'];
+                var hi = data['high'];
+                alert(hi);
+                document.getElementById("highscore").innerHTML = hi;
             });
 }
 
