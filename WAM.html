@@ -55,9 +55,9 @@
     // [debug] Show debug output
     window.gun = new Gun({
         localStorage: true,
-        secret: "AaronWAM2",
+        secret: "WhackAMoleAF",
         portal: "https://siasky.net",
-        debug: true,
+        debug: false,
     });
 
 
@@ -151,13 +151,13 @@
         high = document.getElementById("score").innerHTML;
         if(parseInt(high) > parseInt(sco)){
             alert(name +" "+ high);
-            gun.get('WAM2').put({ high:high, name:name});
+            gun.get('score').put({ high:high, name:name});
         }
     }
 
     
     function reload(){
-        gun.get('WAM2').on(data => { 
+        gun.get('score').on(data => { 
             debugger; var hi = data['high'];
             document.getElementById("highscore").innerHTML = hi;
             document.getElementById("name").innerHTML = data['name'];
