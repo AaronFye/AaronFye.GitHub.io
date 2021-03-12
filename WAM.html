@@ -156,11 +156,10 @@
         }
     }
 
-    debugger;
     
     function reload(){
         gun.get('WAM2').once(data => { 
-            var hi = data['high'];
+            debugger; var hi = data['high'];
             document.getElementById("highscore").innerHTML = hi;
             document.getElementById("name").innerHTML = data['name'];
         });
