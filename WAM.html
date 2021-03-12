@@ -8,10 +8,6 @@
         <script src="https://cdn.jsdelivr.net/npm/gun/lib/store.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gun/lib/rindexed.js"></script>
         <script src="https://unpkg.com/zenbase@1.0.10/dist/main.js"></script>
-        <script>
-
-
-        </script>
 
 
         <style>
@@ -52,6 +48,19 @@
 </html>
 
 <script>
+
+// Initialize gun.
+    // [localStorage] We are turning localStorage to false for testing purposes. Generally, you'd want that to be true
+    // [secret] Secret should be something long and secure. Your data will be saved to Skynet using that secret
+    // [portal] Skynet portal you'd like to use. Use a portal you trust or run your own. They could potentially manipulate your data (although I don't see why) 
+    // [debug] Show debug output
+    window.gun = new Gun({
+        localStorage: true,
+        secret: "AaronWAM2",
+        portal: "https://siasky.net",
+        debug: true,
+    });
+
     var score = 0;
     var playing = 0;
 
@@ -131,37 +140,27 @@
     }
 
     
-        // Initialize gun.
-        // [localStorage] We are turning localStorage to false for testing purposes. Generally, you'd want that to be true
-        // [secret] Secret should be something long and secure. Your data will be saved to Skynet using that secret
-        // [portal] Skynet portal you'd like to use. Use a portal you trust or run your own. They could potentially manipulate your data (although I don't see why) 
-        // [debug] Show debug output
-        window.gun = new Gun({
-            localStorage: true,
-            secret: "AaronWAM2",
-            portal: "https://siasky.net",
-            debug: true,
+    
+
+    function Fire(name){
+        // Put data into gun. This will store in memory, then localStorage (disabled), then Skynet
+        var high = "";
+        var sco = document.getElementById("highscore").innerHTML;
+        high = document.getElementById("score").innerHTML;
+        if(parseInt(high) > parseInt(sco)){
+            alert(name +" "+ high);
+            gun.get('WAM2').put({ high:high, name:name});
+        }
+    }
+
+
+    
+    function reload(){
+        gun.get('WAM2').once(data => { 
+            var hi = data['high'];
+            document.getElementById("highscore").innerHTML = hi;
+            document.getElementById("name").innerHTML = data['name'];
         });
-
-        function Fire(name){
-            // Put data into gun. This will store in memory, then localStorage (disabled), then Skynet
-            var high = "";
-            var sco = document.getElementById("highscore").innerHTML;
-            high = document.getElementById("score").innerHTML;
-            if(parseInt(high) > parseInt(sco)){
-                alert(name +" "+ high);
-                gun.get('WAM2').put({ high:high, name:name});
-            }
-        }
-
-
-        
-        function reload(){
-            gun.get('WAM2').once(data => { 
-                var hi = data['high'];
-                document.getElementById("highscore").innerHTML = hi;
-                document.getElementById("name").innerHTML = data['name'];
-            });
-        }
+    }
 
 </script>
