@@ -68,6 +68,8 @@
 
     window.onload = reload();
 
+    debugger;
+
     var rando = Math.floor((Math.random()*100000000)%5000)+5000;
     var field = 
     [
@@ -142,7 +144,7 @@
     }
 
     
-    
+      debugger;
 
     function Fire(name){
         // Put data into gun. This will store in memory, then localStorage (disabled), then Skynet
@@ -155,7 +157,7 @@
         }
     }
 
-
+    debugger;
     
     function reload(){
         gun.get('WAM2').once(data => { 
@@ -164,5 +166,5 @@
             document.getElementById("name").innerHTML = data['name'];
         });
     }
-
+    debugger;
 </script>
