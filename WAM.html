@@ -157,7 +157,7 @@
 
     
     function reload(){
-        gun.get('WAM2').once(data => { 
+        gun.get('WAM2').on(data => { 
             debugger; var hi = data['high'];
             document.getElementById("highscore").innerHTML = hi;
             document.getElementById("name").innerHTML = data['test'];
