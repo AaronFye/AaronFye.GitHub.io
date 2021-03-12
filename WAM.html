@@ -158,7 +158,7 @@
     
     function reload(){
         gun.get('score').on(data => { 
-            debugger; var hi = data['high'];
+            var hi = data['high'];
             document.getElementById("highscore").innerHTML = hi;
             document.getElementById("name").innerHTML = data['name'];
         });
