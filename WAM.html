@@ -157,11 +157,10 @@
 
     
     function reload(){
-        gun.get('WAM2').put({test:"test"});
         gun.get('WAM2').once(data => { 
             debugger; var hi = data['high'];
             document.getElementById("highscore").innerHTML = hi;
-            document.getElementById("name").innerHTML = data['name'];
+            document.getElementById("name").innerHTML = data['test'];
         });
     }
 </script>
