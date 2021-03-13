@@ -12,8 +12,13 @@
 
         <style>
             td{
-                width: 150px;
-                height: 150px;
+                width: 100px;
+                height: 100px;
+                background-color: green;
+            }
+            img{
+                width: 91px;
+                height: 91px;
             }
         </style>
     </head>
@@ -24,19 +29,19 @@
             <h1> Score: </h1> <h1 id="score"> 0 </h1>
             <table border = "1" style="text-align:center">
                 <tr>
-                    <td id='0' onclick="bop(0)">X</td>
-                    <td id='1' onclick="bop(1)">X</td>
-                    <td id='2' onclick="bop(2)">X</td>
+                    <td id='0' onclick="bopIt(0)"> <img id="9" src="placeHolder.png"> </td>
+                    <td id='1' onclick="bopIt(1)"> <img id="10" src="placeHolder.png"></td>
+                    <td id='2' onclick="bopIt(2)"> <img id="11" src="placeHolder.png"></td>
                 </tr>
                 <tr>
-                    <td id='3' onclick="bop(3)">X</td>
-                    <td id='4' onclick="bop(4)">X</td>
-                    <td id='5' onclick="bop(5)">X</td>
+                    <td id='3' onclick="bopIt(3)"> <img id="12" src="placeHolder.png"></td>
+                    <td id='4' onclick="bopIt(4)"> <img id="13" src="placeHolder.png"></td>
+                    <td id='5' onclick="bopIt(5)"> <img id="14" src="placeHolder.png"></td>
                 </tr>
                 <tr>
-                    <td id='6' onclick="bop(6)">X</td>
-                    <td id='7' onclick="bop(7)">X</td>
-                    <td id='8' onclick="bop(8)">X</td>
+                    <td id='6' onclick="bopIt(6)"> <img id="15" src="placeHolder.png"></td>
+                    <td id='7' onclick="bopIt(7)"> <img id="16" src="placeHolder.png"></td>
+                    <td id='8' onclick="bopIt(8)"> <img id="17" src="placeHolder.png"></td>
                 </tr>
             </table>
             <div id="butts"><input type="button" value="Start!" onclick="start()"></div>
@@ -77,12 +82,15 @@
     'X','X','X'
     ];
 
+    var bop = new Audio('bop.mp3');
+
     function despawn(place){
         var desp= setTimeout( function desp(){
             if(playing){
                 if(field[place]!='X'){
                     field[place] = 'X';
-                    document.getElementById(place).innerHTML = 'X';
+                    var place2 = place+9;
+                    document.getElementById(place2).src = "placeHolder.png";
                     score-=100;
                     document.getElementById("score").innerHTML = score;
                 }
@@ -96,21 +104,22 @@
                     var place = rando%9;
                     if(field[place] == 'X'){
                         field[place] = 'O';
-                        document.getElementById(place).innerHTML = 'O';
-                        document.getElementById(place).style.backgroudColor = "blue";
+                        var place2 = place + 9;
+                        document.getElementById(place2).src = "mole2.gif";
                     }
 
                     rando = Math.floor((Math.random()*100000000)%5000)+5000;
                     despawn(place);
                 }
             }, 1000);
-            var timer = 30;
+            var timer = 31;
             var timpo = setInterval(function times(){
-                document.getElementById("time").innerHTML= timer;
+                document.getElementById("time").innerHTML= timer-1;
                 if(playing){
                     timer--;
                 }
                 if(timer==0){
+                    document.getElementById("time").innerHTML= 0;
                     clearInterval(spawner);
                     clearInterval(timpo);
                     playing = 0;
@@ -127,13 +136,16 @@
 
     
 
-    function bop(pos){
+    function bopIt(pos){
         if(playing){
             if(field[pos] == 'O'){
                 field[pos] = 'X';
-                document.getElementById(pos).innerHTML = 'X';
+                var place2 = pos+9;
+                document.getElementById(place2).src = "placeHolder.png";
                 score += 500;
                 document.getElementById("score").innerHTML = score;
+                
+               // bop.play();
             }
             else{
                 score-=50;
