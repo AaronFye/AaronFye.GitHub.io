@@ -32,12 +32,15 @@
         var seed = inp.value;
       //  alert(seed.length);
         for(var x = 0; x < seed.length; x++){
-            if(x%2 == 0){
-                randy += seed.charCodeAt(x);
+            if(x == 0){
+                randy += seed.charCodeAt(x)*salt;
+                //alert(randy);
             }
+             
             else{
-                randy = randy * seed.charCodeAt(x);
-            }
+                randy = randy * (seed.charCodeAt(x-1)+salt);
+           //     alert(randy);
+            } 
     
             /* for(var y = 0; y < seed.length; y++){
                 //alert(x+ " " +y);
@@ -51,8 +54,8 @@
         
         
         }
-       // alert(randy*salt);
-        return randy*salt;
+      //  alert("emnd");
+        return (randy*salt)%13;
     }
 
     function drawIt(x, y){
