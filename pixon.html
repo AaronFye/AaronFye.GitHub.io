@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <center>
+        <input id="inp" type="text"> <input type="button" value="Art me up" onclick="start()"> <br> <br>
+        <canvas id="main" width="150" height="200">
+        </canvas>
+        </center>
+    </body>
+</html>
+
+<script>
+
+    var colors = ["red","orange","yellow","green","blue","indigo","violet","brown","white","black","grey","pink"];
+
+    function start(){
+        for(var x = 0; x<150; x+=10){
+            for(var y = 0; y<200; y+=10){
+                drawIt(x, y);
+            }
+        }
+    }
+
+    function rando(salt){
+        var randy = 0;
+        var inp = document.getElementById("inp");
+        var seed = inp.value;
+      //  alert(seed.length);
+        for(var x = 0; x < seed.length; x++){
+            if(x%2 == 0){
+                randy += seed.charCodeAt(x);
+            }
+            else{
+                randy = randy * seed.charCodeAt(x);
+            }
+    
+            /* for(var y = 0; y < seed.length; y++){
+                //alert(x+ " " +y);
+                if(y%2 == 0){
+                    randy += randy;
+                }
+                else{
+                    randy = randy * randy;
+                }
+            } */
+        
+        
+        }
+       // alert(randy*salt);
+        return randy*salt;
+    }
+
+    function drawIt(x, y){
+
+    var c = document.getElementById("main");
+    var con = c.getContext("2d");
+
+    con.beginPath();
+    con.rect(x, y, 10, 10);  
+    con.fillStyle = colors[(rando((x+1)*(y+1))%12)];
+    con.fill();
+    }
+
+
+
+</script>
