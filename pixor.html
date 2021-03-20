@@ -12,6 +12,7 @@
         </canvas>
         <br>
         <!-- <a id="downloadLnk" download="pixor.png"> <input type="button" onclick="download()" value="Save Me!"/></a>-->
+        <input type="button" value="Save Me!" onclick="saveImage()" >
         </center>
     </body>
 </html>
@@ -43,6 +44,22 @@
         }
     }
 
+    function saveImage() {
+				var ua = window.navigator.userAgent;
+
+				if (ua.indexOf("Chrome") > 0) {
+					var canvas = document.getElementById("main");
+                    var name = document.getElementById("inp");
+					// save image as png
+					var link = document.createElement('a');
+    				link.download = name.value+".png";
+    				link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
+    				link.click();
+				}
+				else {
+					alert("Please use Chrome");
+				}
+			}
     function rando(salt_x, salt_y){
         var randy = 0;
         var inp = document.getElementById("inp");
