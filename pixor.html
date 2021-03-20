@@ -7,7 +7,7 @@
 
     <body>
         <center>
-        <input id="inp" type="text"> <input type="button" value="Art me up" onclick="start()"> <br> <br>
+        <input id="inp" type="text"> <input id="butto" type="button" value="Art me up" onclick="start()"> <br> <br>
         <canvas id="main" width="300" height="500">    
         </canvas>
         <br>
@@ -19,6 +19,21 @@
 <script>
 
     var colors = ["black","orange","yellow","green","blue","indigo","violet","brown","white","red","grey","pink"];
+
+    // Get the input field
+    var inputVal = document.getElementById("inp");
+
+    // Execute a function when the user releases a key on the keyboard
+    inputVal.addEventListener("keyup", function(event) {
+    
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("butto").click();
+    }
+    });
 
     function start(){
         for(var x = 0; x<300; x+=10){
