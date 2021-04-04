@@ -48,7 +48,7 @@
                     uiChange(1);
                     baby.src = 'baby/baby40.png'
                 }
-            }, 500);
+            }, 250);
         }
         age++;
     }
