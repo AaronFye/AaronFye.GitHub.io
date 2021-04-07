@@ -1,6 +1,9 @@
     var age = 0;
     var canvas = document.getElementById('main');
     var context = canvas.getContext('2d');
+    var pos = 45;
+    var last = 0;
+
     var egg = new Image();
     egg.src = 'egg/egg40.png';
     var baby = new Image();
@@ -47,11 +50,75 @@
                     clearInterval(heart);
                     uiChange(1);
                     baby.src = 'baby/baby40.png'
+                    go();
                 }
             }, 250);
         }
         age++;
     }
+
+    
+    function move(dir){
+        //move left
+        if(dir==0){
+            if(pos<110 && last != 2){
+            var sauce = 'baby/right40.png';
+            baby.src = sauce;
+                
+            baby.onload = function(){
+                context.clearRect(0,0,150,150);
+                context.drawImage(baby, pos+4,90);
+                pos +=4;
+                last = 1;
+            }
+            }
+            else{
+                var sauce = 'baby/baby40.png';
+                baby.src = sauce;
+                    
+                baby.onload = function(){
+                    context.clearRect(0,0,150,150);
+                    context.drawImage(baby, pos,90);
+                    last = 0;
+                }
+            }
+        }
+        else{
+            if(pos>4 && last != 1){
+                var sauce = 'baby/left40.png';
+                baby.src = sauce;
+                    
+                baby.onload = function(){
+                    context.clearRect(0,0,150,150);
+                    context.drawImage(baby, pos-4,90);
+                    pos -=4;
+                    last = 2;
+                }
+            }
+            else{
+                var sauce = 'baby/baby40.png';
+                baby.src = sauce;
+                    
+                baby.onload = function(){
+                    context.clearRect(0,0,150,150);
+                    context.drawImage(baby, pos,90);
+                    last = 0;
+                }
+            }
+        }
+                
+    }
+
+    function go(){
+    var moove = setInterval(function mover(){
+        
+        var rando = Math.floor(Math.random()*1000000)%2;
+        move(rando);
+
+    }, 1000);
+    }
+    
+
 
     document.addEventListener('DOMContentLoaded', function() {
         var link = document.getElementById('hatch');
@@ -61,69 +128,11 @@
         });
     });
 
-    document.addEventListener("click", function() {
-        var link = document.getElementById('left');
-        // onClick's logic below:
-        link.addEventListener('click', function() {
-            move(0);
-        });
-    });
-
-    document.addEventListener("click", function() {
-        var link = document.getElementById('right');
-        // onClick's logic below:
-        link.addEventListener('click', function() {
-            move(1);
-        });
-    });
-
     function uiChange(prog){
         if(prog==1){
-            var cont = document.getElementById("cont");
-            cont.innerHTML = "<input type=\"button\" id=\"left\" value=\"<\"></input> <input type=\"button\" id=\"right\" value=\">\"></input>";
-        }
-        if(prog==2){
-            var cont = document.getElementById("cont");
-            cont.innerHTML = "";
-        }
-    }
-
-    function move(dir){
-        //move left
-        if(dir==0){
-            var i = 0;
-            var left = setInterval(function left(){
-                
-                i+= 4;
-                var sauce = 'baby/left40.png'
-                baby.src = sauce;
-                
-                baby.onload = function(){
-                    context.clearRect(0,0,150,150);
-                    context.drawImage(baby, 45-i,90);
-                }
-                if(i==(25*4)){
-                    clearInterval(left);
-                }
-            }, 250);
-        }
-
-        //move right
-        if(dir==1){
-            var i = 0;
-            var right = setInterval(function right(){
-                
-                i+= 4;
-                var sauce = 'baby/right40.png'
-                baby.src = sauce;
-                
-                baby.onload = function(){
-                    context.clearRect(0,0,150,150);
-                    context.drawImage(baby, 45+i,90);
-                }
-                if(i==(25*4)){
-                    clearInterval(right);
-                }
-            }, 250);
+            var cont = document.getElementById("hatch");
+            cont.style = "display: none;";
+            var trol = document.getElementById("feed");
+            trol.style = "display: inline;";
         }
     }

@@ -7,6 +7,16 @@
                 border: 5px; 
                 border-style: solid;
             }
+
+            @font-face {
+                font-family: pix;
+                src: url(Teletactile-3zavL.ttf);
+            }
+            
+            input{
+                font-family: pix;
+                width: 100px;
+            }
         </style>
     </head>
 
@@ -15,7 +25,8 @@
         <canvas id="main" width="150" height="150" >    
         </canvas>
         <div id="cont">
-        <input type="button" id="hatch" value="Hatch">
+        <input type="button" id="hatch" value="Hatch" style = "display: inline;">
+        <input type="button" id="feed" value="Feed" style = "display: none;"> 
         </div>
         </center>
 
