@@ -3,11 +3,15 @@
     var context = canvas.getContext('2d');
     var pos = 45;
     var last = 0;
+    var eaten = true;
+    var carPos = -100;
 
     var egg = new Image();
     egg.src = 'egg/egg40.png';
     var baby = new Image();
     baby.src = 'baby/baby40.png';
+    var carrot = new Image();
+    carrot.src = 'etc/food40.png';
 
     egg.onload = function() {
         context.drawImage(egg, 55, 110);
@@ -32,9 +36,9 @@
 
             context.clearRect(0,0,150,150);
             
-            context.drawImage(baby, 45,90);            
+            context.drawImage(baby, pos,90);            
 
-            var i = 40;  
+            var i = pos-5;;  
 
             var heart = setInterval(function spawn(){
                 
@@ -44,9 +48,9 @@
                 
                 baby.onload = function(){
                     context.clearRect(0,0,150,150);
-                    context.drawImage(baby, 45,90);
+                    context.drawImage(baby, pos,90);
                 }
-                if(i==45){
+                if(i==pos){
                     clearInterval(heart);
                     uiChange(1);
                     baby.src = 'baby/baby40.png'
@@ -59,6 +63,7 @@
 
     
     function move(dir){
+
         //move left
         if(dir==0){
             if(pos<110 && last != 2){
@@ -66,7 +71,7 @@
             baby.src = sauce;
                 
             baby.onload = function(){
-                context.clearRect(0,0,150,150);
+                context.clearRect(pos+12, 125, 40, 35);
                 context.drawImage(baby, pos+4,90);
                 pos +=4;
                 last = 1;
@@ -77,7 +82,7 @@
                 baby.src = sauce;
                     
                 baby.onload = function(){
-                    context.clearRect(0,0,150,150);
+                    context.clearRect(pos+10, 125, 35, 30);
                     context.drawImage(baby, pos,90);
                     last = 0;
                 }
@@ -89,7 +94,7 @@
                 baby.src = sauce;
                     
                 baby.onload = function(){
-                    context.clearRect(0,0,150,150);
+                    context.clearRect(pos+10, 125, 35, 30);
                     context.drawImage(baby, pos-4,90);
                     pos -=4;
                     last = 2;
@@ -100,7 +105,7 @@
                 baby.src = sauce;
                     
                 baby.onload = function(){
-                    context.clearRect(0,0,150,150);
+                    context.clearRect(pos+10, 125, 35, 30);
                     context.drawImage(baby, pos,90);
                     last = 0;
                 }
@@ -114,6 +119,12 @@
         
         var rando = Math.floor(Math.random()*1000000)%2;
         move(rando);
+        if(carPos==pos){
+            age++;
+            carPos= -100;
+            context.clearRect(0,0,150,150);
+            eaten = true;
+        }
 
     }, 1000);
     }
@@ -136,3 +147,33 @@
             trol.style = "display: inline;";
         }
     }
+
+    function crop(x){
+        if(eaten == true){
+            eaten = false;
+            var rando = (Math.floor(Math.random()*1000000)%2);
+            if(rando==0){
+                carPos = pos +24;
+                if(carPos > 150){
+                    carPos = pos - 24;
+                }
+            }
+            else{
+                carPos = pos - 24;
+                if(carPos < 0){
+                    carPos = pos + 24;
+                }
+            }
+            context.drawImage(carrot, carPos , 125);
+        }
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var link = document.getElementById('feed');
+        // onClick's logic below:
+        link.addEventListener('click', function() {
+            var rando = (Math.floor(Math.random()*1000000)%15+3);
+            crop(rando);
+        });
+    });
