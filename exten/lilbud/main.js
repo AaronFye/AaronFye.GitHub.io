@@ -1,10 +1,11 @@
     var age = 0;
     var canvas = document.getElementById('main');
     var context = canvas.getContext('2d');
-    var pos = 45;
+    var pos = 45; // -30 for mid
+    var lPos = 0;
     var last = 0;
     var eaten = true;
-    var carPos = -100;
+    var carPos = -100; //-10 for mid
 
     var egg = new Image();
     egg.src = 'egg/egg40.png';
@@ -73,6 +74,7 @@
             baby.onload = function(){
                 context.clearRect(pos+12, 125, 40, 35);
                 context.drawImage(baby, pos+4,90);
+                lPos = pos;
                 pos +=4;
                 last = 1;
             }
@@ -84,6 +86,7 @@
                 baby.onload = function(){
                     context.clearRect(pos+10, 125, 35, 30);
                     context.drawImage(baby, pos,90);
+                    lPos = pos;
                     last = 0;
                 }
             }
@@ -96,6 +99,7 @@
                 baby.onload = function(){
                     context.clearRect(pos+10, 125, 35, 30);
                     context.drawImage(baby, pos-4,90);
+                    lPos = pos;
                     pos -=4;
                     last = 2;
                 }
@@ -107,6 +111,7 @@
                 baby.onload = function(){
                     context.clearRect(pos+10, 125, 35, 30);
                     context.drawImage(baby, pos,90);
+                    lPos = pos;
                     last = 0;
                 }
             }
@@ -119,13 +124,29 @@
         
         var rando = Math.floor(Math.random()*1000000)%2;
         move(rando);
-        if(carPos==pos){
+        if(carPos==(pos+30)){
+            //alert("-2 la: " + (lPos+30) + " car " + carPos );
+            if((lPos+30) < carPos){
             age++;
+            //alert("- car " + carPos + " pos:" + pos + " tr" + (pos+30));
             carPos= -100;
             context.clearRect(0,0,150,150);
             eaten = true;
-        }
+            document.getElementById("feed").style = "color:black";
+            }
 
+        }
+        if((carPos+16)==(pos+30)){
+            //alert("+2 la: " + (lPos+30) + " car " + carPos );
+            if((lPos+30) > carPos){
+            age++;
+            //alert("+ car " + carPos + " pos:" + pos + " tr" + (pos+30));
+            carPos= -100;
+            context.clearRect(0,0,150,150);
+            eaten = true;
+            document.getElementById("feed").style = "color:black";
+            }
+        }
     }, 1000);
     }
     
@@ -150,23 +171,26 @@
 
     function crop(x){
         if(eaten == true){
+            var tpos = pos + 30; 
             eaten = false;
             var rando = (Math.floor(Math.random()*1000000)%2);
             if(rando==0){
-                carPos = pos +24;
-                if(carPos > 150){
-                    carPos = pos - 24;
+                carPos = tpos +36;
+                if(carPos > 130){
+                    carPos = tpos - 44;
                 }
             }
             else{
-                carPos = pos - 24;
-                if(carPos < 0){
-                    carPos = pos + 24;
+                carPos = tpos - 44;
+                if(carPos < 10){
+                    carPos = tpos + 36;
                 }
             }
-            context.drawImage(carrot, carPos , 125);
+         //   alert("pos " + pos + " tpos " + tpos + " car " +carPos);
+            context.drawImage(carrot, carPos, 125);
+            document.getElementById("feed").style = "color:red";
+          //  carPos +=12;
         }
-
     }
 
     document.addEventListener('DOMContentLoaded', function() {
