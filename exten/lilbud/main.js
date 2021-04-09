@@ -128,7 +128,7 @@
     var moove = setInterval(function mover(){
         var rando = Math.floor(Math.random()*1000000)%2;
         move(rando);
-        if(carPos==(pos+30)){
+        if(carPos==(pos+34)){
             //alert("-2 la: " + (lPos+30) + " car " + carPos );
             if((lPos+30) < carPos){
             hrt();
@@ -142,7 +142,7 @@
             }
 
         }
-        if((carPos+20)==(pos+30)){
+        if((carPos+24)==(pos+30)){
             //alert("+2 la: " + (lPos+30) + " car " + carPos );
             if((lPos+30) > carPos){
             hrt();
