@@ -34,12 +34,17 @@
             egg.src = 'egg/egg45.png';
         }
         if(age==4){
+            hrt();
+        }
+        age++;
+    }
 
-            context.clearRect(0,0,150,150);
+    function hrt(){
+        context.clearRect(0,0,150,150);
             
             context.drawImage(baby, pos,90);            
 
-            var i = pos-5;;  
+            var i = 40;  
 
             var heart = setInterval(function spawn(){
                 
@@ -51,17 +56,16 @@
                     context.clearRect(0,0,150,150);
                     context.drawImage(baby, pos,90);
                 }
-                if(i==pos){
+                if(i==45){
                     clearInterval(heart);
+                    context.clearRect(0,0,150,150);
                     uiChange(1);
                     baby.src = 'baby/baby40.png'
-                    go();
+                    go(age);
+                    
                 }
             }, 250);
-        }
-        age++;
     }
-
     
     function move(dir){
 
@@ -119,35 +123,43 @@
                 
     }
 
-    function go(){
+    function go(x){
+    if(x<=5){
     var moove = setInterval(function mover(){
-        
         var rando = Math.floor(Math.random()*1000000)%2;
         move(rando);
         if(carPos==(pos+30)){
             //alert("-2 la: " + (lPos+30) + " car " + carPos );
             if((lPos+30) < carPos){
+            hrt();
             age++;
             //alert("- car " + carPos + " pos:" + pos + " tr" + (pos+30));
             carPos= -100;
             context.clearRect(0,0,150,150);
             eaten = true;
             document.getElementById("feed").style = "color:black";
+            document.getElementById("count").src = "etc/count" + (age-5) + ".png";
             }
 
         }
-        if((carPos+16)==(pos+30)){
+        if((carPos+20)==(pos+30)){
             //alert("+2 la: " + (lPos+30) + " car " + carPos );
             if((lPos+30) > carPos){
+            hrt();
             age++;
             //alert("+ car " + carPos + " pos:" + pos + " tr" + (pos+30));
             carPos= -100;
             context.clearRect(0,0,150,150);
             eaten = true;
             document.getElementById("feed").style = "color:black";
+            document.getElementById("count").src = "etc/count" + (age-5) + ".png";
             }
         }
     }, 1000);
+    }
+    else{
+        
+    }
     }
     
 
@@ -162,10 +174,24 @@
 
     function uiChange(prog){
         if(prog==1){
+        
             var cont = document.getElementById("hatch");
             cont.style = "display: none;";
-            var trol = document.getElementById("feed");
-            trol.style = "display: inline;";
+        
+            
+        
+            var cart = document.getElementById("count");
+            cart.style = "display: inline;";
+
+            
+            if(age == 10){
+                document.getElementById("feed").style = "display: none;";
+            }
+            else{
+                var trol = document.getElementById("feed");
+                trol.style = "display: inline;";
+            }
+
         }
     }
 
