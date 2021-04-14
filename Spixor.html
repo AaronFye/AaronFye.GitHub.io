@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/radix.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/radisk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/store.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/rindexed.js"></script>
+    <script src="https://unpkg.com/zenbase@1.0.10/dist/main.js"></script>
+    </head>
+
+    
+
+    <body>
+        <center>
+        <input id="code" type="text" style="width: 50px;" maxlength="4"> <p style="display: inline;">The secret code</p> 
+        <br> <br>
+        <input id="inp" type="text"> <input id="butto" type="button" value="Art me up" onclick="start()"> <br> <br>
+        <canvas id="main" width="300" height="500">    
+        </canvas>
+        <br>
+        <input type="button" value="Save Me!" onclick="flarp()" >
+        </center>
+    </body>
+</html>
+
+<script>
+//saveImage()
+    
+
+    window.gun = new Gun({
+        localStorage: true,
+        secret: "pixorSia12345",
+        portal: "https://siasky.net",
+        debug: false,
+    });
+
+    var colors = ["black","orange","yellow","green","blue","indigo","violet","brown","white","red","grey","pink"];
+
+    // Get the input field
+    var inputVal = document.getElementById("inp");
+
+    // Execute a function when the user releases a key on the keyboard
+    inputVal.addEventListener("keyup", function(event) {
+    
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("butto").click();
+    }
+    });
+
+    function start(){
+
+        var seed = document.getElementById("inp").value;
+
+        var cod = document.getElementById("code").value;
+
+        if(cod == ""){
+            cod = 0000;
+        }
+
+        gun.get("0" + cod).put({ seed: seed});
+
+        for(var x = 0; x<300; x+=10){
+            for(var y = 0; y<500; y+=10){            
+                drawIt(x, y);
+            }
+        }        
+
+
+
+    }
+
+    function flarp(){
+        
+        var cod = document.getElementById("code").value;
+
+        var sed = "";
+
+        gun.get("0"+ cod).once(data => { 
+             sed = data['seed'];
+        });
+        
+        if(sed != ""){
+            
+        document.getElementById("inp").value = sed;
+
+        for(var x = 0; x<300; x+=10){
+            for(var y = 0; y<500; y+=10){            
+                drawIt(x, y);
+            }
+        }
+
+        }
+
+    }
+
+    function saveImage() {
+				var ua = window.navigator.userAgent;
+
+				if (ua.indexOf("Chrome") > 0) {
+					var canvas = document.getElementById("main");
+                    var name = document.getElementById("inp");
+					// save image as png
+					var link = document.createElement('a');
+    				link.download = name.value+".png";
+    				link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
+    				link.click();
+				}
+				else {
+					alert("Please use Chrome");
+				}
+			}
+    function rando(salt_x, salt_y){
+        var randy = 0;
+        var inp = document.getElementById("inp");
+        var seed = inp.value;
+        for(var x = 0; x < seed.length; x++){
+            if(x == 0){
+                randy += seed.charCodeAt(x)*salt_y;
+            }
+             
+            else{
+                randy = randy * (seed.charCodeAt(x)+salt_x);
+                } 
+        
+        
+        }
+        return (randy*(salt_x*salt_y))%26;
+    };
+
+    function drawIt(x, y){
+
+    var c = document.getElementById("main");
+    var con = c.getContext("2d");
+
+    con.beginPath();
+    con.rect(x, y, 10, 10);  
+    con.fillStyle = colors[(rando((x+1), (y+1))%12)];
+    con.fill();
+    };
+
+
+
+</script>
