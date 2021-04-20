@@ -16,7 +16,7 @@
         <center>
         <input id="code" type="text" style="width: 50px;" maxlength="4"> <p style="display: inline;">The secret code</p> 
         <br> <br>
-        <input id="inp" type="text"> <input id="butto" type="button" value="Art me up" onclick="start()"> <input type="button" value="Load pixor" onclick="flarp()" > <br> <br>
+        <input id="inp" type="text"> <input id="butto" type="button" value="Art me up" onclick="start()"> <input id="load" type="button" value="Load pixor" onclick="flarp()" > <br> <br>
         <canvas id="main" width="300" height="500">    
         </canvas>
         </center>
@@ -75,7 +75,7 @@
     }
 
     function flarp(){
-
+    document.getElementById("load").style.color = "red";
     for(var i=0; i<4; i++){        
         var cod = document.getElementById("code").value;
 
@@ -102,6 +102,7 @@
         }
 
     }
+    document.getElementById("load").style.color = "green";
     }
 
     function saveImage() {
