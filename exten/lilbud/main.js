@@ -72,51 +72,81 @@
         //move left
         if(dir==0){
             if(pos<110 && last != 2){
-            var sauce = 'baby/right40.png';
-            baby.src = sauce;
-                
-            baby.onload = function(){
-                context.clearRect(pos+12, 125, 40, 35);
-                context.drawImage(baby, pos+4,90);
-                lPos = pos;
-                pos +=4;
-                last = 1;
-            }
+                if(age<10){
+                    var sauce = 'baby/right40.png';
+                    baby.src = sauce;
+                        
+                    baby.onload = function(){
+                        context.clearRect(pos+12, 125, 40, 35);
+                        context.drawImage(baby, pos+4,90);
+                        lPos = pos;
+                        pos +=4;
+                        last = 1;
+                    }
+                }
+                else{
+                    var sauce = 'kid/right.png';
+                    baby.src = sauce;
+                        
+                    baby.onload = function(){
+                        context.clearRect(pos+12, 125, 40, 35);
+                        context.drawImage(baby, pos+4,90);
+                        lPos = pos;
+                        pos +=4;
+                        last = 1;
+                    }
+                }
+
             }
             else{
-                var sauce = 'baby/baby40.png';
-                baby.src = sauce;
-                    
-                baby.onload = function(){
-                    context.clearRect(pos+10, 125, 35, 30);
-                    context.drawImage(baby, pos,90);
-                    lPos = pos;
-                    last = 0;
+                if(age<11){
+                    var sauce = 'baby/baby40.png';
+                    baby.src = sauce;
+                        
+                    baby.onload = function(){
+                        context.clearRect(pos+10, 125, 35, 30);
+                        context.drawImage(baby, pos,90);
+                        lPos = pos;
+                        last = 0;
+                    }
+                    }
+                else{
+                    alert(age);
                 }
             }
         }
         else{
             if(pos>4 && last != 1){
-                var sauce = 'baby/left40.png';
-                baby.src = sauce;
-                    
-                baby.onload = function(){
-                    context.clearRect(pos+10, 125, 35, 30);
-                    context.drawImage(baby, pos-4,90);
-                    lPos = pos;
-                    pos -=4;
-                    last = 2;
+                if(age<11){
+                    var sauce = 'baby/left40.png';
+                    baby.src = sauce;
+                        
+                    baby.onload = function(){
+                        context.clearRect(pos+10, 125, 35, 30);
+                        context.drawImage(baby, pos-4,90);
+                        lPos = pos;
+                        pos -=4;
+                        last = 2;
+                    }
+                }
+                else{
+                    alert(age);
                 }
             }
             else{
-                var sauce = 'baby/baby40.png';
-                baby.src = sauce;
-                    
-                baby.onload = function(){
-                    context.clearRect(pos+10, 125, 35, 30);
-                    context.drawImage(baby, pos,90);
-                    lPos = pos;
-                    last = 0;
+                if(age<11){
+                    var sauce = 'baby/baby40.png';
+                    baby.src = sauce;
+                        
+                    baby.onload = function(){
+                        context.clearRect(pos+10, 125, 35, 30);
+                        context.drawImage(baby, pos,90);
+                        lPos = pos;
+                        last = 0;
+                    }
+                }
+                else{
+                    alert(age);
                 }
             }
         }
