@@ -43,7 +43,97 @@ function howMany(pos_x, pos_y){
 
     var num = 0;
 
-    //for(var i = 0; i<8;i++){
+    if(pos_x == 0 && pos_y == 0){
+        if(field[pos_x+1][pos_y]){
+            num++;
+        }
+        if(field[pos_x+1][pos_y+1]){
+            num++;
+        }
+        if(field[pos_x][pos_y+1]){
+            num++;
+        }
+        return num;
+    }
+
+    if(pos_x == 15 && pos_y == 0){
+        if(field[pos_x-1][pos_y]){
+            num++;
+        }
+        if(field[pos_x-1][pos_y+1]){
+            num++;
+        }
+        if(field[pos_x][pos_y+1]){
+            num++;
+        }
+        return num;
+    }
+
+    if(pos_x == 15 && pos_y == 15){
+        if(field[pos_x-1][pos_y]){
+            num++;
+        }
+        if(field[pos_x-1][pos_y-1]){
+            num++;
+        }
+        if(field[pos_x][pos_y-1]){
+            num++;
+        }
+        return num;
+    }
+
+    if(pos_x == 0 && pos_y == 15){
+        if(field[pos_x][pos_y-1]){
+            num++;
+        }
+        if(field[pos_x+1][pos_y-1]){
+            num++;
+        }
+        if(field[pos_x+1][pos_y]){
+            num++;
+        }
+        return num;
+    }
+
+    if( pos_x == 15 && 0<pos_y<15){
+        if(field[pos_x-1][pos_y-1]){
+            num++;
+        }
+        if(field[pos_x-1][pos_y]){
+            num++;
+        }
+        if(field[pos_x-1][pos_y+1]){
+            num++;
+        }
+        if(field[pos_x][pos_y-1]){
+            num++;
+        }
+        if(field[pos_x][pos_y+1]){
+            num++;
+        }
+        return num;
+    }
+
+    if( pos_x == 0 && 0<pos_y<15){
+        
+        if(field[pos_x][pos_y-1]){
+            num++;
+        }
+        if(field[pos_x+1][pos_y-1]){
+            num++;
+        }
+        if(field[pos_x+1][pos_y]){
+            num++;
+        }
+        if(field[pos_x+1][pos_y+1]){
+            num++;
+        }
+        if(field[pos_x][pos_y+1]){
+            num++;
+        }
+        return num;
+    }
+
     if(field[pos_x-1][pos_y-1]){
         num++;
     }
