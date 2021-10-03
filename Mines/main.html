@@ -19,10 +19,24 @@
 <link rel="shortcut icon" type="image/gif" href="Dancing-Mario-01.gif"/>
 </head>
 
-<body onload = "Roll()" style="text-align:center">
+<body onload = "Roll(32)" style="text-align:center">
+    <!-- <audio id="player" autoplay><source src="Minecraft.mp3" type="audio/mp3"></audio> -->
+    
     <center>
-    <img src="logo.png">    
-    <table>
+    <img src="logo.png">     
+    <br>
+  <!--  <input type="number" value="32" id="ammo" onclick="fill()">-->
+    <!-- <input type="button" value="Fill" id="start"> -->
+    <br>
+    <br>
+    <br>
+
+    </center>
+
+    <img id= "left" src="swifter.gif" height="275px" width="275px" style="float: left; margin-left: 15%; margin-right: 0%; visibility: hidden;">
+    <img id= "right" src="swifter.gif" height="275px" width="275px" style="float: right;  margin-left: 0%; margin-right: 15%; visibility: hidden;">
+    <center>
+    <table id="board" style=" margin-left: 25%; margin-right: 25%;">
         <tr>
             <th onclick = "rev(this.id)" id = "0101" style="background-color: #689f38">
 

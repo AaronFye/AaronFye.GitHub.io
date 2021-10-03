@@ -1,3 +1,8 @@
+var lost = 0;
+var bgm = new Audio("Minecraft.mp3");
+var lbgm = new Audio("despasquido.wav");
+var mine = new Audio("dirt.mp3");
+var bmg = new Audio("bomb.mp3");
 
 var field = 
 [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -16,7 +21,29 @@ var field =
  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-]
+];
+
+/*function fill(){
+    var ammo = (document.getElementById("ammo")).value;
+    field = [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+    Roll(ammo);
+
+}*/
 
 function rev(pos){
     var x = document.getElementById(pos);
@@ -28,14 +55,51 @@ function rev(pos){
     sub_x--;
     sub_y--;
 
-    if(field[sub_x][sub_y]==0){        
+    if(!lost){
+    if(field[sub_x][sub_y]==0){
+        mine.play();        
         x.style = "background-color: white";
         var bmb = howMany(sub_x, sub_y);
         danger(bmb, x);
     }
     else{
-        x.style = "background-image: url('bomb.png'); background-size: 25px;"
+        bmg.play();
+        x.style = "background-image: url('bomb.png'); background-size: 25px;";
+        Lose();
     }
+    }
+
+}
+
+function Lose(){
+    lost = 1;
+    for(var l=0; l<16; l++){
+        for(var k=0; k<16; k++){
+            var loc = "";
+            if(l<9){
+                loc = "0";
+                loc+=(l+1);
+            }
+            else{
+                loc+=(l+1);
+            }
+            if(k<9){
+                loc+="0";
+                loc+=(k+1);
+            }
+            else{
+                //alert("bruh");
+                loc+=(k+1);
+            }
+            //alert(loc);
+            var bom = document.getElementById(loc);
+            if(field[l][k]){
+                bom.style = "background-image: url('bomb.png'); background-size: 25px;";
+            }
+        }
+    }
+
+    //var bk = document.getElementById();
 
 }
 
@@ -162,9 +226,11 @@ function howMany(pos_x, pos_y){
     return num;
 }
 
-function Roll(){
+function Roll(numb){
 
-    for(var i = 0; i<32;){
+    bgm.play();
+
+    for(var i = 0; i<numb;){
         
         r_x = Math.floor(Math.random()*876543)%16;
         r_y = Math.floor(Math.random()*543210)%16;
