@@ -1,8 +1,15 @@
 var lost = 0;
+var trol = Math.floor(Math.random() *1000000);
+var troll = trol%2;
+var Egg = 0;
+
 var bgm = new Audio("Minecraft.mp3");
 var lbgm = new Audio("despasquido.wav");
+var splat = new Audio("splat attack.mp3");
 var mine = new Audio("dirt.mp3");
 var bmg = new Audio("bomb.mp3");
+var des = new Audio("despacito.mp3");
+var hiss = new Audio("boom.mp3");
 
 var field = 
 [[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,8 +71,14 @@ function rev(pos){
         danger(bmb, x);
     }
     else{
-        bmg.play();
-        x.style = "background-image: url('bomb1.png'); background-size: 25px;";
+        if(Egg){
+            bmg.play();
+            x.style = "background-image: url('bomb1.png'); background-size: 25px;";
+        }
+        else{
+            hiss.play();
+            x.style = "background-image: url('face.png'); background-size: 20px;";
+        }
         Lose();
         bgm.pause();
     }
@@ -74,7 +87,20 @@ function rev(pos){
 }
 
 function Lose(){
-    lbgm.play();
+    if(Egg){
+        if(troll==1){
+            alert(troll + " troll");
+            lbgm.play();
+        }
+        else{
+            alert(troll + " norm");
+            splat.play();
+        }
+    }
+    else{
+        des.play();
+    }
+
     lost = 1;
     for(var l=0; l<16; l++){
         for(var k=0; k<16; k++){
@@ -97,18 +123,33 @@ function Lose(){
             //alert(loc);
             var bom = document.getElementById(loc);
             if(field[l][k]){
-                bom.style = "background-image: url('bomb1.png'); background-size: 25px;";
+                if(Egg){
+                    bom.style = "background-image: url('bomb1.png'); background-size: 25px;";
+                }
+                else{
+                    bom.style = "background-image: url('face.png'); background-size: 20px;";
+                }
             }
         }
     }
 
-    var bk = document.getElementById("bod");
-    bk.style = "background-color: purple;";
+    if(Egg){
+        var bk = document.getElementById("bod");
+        bk.style = "background-color: purple;";
 
-    var bk = document.getElementById("left");
-    bk.style = "float: right;  margin-left: 0%; margin-right: 15%;  visibility: visible;";
-    var bk = document.getElementById("right");
-    bk.style = "float: left; margin-left: 15%; margin-right: 0%; visibility: visible;";
+        var bk = document.getElementById("left");
+        bk.style = "float: right;  margin-left: 0%; margin-right: 15%;  visibility: visible;";
+        var bk = document.getElementById("right");
+        bk.style = "float: left; margin-left: 15%; margin-right: 0%; visibility: visible;";
+    }
+    else{
+        var bk = document.getElementById("left");
+        bk.src = "creeper.png";
+        bk.style = "float: right;  margin-left: 0%; margin-right: 15%;  visibility: visible;";
+        var bk = document.getElementById("right");
+        bk.src = "creeper.png";
+        bk.style = "float: left; margin-left: 15%; margin-right: 0%; visibility: visible;";
+    }
 
 }
 
@@ -249,6 +290,10 @@ function Roll(numb){
     }
     
 
+}
+
+function easter(){
+    Egg = 1;
 }
 
 function danger(number, doc){
