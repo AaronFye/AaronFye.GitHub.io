@@ -57,21 +57,24 @@ function rev(pos){
 
     if(!lost){
     if(field[sub_x][sub_y]==0){
-        mine.play();        
+        mine.play();
+        bgm.play();        
         x.style = "background-color: white";
         var bmb = howMany(sub_x, sub_y);
         danger(bmb, x);
     }
     else{
         bmg.play();
-        x.style = "background-image: url('bomb.png'); background-size: 25px;";
+        x.style = "background-image: url('bomb1.png'); background-size: 25px;";
         Lose();
+        bgm.pause();
     }
     }
 
 }
 
 function Lose(){
+    lbgm.play();
     lost = 1;
     for(var l=0; l<16; l++){
         for(var k=0; k<16; k++){
@@ -94,12 +97,18 @@ function Lose(){
             //alert(loc);
             var bom = document.getElementById(loc);
             if(field[l][k]){
-                bom.style = "background-image: url('bomb.png'); background-size: 25px;";
+                bom.style = "background-image: url('bomb1.png'); background-size: 25px;";
             }
         }
     }
 
-    //var bk = document.getElementById();
+    var bk = document.getElementById("bod");
+    bk.style = "background-color: purple;";
+
+    var bk = document.getElementById("left");
+    bk.style = "float: right;  margin-left: 0%; margin-right: 15%;  visibility: visible;";
+    var bk = document.getElementById("right");
+    bk.style = "float: left; margin-left: 15%; margin-right: 0%; visibility: visible;";
 
 }
 
@@ -227,8 +236,6 @@ function howMany(pos_x, pos_y){
 }
 
 function Roll(numb){
-
-    bgm.play();
 
     for(var i = 0; i<numb;){
         
