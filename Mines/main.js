@@ -89,11 +89,9 @@ function rev(pos){
 function Lose(){
     if(Egg){
         if(troll==1){
-            alert(troll + " troll");
             lbgm.play();
         }
         else{
-            alert(troll + " norm");
             splat.play();
         }
     }
