@@ -136,16 +136,16 @@ function Lose(){
         bk.style = "background-color: purple;";
 
         var bk = document.getElementById("left");
+        bk.src = "swifter.gif";
         bk.style = "float: right;  margin-left: 0%; margin-right: 15%;  visibility: visible;";
         var bk = document.getElementById("right");
+        bk.src = "swifter.gif";
         bk.style = "float: left; margin-left: 15%; margin-right: 0%; visibility: visible;";
     }
     else{
         var bk = document.getElementById("left");
-        bk.src = "creeper.png";
         bk.style = "float: right;  margin-left: 0%; margin-right: 15%;  visibility: visible;";
         var bk = document.getElementById("right");
-        bk.src = "creeper.png";
         bk.style = "float: left; margin-left: 15%; margin-right: 0%; visibility: visible;";
     }
 
@@ -292,6 +292,8 @@ function Roll(numb){
 
 function easter(){
     Egg = 1;
+    var doc = document.getElementById("logo");
+    doc.src="logoT.png";
 }
 
 function danger(number, doc){
