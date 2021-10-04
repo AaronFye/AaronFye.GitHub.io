@@ -133,7 +133,7 @@ function Lose(){
 
     if(Egg){
         var bk = document.getElementById("bod");
-        bk.style = "background-color: purple;";
+        bk.style = "background-color: #830B9C;";
 
         var bk = document.getElementById("left");
         bk.src = "swifter.gif";
