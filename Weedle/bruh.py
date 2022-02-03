@@ -8,18 +8,16 @@ for line in fileinput.input(files='names.txt'):
     length += size
     if(size > longest):
         longest = size
-    appear[size]+=1
-    if(size == 8):
         print(line)
+    appear[size]+=1
+    #if(size == 8):
+       # print(line)
 
-avg = length/807
+avg = length/897
 #print(avg)
-#print(longest)
+#print(appear[longest])
 
 i = 0
 for items in appear:
-    #print("there are ")
-  #  print(appear[i])
-  #  print(i)
-  #  print(" letter names")
+    print("there are ", appear[i], " ",(i-1), " letter names")
     i = i+1

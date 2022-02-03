@@ -64,8 +64,6 @@ seaking
 
 starmie
 
-mr mime
-
 scyther
 
 jolteon
@@ -251,8 +249,6 @@ glameow
 purugly
 
 bronzor
-
-mime jr
 
 happiny
 
@@ -440,8 +436,6 @@ mimikyu
 
 bruxish
 
-kommo o
-
 cosmoem
 
 kartana
@@ -477,8 +471,6 @@ hattrem
 morgrem
 
 cursola
-
-mr rime
 
 milcery
 
