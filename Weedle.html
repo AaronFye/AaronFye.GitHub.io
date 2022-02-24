@@ -8,40 +8,98 @@
         var playing = 0;
         var misses = 0;
         var live = 9;
-        var mon = ["bulbasaur", "ivysaur", "metapod", "pidgeot", "rattata", "spearow", "pikachu", "nidoran", "venonat", "diglett", "dugtrio", "persian", "psyduck", "golduck", "poliwag", "kadabra", "machoke", "machamp", "geodude", "slowbro", "dewgong", "haunter", "drowzee", "kingler", "voltorb", "marowak", "koffing", "weezing", "rhyhorn", "chansey", "tangela", "goldeen", "seaking", "starmie", "scyther", "jolteon", "flareon", "porygon", "omanyte", "omastar", "snorlax", "moltres", "dratini", "bayleef", "quilava", "sentret", "noctowl", "ariados", "lanturn", "togetic", "flaaffy", "sunkern", "umbreon", "murkrow", "steelix", "shuckle", "sneasel", "corsola", "mantine", "kingdra", "donphan", "tyrogue", "miltank", "blissey", "suicune", "pupitar", "treecko", "grovyle", "torchic", "linoone", "wurmple", "silcoon", "cascoon", "nuzleaf", "shiftry", "taillow", "swellow", "wingull", "surskit", "breloom", "slakoth", "slaking", "nincada", "ninjask", "whismur", "loudred", "exploud", "azurill", "sableye", "volbeat", "roselia", "wailmer", "wailord", "torkoal", "grumpig", "vibrava", "altaria", "seviper", "solrock", "claydol", "cradily", "anorith", "armaldo", "milotic", "kecleon", "shuppet", "banette", "duskull", "tropius", "snorunt", "walrein", "huntail", "luvdisc", "shelgon", "groudon", "jirachi", "turtwig", "bibarel", "cherubi", "cherrim", "shellos", "ambipom", "buneary", "lopunny", "glameow", "purugly", "bronzor", "happiny", "lucario", "skorupi", "drapion", "finneon", "mantyke", "weavile", "yanmega", "leafeon", "glaceon", "gliscor", "gallade", "mesprit", "heatran", "manaphy", "darkrai", "shaymin", "victini", "servine", "pignite", "watchog", "herdier", "liepard", "pansage", "pansear", "panpour", "blitzle", "boldore", "swoobat", "drilbur", "timburr", "gurdurr", "tympole", "petilil", "sandile", "dwebble", "crustle", "scraggy", "scrafty", "zoroark", "gothita", "solosis", "duosion", "foongus", "litwick", "lampent", "fraxure", "haxorus", "cubchoo", "beartic", "shelmet", "mienfoo", "bisharp", "rufflet", "vullaby", "heatmor", "chespin", "braixen", "delphox", "froakie", "flabebe", "floette", "florges", "pancham", "pangoro", "furfrou", "honedge", "swirlix", "malamar", "binacle", "aurorus", "sylveon", "dedenne", "carbink", "sliggoo", "avalugg", "noivern", "xerneas", "yveltal", "zygarde", "diancie", "dartrix", "popplio", "brionne", "pikipek", "yungoos", "grubbin", "toxapex", "mudbray", "stufful", "steenee", "mimikyu", "bruxish", "cosmoem", "kartana", "poipole", "zeraora", "grookey", "skwovet", "blipbug", "dottler", "thievul", "dubwool", "chewtle", "drednaw", "boltund", "flapple", "hatenna", "hattrem", "morgrem", "cursola", "milcery", "falinks", "morpeko", "urshifu", "calyrex"];
+        var mon = ["ivysaur", "metapod", "pidgeot", "rattata", "spearow", "pikachu", "nidoran", "venonat", "diglett", "dugtrio", "persian", "psyduck", "golduck", "poliwag", "kadabra", "machoke", "machamp", "geodude", "slowbro", "dewgong", "haunter", "drowzee", "kingler", "voltorb", "marowak", "koffing", "weezing", "rhyhorn", "chansey", "tangela", "goldeen", "seaking", "starmie", "scyther", "jolteon", "flareon", "porygon", "omanyte", "omastar", "snorlax", "moltres", "dratini", "bayleef", "quilava", "sentret", "noctowl", "ariados", "lanturn", "togetic", "flaaffy", "sunkern", "umbreon", "murkrow", "steelix", "shuckle", "sneasel", "corsola", "mantine", "kingdra", "donphan", "tyrogue", "miltank", "blissey", "suicune", "pupitar", "treecko", "grovyle", "torchic", "linoone", "wurmple", "silcoon", "cascoon", "nuzleaf", "shiftry", "taillow", "swellow", "wingull", "surskit", "breloom", "slakoth", "slaking", "nincada", "ninjask", "whismur", "loudred", "exploud", "azurill", "sableye", "volbeat", "roselia", "wailmer", "wailord", "torkoal", "grumpig", "vibrava", "altaria", "seviper", "solrock", "claydol", "cradily", "anorith", "armaldo", "milotic", "kecleon", "shuppet", "banette", "duskull", "tropius", "snorunt", "walrein", "huntail", "luvdisc", "shelgon", "groudon", "jirachi", "turtwig", "bibarel", "cherubi", "cherrim", "shellos", "ambipom", "buneary", "lopunny", "glameow", "purugly", "bronzor", "happiny", "lucario", "skorupi", "drapion", "finneon", "mantyke", "weavile", "yanmega", "leafeon", "glaceon", "gliscor", "gallade", "mesprit", "heatran", "manaphy", "darkrai", "shaymin", "victini", "servine", "pignite", "watchog", "herdier", "liepard", "pansage", "pansear", "panpour", "blitzle", "boldore", "swoobat", "drilbur", "timburr", "gurdurr", "tympole", "petilil", "sandile", "dwebble", "crustle", "scraggy", "scrafty", "zoroark", "gothita", "solosis", "duosion", "foongus", "litwick", "lampent", "fraxure", "haxorus", "cubchoo", "beartic", "shelmet", "mienfoo", "bisharp", "rufflet", "vullaby", "heatmor", "chespin", "braixen", "delphox", "froakie", "flabebe", "floette", "florges", "pancham", "pangoro", "furfrou", "honedge", "swirlix", "malamar", "binacle", "aurorus", "sylveon", "dedenne", "carbink", "sliggoo", "avalugg", "noivern", "xerneas", "yveltal", "zygarde", "diancie", "dartrix", "popplio", "brionne", "pikipek", "yungoos", "grubbin", "toxapex", "mudbray", "stufful", "steenee", "mimikyu", "bruxish", "cosmoem", "kartana", "poipole", "zeraora", "grookey", "skwovet", "blipbug", "dottler", "thievul", "dubwool", "chewtle", "drednaw", "boltund", "flapple", "hatenna", "hattrem", "morgrem", "cursola", "milcery", "falinks", "morpeko", "urshifu", "calyrex"];
         var poke = mon[random];
         var game = poke.split("");
         var counter = 0;
         var alphabet = ["A.png","B.png","C.png","D.png","E.png","F.png","G.png","H.png","I.png","J.png","K.png","L.png","M.png","N.png","O.png","P.png","Q.png","R.png","S.png","T.png","U.png","V.png","W.png","X.png","Y.png","Z.png"];
-
+        var thing = ["g1","g2","g3","g4","g5","g6","g7","g8","g9"];
         
-        var dex = 0;
-        function guess(letter){
+        
+        function place(ind){
+            var big = Math.random()*100000;
+            if (Math.floor(big)%2) {return true;}
+            else {return false;}
+        }
+
+        function guess(letter, index){
             var char = letter.keyCode;
             var gues = String.fromCharCode(char).toLowerCase();
-            if(poke[dex] == gues){
-                window.alert(poke[dex]);
-                dex++;
+            //if(poke[dex] == gues){
+            //window.alert(poke[dex]);
+            //dex++;
+            //}
+
+            //flags
+            var semi = 0;
+            var full = 0;
+
+
+            for(var dex=0; dex<7; dex++){
+                if(poke[dex] == letter){
+                    if(dex == index){
+                        full = 1;
+                        semi = 0;
+                    }
+                    else{
+                        semi = 1;
+                    }
+                }
+                if(full){
+                    full = 0;
+
+                    
+                }
+            }
+
+
+
+        }
+
+        function yellow(elm, ind){
+            var par = document.getElementById(elm);
+            var rep = par.innerHTML.split('').map(function(c) { if(place(ind)) {return "<span class='" + "yellow" + "'" + ">" + c + "</span>"} else { return "<span class='" + "black" + "'" + ">" + c + "</span>" }}).join('');
+            par.innerHTML = rep;
+        }
+
+        function check(word){
+            var ltrs = word.split("");
+            for(var i = 0; i<7; i++){
+                guess(ltrs[i], i);
+            }
+        }
+
+        function reveal(){
+            var p = document.getElementById("name");
+            p.textContent = "";
+            p.textContent += poke;
+        }
+
+        function smash(inp){
+            var code = inp.keyCode;
+            if(code == 13){
+            var a = document.getElementById("1").value;
+            var b = document.getElementById("2").value;
+            var c = document.getElementById("3").value;
+            var d = document.getElementById("4").value;
+            var e = document.getElementById("5").value;
+            var f = document.getElementById("6").value;
+            var g = document.getElementById("7").value;
+            var combo = a+b+c+d+e+f+g;
+            
+            //for(var i = 0; i<7; i++){
+            var p = document.getElementById(thing[counter]);
+            p.textContent += combo;
+            //}
+            check(combo);
+            yellow(thing[counter], counter);
+            counter++;
+            if(counter == 8){
+                reveal();
+            }
             }
         }
         
-        function start(){
-            var art = document.getElementById("art").innerHTML;
-            var body = document.getElementById("body");
-            body.innerHTML ="<div id=\"game\">" + art + "</div>"
-            playing=1;
-            //onkeypress="guess(event)"
-            var letters = document.getElementById("letters");
-            var spaces = letters.innerHTML;
-        
-            for ( var i =0; i<game.length;i++){
-                letters.innerHTML= spaces + "<img class=\""+ game[i] + "\" src=\"Hangman/letter.png\" style=\"visibility: visible; margin-top: 550px; margin-left: "+ (i*50+100) +"px; position: absolute;\">";
-                //<br/> <img src=\"Hangman/letter.png\">";
-                //alert("<img src=\"Hangman/Alpha/"+ alphabet[i] +"\">");
-                //"+ alphabet[(game[i].charCodeAt(0))-97] +"
-                spaces = letters.innerHTML;
-            }
-        }
     </script>
 
     <style>
@@ -55,13 +113,21 @@
             width: 550px;
             height: 550px
         }
-        h3{
+        p{
             font-family: Aarons;
             font-size: xx-large;
         }
-        h2{
+        div{
             font-family: Aarons;
             font-size:xx-large;
+        }
+
+        .yellow{
+            color: yellow;
+        }
+
+        .green{
+            color: green;
         }
 
     </style>
@@ -69,10 +135,227 @@
 
 </head>
 
+<center>
+<body id="body" onkeypress="smash(event)">
+    <p id="name"></p>
+    <select id="1">  
+        <option value=a>A</option>
+        <option value=b>B</option>
+        <option value=c>C</option>
+        <option value=d>D</option>
+        <option value=e>E</option>
+        <option value=f>F</option>
+        <option value=g>G</option>
+        <option value=h>H</option>
+        <option value=i>I</option>
+        <option value=j>J</option>
+        <option value=k>K</option>
+        <option value=l>L</option>
+        <option value=m>M</option>
+        <option value=n>N</option>
+        <option value=o>O</option>
+        <option value=p>P</option>
+        <option value=q>Q</option>
+        <option value=r>R</option>
+        <option value=s>S</option>
+        <option value=t>T</option>
+        <option value=u>U</option>
+        <option value=v>V</option>
+        <option value=w>W</option>
+        <option value=x>X</option>
+        <option value=y>Y</option>
+        <option value=z>Z</option>
+    </select>
+    <select id="2">  
+        <option value=a>A</option>
+        <option value=b>B</option>
+        <option value=c>C</option>
+        <option value=d>D</option>
+        <option value=e>E</option>
+        <option value=f>F</option>
+        <option value=g>G</option>
+        <option value=h>H</option>
+        <option value=i>I</option>
+        <option value=j>J</option>
+        <option value=k>K</option>
+        <option value=l>L</option>
+        <option value=m>M</option>
+        <option value=n>N</option>
+        <option value=o>O</option>
+        <option value=p>P</option>
+        <option value=q>Q</option>
+        <option value=r>R</option>
+        <option value=s>S</option>
+        <option value=t>T</option>
+        <option value=u>U</option>
+        <option value=v>V</option>
+        <option value=w>W</option>
+        <option value=x>X</option>
+        <option value=y>Y</option>
+        <option value=z>Z</option>
+    </select>
+    <select id="3">  
+        <option value=a>A</option>
+        <option value=b>B</option>
+        <option value=c>C</option>
+        <option value=d>D</option>
+        <option value=e>E</option>
+        <option value=f>F</option>
+        <option value=g>G</option>
+        <option value=h>H</option>
+        <option value=i>I</option>
+        <option value=j>J</option>
+        <option value=k>K</option>
+        <option value=l>L</option>
+        <option value=m>M</option>
+        <option value=n>N</option>
+        <option value=o>O</option>
+        <option value=p>P</option>
+        <option value=q>Q</option>
+        <option value=r>R</option>
+        <option value=s>S</option>
+        <option value=t>T</option>
+        <option value=u>U</option>
+        <option value=v>V</option>
+        <option value=w>W</option>
+        <option value=x>X</option>
+        <option value=y>Y</option>
+        <option value=z>Z</option>
+    </select>
+    <select id="4">  
+        <option value=a>A</option>
+        <option value=b>B</option>
+        <option value=c>C</option>
+        <option value=d>D</option>
+        <option value=e>E</option>
+        <option value=f>F</option>
+        <option value=g>G</option>
+        <option value=h>H</option>
+        <option value=i>I</option>
+        <option value=j>J</option>
+        <option value=k>K</option>
+        <option value=l>L</option>
+        <option value=m>M</option>
+        <option value=n>N</option>
+        <option value=o>O</option>
+        <option value=p>P</option>
+        <option value=q>Q</option>
+        <option value=r>R</option>
+        <option value=s>S</option>
+        <option value=t>T</option>
+        <option value=u>U</option>
+        <option value=v>V</option>
+        <option value=w>W</option>
+        <option value=x>X</option>
+        <option value=y>Y</option>
+        <option value=z>Z</option>
+    </select>
+    <select id="5">  
+        <option value=a>A</option>
+        <option value=b>B</option>
+        <option value=c>C</option>
+        <option value=d>D</option>
+        <option value=e>E</option>
+        <option value=f>F</option>
+        <option value=g>G</option>
+        <option value=h>H</option>
+        <option value=i>I</option>
+        <option value=j>J</option>
+        <option value=k>K</option>
+        <option value=l>L</option>
+        <option value=m>M</option>
+        <option value=n>N</option>
+        <option value=o>O</option>
+        <option value=p>P</option>
+        <option value=q>Q</option>
+        <option value=r>R</option>
+        <option value=s>S</option>
+        <option value=t>T</option>
+        <option value=u>U</option>
+        <option value=v>V</option>
+        <option value=w>W</option>
+        <option value=x>X</option>
+        <option value=y>Y</option>
+        <option value=z>Z</option>
+    </select>
+    <select id="6">  
+        <option value=a>A</option>
+        <option value=b>B</option>
+        <option value=c>C</option>
+        <option value=d>D</option>
+        <option value=e>E</option>
+        <option value=f>F</option>
+        <option value=g>G</option>
+        <option value=h>H</option>
+        <option value=i>I</option>
+        <option value=j>J</option>
+        <option value=k>K</option>
+        <option value=l>L</option>
+        <option value=m>M</option>
+        <option value=n>N</option>
+        <option value=o>O</option>
+        <option value=p>P</option>
+        <option value=q>Q</option>
+        <option value=r>R</option>
+        <option value=s>S</option>
+        <option value=t>T</option>
+        <option value=u>U</option>
+        <option value=v>V</option>
+        <option value=w>W</option>
+        <option value=x>X</option>
+        <option value=y>Y</option>
+        <option value=z>Z</option>
+    </select>
+    <select id="7">  
+        <option value=a>A</option>
+        <option value=b>B</option>
+        <option value=c>C</option>
+        <option value=d>D</option>
+        <option value=e>E</option>
+        <option value=f>F</option>
+        <option value=g>G</option>
+        <option value=h>H</option>
+        <option value=i>I</option>
+        <option value=j>J</option>
+        <option value=k>K</option>
+        <option value=l>L</option>
+        <option value=m>M</option>
+        <option value=n>N</option>
+        <option value=o>O</option>
+        <option value=p>P</option>
+        <option value=q>Q</option>
+        <option value=r>R</option>
+        <option value=s>S</option>
+        <option value=t>T</option>
+        <option value=u>U</option>
+        <option value=v>V</option>
+        <option value=w>W</option>
+        <option value=x>X</option>
+        <option value=y>Y</option>
+        <option value=z>Z</option>
+    </select>
 
-<body id="body" onkeypress="guess(event)">
+    <p></p>
+
+    <p id="g1"></p>
+    
+    <p id="g2"></p>
+    
+    <p id="g3"></p>
+
+    <p id="g4"></p>
+
+    <p id="g5"></p>
+
+    <p id="g6"></p>
+
+    <p id="g7"></p>
+
+    <p id="g8"></p>
+
+    <p id="g9"></p>
 
 </body>
-
+</center>
 
 
