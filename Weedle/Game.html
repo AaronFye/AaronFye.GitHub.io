@@ -25,7 +25,6 @@
         var alphabet = ["A.png","B.png","C.png","D.png","E.png","F.png","G.png","H.png","I.png","J.png","K.png","L.png","M.png","N.png","O.png","P.png","Q.png","R.png","S.png","T.png","U.png","V.png","W.png","X.png","Y.png","Z.png"];
         var thing = ["g1","g2","g3","g4","g5","g6","g7","g8","g9"];
         
-        
         function smash(inp){
             var guess = document.getElementById("guess").value.toLowerCase();
             var guessDex = 0;
@@ -37,6 +36,8 @@
             if(guess == poke.toLowerCase() && live!=0){    
                 var pic = document.getElementById("pic");
                 pic.src = "poke/"+ (seed+1) + "a.png";
+                document.getElementById("time1").style.visibility = "Visible";
+                document.getElementById("time").style.visibility = "Visible";
                 document.getElementById("name").innerHTML = nums[seed].split(',')[0] + " <br> " +nums[seed].split(',')[1] ;
                 document.getElementById("dex").innerHTML = "Pokedex: ✅✅✅";
                 document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
@@ -45,14 +46,31 @@
                 if(live==6){
                     var g = document.getElementById("g1");
                     g.style.visibility = "visible";
-                    g.innerHTML = guess + " ❌";
+                    g.innerHTML = mon[guessDex].split(",")[0]+ " " + guess + " ❌";
                     if(guessDex > seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        var d = guessDex-seed;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        }
+                        if(75 > d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                        }
+                        if(25 > d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                        }
                     }
                     if(guessDex < seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        var d = seed-guessDex;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        }
+                        if(75 > d && d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                        }
+                        if(25 > d && d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                        }
                     }
-                    alert(mon[guessDex].split(",")[2]);
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
                         document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
                     }
@@ -62,12 +80,30 @@
                 if(live==5){
                     var g = document.getElementById("g2");
                     g.style.visibility = "visible";
-                    g.innerHTML = guess + " ❌";
+                    g.innerHTML = mon[guessDex].split(",")[0]+ " " + guess + " ❌";
                     if(guessDex > seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        var d = guessDex-seed;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        }
+                        if(75 > d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                        }
+                        if(25 > d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                        }
                     }
                     if(guessDex < seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        var d = seed-guessDex;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        }
+                        if(75 > d && d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                        }
+                        if(25 > d && d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                        }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
                         document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
@@ -79,12 +115,30 @@
                 if(live==4){
                     var g = document.getElementById("g3");
                     g.style.visibility = "visible";
-                    g.innerHTML = guess + " ❌";
+                    g.innerHTML = mon[guessDex].split(",")[0]+ " " + guess + " ❌";
                     if(guessDex > seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        var d = guessDex-seed;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        }
+                        if(75 > d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                        }
+                        if(25 > d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                        }
                     }
                     if(guessDex < seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        var d = seed-guessDex;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        }
+                        if(75 > d && d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                        }
+                        if(25 > d && d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                        }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
                         document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
@@ -95,12 +149,30 @@
                 if(live==3){
                     var g = document.getElementById("g4");
                     g.style.visibility = "visible";
-                    g.innerHTML = guess + " ❌";
+                    g.innerHTML = mon[guessDex].split(",")[0]+ " " + guess + " ❌";
                     if(guessDex > seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        var d = guessDex-seed;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        }
+                        if(75 > d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                        }
+                        if(25 > d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                        }
                     }
                     if(guessDex < seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        var d = seed-guessDex;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        }
+                        if(75 > d && d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                        }
+                        if(25 > d && d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                        }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
                         document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
@@ -111,12 +183,30 @@
                 if(live==2){
                     var g = document.getElementById("g5");
                     g.style.visibility = "visible";
-                    g.innerHTML = guess + " ❌";
+                    g.innerHTML = mon[guessDex].split(",")[0]+ " " + guess + " ❌";
                     if(guessDex > seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        var d = guessDex-seed;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                        }
+                        if(75 > d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                        }
+                        if(25 > d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                        }
                     }
                     if(guessDex < seed){
-                        document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        var d = seed-guessDex;
+                        if(d >= 75){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                        }
+                        if(75 > d && d >= 25){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                        }
+                        if(25 > d && d >= 0){
+                            document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                        }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
                         document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
@@ -130,11 +220,15 @@
                 if(live==1){
                     var g = document.getElementById("g6");
                     g.style.visibility = "visible";
-                    g.innerHTML = guess + " ❌";
+                    g.innerHTML = mon[guessDex].split(",")[0]+ " " + guess + " ❌";
                     var pic = document.getElementById("pic");
                     pic.src = "poke/"+ (seed+1) + "a.png";
                     document.getElementById("name").innerHTML = nums[seed].split(',')[0] + " <br> " +nums[seed].split(',')[1] ;
+                    document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
+                    document.getElementById("dex").innerHTML = "Pokedex: ❌❌❌";
                     live--;
+                    document.getElementById("time1").style.visibility = "Visible";
+                    document.getElementById("time").style.visibility = "Visible";
                     return;
                 }
 
@@ -142,6 +236,42 @@
         
         }
         
+
+    // Set the date we're counting down to
+    var date = new Date();
+    date.setHours(20,0,0);
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date();
+    
+        // Find the distance between now and the count down date
+        if(date > now){
+            var distance = date - now;
+        }
+        else{
+            date.setDate(date.getDate() + 1);
+            var distance = date-now;
+        }
+
+        // Time calculations for days, hours, minutes and seconds
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("time").innerHTML = hours + ":"
+        + minutes + ":" + seconds;
+    
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+        }
+}, 1000);
+
+
     </script>
 
     <style>
@@ -189,13 +319,15 @@
     <br>
     <img id="pic" src="temp.png" style="height: 250px; width: 250px;">
     <br>
+    <p style="visibility: hidden;" id="time1">Next Weedle available in: &ensp; </p><p style="visibility: hidden;" id="time"></p>
+    <br>
     <p id="type">Type: ???</p> <p>&emsp;</p> <p id="dex">Pokedex: ???</p>
 
     <br><br>
 
-    <input id="guess" type="search" spellcheck="false" style=" border-width: 10px; border-color: black;"> 
-    <input value= "Search" type="button" onclick="smash()" style="border-width: 10px; border-color: black; background-color: white; border-radius:0%;">
-
+    <input id="guess" type="select" spellcheck="false" style=" border-width: 10px; border-color: black;"> 
+    <input id = "search" value= "Search" type="button" onclick="smash()" style="border-width: 10px; border-color: black; background-color: white; border-radius:0%;">
+    
     <br><br>
     <p id="g1" style="display: block; width: 450px; margin:auto; visibility:hidden; padding: 5px; border-width: 10px; border-color: black; border-style: solid;"></p>
     <br>
