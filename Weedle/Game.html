@@ -31,10 +31,20 @@
         }
 
         function song(){
+            
+            if(playing == 1){
+                music.pause();
+                document.getElementById("note").src = "poke/sing.png";
+                music.loop = false;
+                playing =0;
+                return;
+            }
             if(playing == 0){
                 music.play();
+                document.getElementById("note").src = "poke/!sing.png";
                 music.loop = true;
                 playing =1;
+                return;
             }
             
         }
@@ -86,24 +96,30 @@
                         var d = guessDex-seed;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
                         if(75 > d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
                         if(25 > d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️";
                         }
                     }
                     if(guessDex < seed){
                         var d = seed-guessDex;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️⬆️";
                         }
                         if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️";
                         }
                         if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️";
                         }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
@@ -120,24 +136,30 @@
                         var d = guessDex-seed;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
                         if(75 > d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
                         if(25 > d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️";
                         }
                     }
                     if(guessDex < seed){
                         var d = seed-guessDex;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️⬆️";
                         }
                         if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️";
                         }
                         if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️";
                         }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
@@ -155,24 +177,30 @@
                         var d = guessDex-seed;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
                         if(75 > d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
                         if(25 > d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️";
                         }
                     }
                     if(guessDex < seed){
                         var d = seed-guessDex;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️⬆️";
                         }
                         if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️";
                         }
                         if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️";
                         }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
@@ -189,24 +217,30 @@
                         var d = guessDex-seed;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
                         if(75 > d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
                         if(25 > d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️";
                         }
                     }
                     if(guessDex < seed){
                         var d = seed-guessDex;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️⬆️";
                         }
                         if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️";
                         }
                         if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️";
                         }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
@@ -223,24 +257,30 @@
                         var d = guessDex-seed;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
                         if(75 > d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
                         if(25 > d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
+                            g.innerHTML = g.innerHTML + " ⬇️";
                         }
                     }
                     if(guessDex < seed){
                         var d = seed-guessDex;
                         if(d >= 75){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️⬆️";
                         }
                         if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️⬆️";
                         }
                         if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬆️";
+                            g.innerHTML = g.innerHTML + " ⬆️";
                         }
                     }
                     if(mon[guessDex].split(",")[2] == mon[seed].split(",")[2]){
