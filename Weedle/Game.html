@@ -3,7 +3,7 @@
 <head>
     <title>Weedle</title>
     <link rel="icon" type="image/x-icon" href="poke/icon.png">
-    <link rel="icon" href="aaronfye.com/Weedle/poke/icon.png" type="image/x-icon"> <link rel="shortcut icon" href="aaronfye.com/Weedle/poke/icon.png" type="image/x-icon">
+    <link rel="icon" href="https://aaronfye.com/Weedle/poke/icon.png" type="image/x-icon"> <link rel="shortcut icon" href="https://aaronfye.com/Weedle/poke/icon.png" type="image/x-icon">
 
     <script>
         
@@ -47,13 +47,13 @@
 
             
             var guess = document.getElementById("guess").value.toLowerCase();
-            var guessDex = 0;
+            var guessDex = -1;
             for(var i=0; i<151;i++){
                 if(names[i].toLowerCase() == guess){
                     guessDex = i;
                 }
             }
-            if(guessDex == 0){
+            if(guessDex == -1){
                 var box = document.getElementById("info");
                 box.style.visibility = "visible";
                 box.innerHTML = "Sorry, that is not a Gen1 Pokemon, try again.";
@@ -71,13 +71,13 @@
                 pic.src = "poke/"+ (seed+1) + "a.png";
                 document.getElementById("time1").style.visibility = "Visible";
                 document.getElementById("time").style.visibility = "Visible";
-                document.getElementById("name").innerHTML = nums[seed].split(',')[0] + " <br> " +nums[seed].split(',')[1] ;
+                document.getElementById("name").innerHTML = mon[seed].split(',')[0] + " <br> " +mon[seed].split(',')[1] ;
                 document.getElementById("dex").innerHTML = "Pokedex: ✅✅✅";
                 document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
             }
             else{
                 document.getElementById("guess").value="";
-                if(guessDex!=0){
+                if(guessDex!=-1){
                 if(live==6){
                     var g = document.getElementById("g1");
                     g.style.visibility = "visible";
