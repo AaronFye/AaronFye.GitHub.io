@@ -48,6 +48,11 @@
             }
             
         }
+
+        function agree(){
+            document.getElementById("how").style.visibility = "hidden";
+            document.getElementById("ok").style.visibility = "hidden";
+        }
         function KBW(inp){
             if(inp.charCode == 13){
                 smash();
@@ -298,7 +303,7 @@
                     g.innerHTML = mon[guessDex].split(",")[0]+ " " + guess + " ❌";
                     var pic = document.getElementById("pic");
                     pic.src = "poke/"+ (seed+1) + "a.png";
-                    document.getElementById("name").innerHTML = nums[seed].split(',')[0] + " <br> " +nums[seed].split(',')[1] ;
+                    document.getElementById("name").innerHTML = mon[seed].split(',')[0] + " <br> " +mon[seed].split(',')[1] ;
                     document.getElementById("type").innerHTML = "Type: "+ mon[seed].split(",")[2];
                     document.getElementById("dex").innerHTML = "Pokedex: ❌❌❌";
                     live--;
@@ -362,8 +367,6 @@
         button {
             font-family: poke;
             font-size: xx-large;
-            width: 550px;
-            height: 550px
         }
         p{
             display: inline;
@@ -388,6 +391,17 @@
 <img src="poke/logo.png" style="width: 250px; display:inline; position:absolute; " >
 <input id = "note" type="image" src="poke/sing.png" onclick="song()" style="padding: 5px; float: right; width: 50px; height: 50px; border-style: solid; border-width: 10px; border-color: black; background-color: white; border-radius:0%;">
 <center>
+<div id="how" Style = "z-index: 10; width: 500px; border-width: 10px; border-color: black; border-style: solid; background-color: white; position: absolute; margin-left: 34%; margin-right: 50%;">
+    Every day, there is a new hidden Pokemon. You have 6 tries. <br> 
+    -------------------
+    You can only guess Pokemon from the first 151 pokemon. <br>
+    -------------------
+    If you guess a Pokemon with the same type, it will tell you that. <br>
+    -------------------
+    Every guess will tell you if it is higher in the pokedex or lower. The more arrows, the further it is. ⬆️⬆️⬆️
+</div>
+<br>
+<input type="button" value="Let's Go!" onclick="agree()" id="ok" style="z-index: 10; border-style: solid; margin-top: 750px; border-width: 10px; border-color: black; background-color: white; border-radius:0%; position: absolute;">
 <body id="body" style=" background-image: url(''); background-size: cover; background-repeat: no-repeat;" onkeypress="KBW(event)">
     <div style="z-index: 0; width: 500px; border-width: 10px; border-color: black; border-style: solid; background-color: white;">
     <p id="name"></p>
