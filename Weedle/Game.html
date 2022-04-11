@@ -36,7 +36,6 @@
         }
         function smash(){
 
-
             var guess = document.getElementById("guess").value.toLowerCase();
             var guessDex = 0;
             for(var i=0; i<151;i++){
@@ -45,8 +44,13 @@
                 }
             }
             if(guessDex == 0){
-                alert("Sorry, that is not a Gen1 Pokemon, try again.");
-
+                var box = document.getElementById("info");
+                box.style.visibility = "visible";
+                box.innerHTML = "Sorry, that is not a Gen1 Pokemon, try again.";
+                var x = setInterval(function() {
+                    box.style.visibility = "hidden";
+                    clearInterval(x);
+                }, 2500);  
             }
 
             if(guess == poke.toLowerCase() && live!=0){    
@@ -298,6 +302,10 @@
             font-family: poke;
             src: url(Poke.ttf);
         }
+        @font-face {
+            font-family: textbit;
+            src: url(text.ttf);
+        }
         button {
             font-family: poke;
             font-size: xx-large;
@@ -310,7 +318,7 @@
             font-size: xx-large;
         }
         div{
-            font-family: poke2;
+            font-family: textbit;
             font-size:xx-large;
         }
 
@@ -328,10 +336,10 @@
 <input id = "note" type="image" src="poke/sing.png" onclick="song()" style="padding: 5px; float: right; width: 50px; height: 50px; border-style: solid; border-width: 10px; border-color: black; background-color: white; border-radius:0%;">
 <center>
 <body id="body" style=" background-image: url(''); background-size: cover; background-repeat: no-repeat;" onkeypress="KBW(event)">
-    <div style="width: 500px; border-width: 10px; border-color: black; border-style: solid; background-color: white;">
+    <div style="z-index: 0; width: 500px; border-width: 10px; border-color: black; border-style: solid; background-color: white;">
     <p id="name"></p>
     <br>
-    <img id="pic" src="temp.png" style="height: 250px; width: 250px;">
+    <img id="pic" src="temp.png" style="z-index: 0; height: 250px; width: 250px;">
     <br>
     <p style="visibility: hidden;" id="time1">Next Weedle available in: &ensp; </p><p style="visibility: hidden;" id="time"></p>
     <br>
@@ -339,11 +347,11 @@
     </div>
     
     <br>
-    <div id="info" style="width: 500px; height: 100px; border-style: solid; border-width: 10px; border-color: black; position: relative;" >test</div>
+    <div id="info" style="z-index: 10; visibility: hidden; width: 500px; height: 100px; border-style: solid; background-color: white; border-width: 10px; border-color: black; position: absolute; margin-left: 36%;" ></div>
     <br>
 
-    <input id="guess" type="select" spellcheck="false" style="border-style: solid; border-width: 10px; border-color: black;"> 
-    <input id = "search" value= "Search" type="button" onclick="smash()" style="border-style: solid; border-width: 10px; border-color: black; background-color: white; border-radius:0%;">
+    <input id="guess" type="select" spellcheck="false" style="z-index: 0; border-style: solid; border-width: 10px; border-color: black;"> 
+    <input id = "search" value= "Search" type="button" onclick="smash()" style="z-index: 0; border-style: solid; border-width: 10px; border-color: black; background-color: white; border-radius:0%;">
     
     
     <br><br>
