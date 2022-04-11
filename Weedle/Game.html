@@ -3,6 +3,7 @@
 <head>
     <title>Weedle</title>
     <link rel="icon" type="image/x-icon" href="poke/icon.png">
+    <link rel="icon" href="aaronfye.com/Weedle/poke/icon.png" type="image/x-icon"> <link rel="shortcut icon" href="aaronfye.com/Weedle/poke/icon.png" type="image/x-icon">
 
     <script>
         
@@ -22,6 +23,13 @@
        
         var music = new Audio('disco/'+ disk +'.mp3');
 
+        function setCookie(cname, cvalue) {
+            const d = new Date();
+            d.setTime(d.setHours(20,0,0));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";";
+        }
+
         function song(){
             if(playing == 0){
                 music.play();
@@ -37,6 +45,7 @@
         }
         function smash(){
 
+            
             var guess = document.getElementById("guess").value.toLowerCase();
             var guessDex = 0;
             for(var i=0; i<151;i++){
@@ -53,6 +62,9 @@
                     clearInterval(x);
                 }, 1500);  
             }
+
+           // setCookie("lives", live);
+           // setCookie(live, guess);
 
             if(guess == poke.toLowerCase() && live!=0){    
                 var pic = document.getElementById("pic");
