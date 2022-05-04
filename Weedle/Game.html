@@ -103,11 +103,11 @@
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
-                        if(75 > d >= 25){
+                        if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
-                        if(25 > d >= 0){
+                        if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️";
                         }
@@ -143,11 +143,11 @@
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
-                        if(75 > d >= 25){
+                        if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
-                        if(25 > d >= 0){
+                        if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️";
                         }
@@ -184,11 +184,11 @@
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
-                        if(75 > d >= 25){
+                        if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
-                        if(25 > d >= 0){
+                        if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️";
                         }
@@ -224,11 +224,11 @@
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
-                        if(75 > d >= 25){
+                        if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
-                        if(25 > d >= 0){
+                        if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️";
                         }
@@ -264,11 +264,11 @@
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️⬇️";
                         }
-                        if(75 > d >= 25){
+                        if(75 > d && d >= 25){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️⬇️";
                         }
-                        if(25 > d >= 0){
+                        if(25 > d && d >= 0){
                             document.getElementById("dex").innerHTML = "Pokedex: ⬇️";
                             g.innerHTML = g.innerHTML + " ⬇️";
                         }
@@ -391,7 +391,7 @@
 <img src="poke/logo.png" style="width: 250px; display:inline; position:absolute; " >
 <input id = "note" type="image" src="poke/sing.png" onclick="song()" style="padding: 5px; float: right; width: 50px; height: 50px; border-style: solid; border-width: 10px; border-color: black; background-color: white; border-radius:0%;">
 <center>
-<div id="how" Style = "z-index: 10; width: 500px; border-width: 10px; border-color: black; border-style: solid; background-color: white; position: absolute; margin-left: 34%; margin-right: 50%;">
+<div id="howx" Style = "visibility: hidden; z-index: 10; width: 500px; border-width: 10px; border-color: black; border-style: solid; background-color: white; position: absolute; margin-left: 34%; margin-right: 50%;">
     Every day, there is a new hidden Pokemon. You have 6 tries. <br> 
     -------------------
     You can only guess Pokemon from the first 151 pokemon. <br>
@@ -401,7 +401,7 @@
     Every guess will tell you if it is higher in the pokedex or lower. The more arrows, the further it is. ⬆️⬆️⬆️
 </div>
 <br>
-<input type="button" value="Let's Go!" onclick="agree()" id="ok" style="z-index: 10; border-style: solid; margin-top: 750px; border-width: 10px; border-color: black; background-color: white; border-radius:0%; position: absolute;">
+<input type="button" value="Let's Go!" onclick="agree()" id="okx" style="visibility: hidden; z-index: 10; border-style: solid; margin-top: 750px; border-width: 10px; border-color: black; background-color: white; border-radius:0%; position: absolute;">
 <body id="body" style=" background-image: url(''); background-size: cover; background-repeat: no-repeat;" onkeypress="KBW(event)">
     <div style="z-index: 0; width: 500px; border-width: 10px; border-color: black; border-style: solid; background-color: white;">
     <p id="name"></p>
