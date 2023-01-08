@@ -8,7 +8,7 @@
     <body>
         <center>
         <input id="inp" type="text"> <input type="button" value="Art me up" onclick="start()"> <br> <br>
-        <canvas id="main" width="150" height="200">
+        <canvas id="main" width="1500" height="2000">
         </canvas>
         </center>
     </body>
@@ -19,8 +19,8 @@
     var colors = ["red","orange","yellow","green","blue","indigo","violet","brown","white","black","grey","pink"];
 
     function start(){
-        for(var x = 0; x<150; x+=10){
-            for(var y = 0; y<200; y+=10){
+        for(var x = 0; x<1500; x+=10){
+            for(var y = 0; y<2000; y+=10){
                 drawIt(x, y);
             }
         }
