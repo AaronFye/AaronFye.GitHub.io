@@ -2,13 +2,26 @@
 
 <html>
     <head>
+        <style>
+            @font-face {
+                font-family: splat;
+                src: url(font.otf);
+            }
+            a{
+                border:5px solid orange;
+                padding: 0px;
+                font-family: splat;
+                
+            }
 
+            
+        </style>
     </head>
 
     <body>
         <center>
-        <input id="inp" type="text"> <input type="button" value="Click Me" onclick="GFI()"> <br> <br>
-        <input type="text" id="facts">
+        <input id="inp" type="text"> <input type="button" value="Click Me" onclick="GFI()"> <br> <br> <br>
+        <div id="new"></div>
         </center>
     </body>
 </html>
@@ -16,19 +29,43 @@
 <script>
 
     var clicks = 0;
-
+    var list = 0;
     function GFI(){
         clicks++;
         document.getElementById("inp").value = clicks;
-        if(clicks%10 == 0){
-            document.getElementById("facts").value = "NICE";
-        }
 
-        fetch('https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty')
+        fetch('https://hacker-news.firebaseio.com/v0/item/'+ clicks +'.json?print=pretty') //8863
             .then(response =>{
                 return response.json();
             }).then(data =>{
-                console.log(data);
+                if(data.type=="story" && !data.dead){
+                    list++;
+                    console.log(data);
+                    var tag = document.createElement("a");
+                    tag.id = list%10;
+                    tag.href = data.url;
+                    var brk = document.createElement("br");
+                    var brk2 = document.createElement("br");
+                    var brk3 = document.createElement("br");
+                    
+                    var text = document.createTextNode("\""+data.title+"\" - " + data.by + " +" + data.score); 
+                    //("By:" + data.by + " title:" + data.title + " score:" + data.score + " link:" + data.url);
+                    if(list<=10){
+                        tag.appendChild(text);
+                        var element = document.getElementById("new");
+                        element.appendChild(tag);
+                        element.appendChild(brk);
+                        element.appendChild(brk2);
+                        element.appendChild(brk3);
+                    }
+                    else{
+                        document.getElementById(list%10).textContent = "\""+data.title+"\" - " + data.by + " +" + data.score;
+                        document.getElementById(list%10).href = data.url;
+                    }
+                }
+                else{
+                    GFI();
+                }
             })
     }
 
