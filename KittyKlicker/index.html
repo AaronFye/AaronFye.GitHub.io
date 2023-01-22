@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <center>
+        <input id="inp" type="text"> <input type="button" value="Click Me" onclick="GFI()"> <br> <br>
+        <input type="text" id="facts">
+        </center>
+    </body>
+</html>
+
+<script>
+
+    var clicks = 0;
+
+    function GFI(){
+        clicks++;
+        document.getElementById("inp").value = clicks;
+        if(clicks%10 == 0){
+            document.getElementById("facts").value = "NICE";
+        }
+
+        fetch('https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty')
+            .then(response =>{
+                return response.json();
+            }).then(data =>{
+                console.log(data);
+            })
+    }
+
+
+</script>
