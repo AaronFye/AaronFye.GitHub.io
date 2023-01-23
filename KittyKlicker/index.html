@@ -33,7 +33,7 @@
                 position: relative;
                 z-index: 0;
             }
-            #a1{
+            /* #a1{
                 background-color: darkslategray;
                 color: white;
                 opacity: 80%;
@@ -152,7 +152,7 @@
                 z-index: 1;
                 font-family: splat;
                 padding: 5px;
-            }
+            } */
             
             /*
             html, body {
@@ -195,32 +195,32 @@
                     list++;
                     console.log(data);
                     var tag = document.createElement("a");
-                    var nam = document.createElement("p");
+                    //var nam = document.createElement("p");
                     tag.id = list%10;
                     tag.href = data.url;
-                    nam.id = 'a' +list%10;
+                    //nam.id = 'a' +list%10;
                     var brk = document.createElement("br");
                     var brk2 = document.createElement("br");
                     var brk3 = document.createElement("br");
                     var brk4 = document.createElement("br");
                     
-                    var text = document.createTextNode("\""+data.title+"\"");
-                    var text2 =  document.createTextNode(data.by);
+                    var text = document.createTextNode("\""+data.title+"\" by " + data.by);
+                    //var text2 =  document.createTextNode(data.by);
                     //("By:" + data.by + " title:" + data.title + " score:" + data.score + " link:" + data.url);
                     if(list<=10){
                         tag.appendChild(text);
-                        nam.appendChild(text2);
+                      //  nam.appendChild(text2);
                         var element = document.getElementById("new");
-                        element.appendChild(tag);element.appendChild(nam);
-                        
+                        element.appendChild(tag);
+                    //  element.appendChild(nam);
                         element.appendChild(brk);
                         element.appendChild(brk2);
                         element.appendChild(brk3);
                         element.appendChild(brk4);
                     }
                     else{
-                        document.getElementById(list%10).textContent = "\""+data.title+"\"";
-                        document.getElementById('a' + list%10).textContent = data.by;
+                        document.getElementById(list%10).textContent = "\""+data.title+"\" by " + data.by;
+         //               document.getElementById('a' + list%10).textContent = data.by;
                         document.getElementById(list%10).href = data.url;
                     }
                 }
