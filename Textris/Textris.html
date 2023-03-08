@@ -20,6 +20,10 @@
                 border: 2.5px solid black;
                 background-color: grey;
             }
+
+            .blocks{
+                color: red;
+            }
         </style>
     </head>
 
@@ -136,7 +140,7 @@ var temp4 = "";
 
         if(t<20){
             //alert("yeah" + t);
-             board[t][0] = 'X';
+             board[t][0] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              t++;
          }
@@ -149,27 +153,84 @@ var temp4 = "";
 
     var rando2 = Math.floor(Math.random()*1000);
     function drop(){
+        var blocked = 0;
+        slot = rando2%10;
          if(t==0){
-            temp1 = board[t][rando2%10];
-            board[t][rando2%10] = 'X';
+            temp1 = board[t][slot];
+            board[t][slot] = '<span class=\"blocks\">X</span>';
             adds(board, t);
             t++;
+            return;
          }   
-         if(t<20 && t>0){
+         if(t<19 && t>0){
+            if(board[t+1][slot]=='<span class=\"blocks\">X</span>'){
+             board[t-1][slot] = temp1; 
+             temp1 = board[t][slot];
+             board[t][slot] = '<span class=\"blocks\">X</span>';
+             adds(board, t);
+             t=20;   
+               return; 
+            }
             //alert("yeah" + t);
-             board[t-1][rando2%10] = temp1; 
-             temp1 = board[t][rando2%10];
-             board[t][rando2%10] = 'X';
+             board[t-1][slot] = temp1; 
+             temp1 = board[t][slot];
+             board[t][slot] = '<span class=\"blocks\">X</span>';
+             adds(board, t);
+             t++;
+             return;
+            }
+            
+         if(t == 19){
+             board[t-1][slot] = temp1; 
+             temp1 = board[t][slot];
+             board[t][slot] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              t++;
          }
-         else{
+         if(t==20){
             t=0;
             newRando();
+            checkIt(board);
             return;
          }
     }
     
+    function checkIt(board){
+        
+        var total = 0;
+        for (var i =0;i<20;i++){
+            for(var j =0;j<10;j++){
+                if(board[i][j] == '<span class=\"blocks\">X</span>'){
+                    total++;
+                }
+                if(total == 10){ //if total is all the blocks in a row
+                    clearUp(board, i);
+                    total = 0;
+                }
+
+            }
+            total =0;
+        }
+    }
+
+    function clearUp(board, index){
+        for(var i=0;i<10;i++){
+            if(index != 0){
+                for(var j=0; j<index;j++){
+                    board[index][i] = board[index-j][i];
+                    adds(board, index-j);
+                }
+                
+            }
+            if(index == 0){
+                board[index][i] = 'O';
+                adds(board, index);
+            }
+        }
+
+        
+    }
+
     function newRando(){
         rando2 = Math.floor(Math.random()*1000);
     }
