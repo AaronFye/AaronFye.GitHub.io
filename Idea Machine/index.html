@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            
+        </style>
+    </head>
+
+    <body>
+        <center>
+        <input type="button" value="Make me an idea" id="load" onclick="GFI()"> <br> <br> <br>
+        <p>A </p> <input id="idea" type="text"> <p> that is also </p> <input id="twist" type="text"> 
+        <div id="new"></div>
+
+        </center>
+    </body>
+</html>
+
+<script>
+
+function GFI(){
+    /*Rock Paper Scissors game: It's a classic game that can be created using HTML, CSS, and JavaScript.
+
+    Memory game: A game where players have to remember the position of hidden objects on the screen. It's a good exercise to practice JavaScript array manipulation and DOM manipulation.
+
+    Snake game: A simple game where a player controls a snake that moves around the screen, trying to eat food without colliding with walls or its own body.
+
+    Tic Tac Toe game: Another classic game that can be created using HTML, CSS, and JavaScript. It's a great exercise to practice conditional statements and DOM manipulation.
+
+    Quiz app: A simple quiz app where players have to answer a set of questions. It's a good exercise to practice JavaScript conditional statements and array manipulation.
+
+    Slot machine game: A simple slot machine game that uses JavaScript's Math library to generate random numbers and display the results on the screen.
+
+    Hangman game: A classic word guessing game that can be created using JavaScript's string manipulation functions.
+
+    Whack-a-mole game: A game where players have to hit moles that appear randomly on the screen. It's a good exercise to practice event handling in JavaScript.
+
+    Matching game: A game where players have to match pairs of cards with the same image. It's a good exercise to practice DOM manipulation and event handling.
+
+    Calculator app: A simple calculator app that performs basic arithmetic operations. It's a good exercise to practice JavaScript functions and event handling.
+    */
+
+    /*
+    Multiplayer: A game mode where multiple players can participate in the same game instance, either cooperatively or competitively. Multiplayer games can be played locally or online.
+
+    Retro: A game style that emulates the look and feel of older video games, often using pixel art, chiptune music, and simple gameplay mechanics.
+
+    3D: A game that uses 3D graphics to render game objects and environments, giving players a sense of depth and immersion.
+
+    Open-world: A game that allows players to freely explore a large virtual world, often featuring non-linear gameplay and side quests.
+
+    Survival: A game mode where players must survive against various threats, such as hunger, thirst, enemies, and environmental hazards.
+
+    Battle Royale: A game mode where players compete against each other to be the last person standing, often featuring shrinking play areas and scavenging for weapons and supplies.
+
+    Roguelike: A game style that features randomly generated levels, permadeath, and a focus on exploration and experimentation.
+
+    Platformer: A game genre that involves jumping between platforms, avoiding obstacles, and defeating enemies, often with a focus on precision and timing.
+
+    Real-time strategy: A game genre that involves building and managing resources, troops, and bases in real-time, often with a focus on tactics and strategy.
+
+    Role-playing: A game genre that involves creating and customizing a character, exploring a virtual world, and completing quests and missions, often with a focus on story and character development.
+    */
+
+    var ideas = ["Rock Paper Scissors", "Memory game", "Snake game", "Tic Tac Toe", "Quiz app", "Slot Machine", "Hangman", "Whack-a-mole", "Matching", "Calculator"];
+    var twists = ["Multiplayer", "Retro", "3D", "Open world", "Survival", "Battle Royale", "Rougelike", "Platformer", "Real Time Strategy", "Role-playing"];
+
+    var ideaTB = document.getElementById("idea");
+    var index = Math.floor(Math.random()*1000) % ideas.length;
+    ideaTB.value = ideas[index];
+
+    
+    var twistTB = document.getElementById("twist");
+    var index2 = Math.floor(Math.random()*1000) % twists.length;
+    twistTB.value = twists[index2];
+}
+
+</script>

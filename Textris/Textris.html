@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            p {
+                margin-bottom: 0;
+                margin-top: 0;
+                margin-left: 0;
+                margin-right: 0;
+                font-family: monospace;
+                font-size:x-large;
+                line-height: 1px;
+                letter-spacing: 0px;
+            }
+            div{
+                width: 150px;
+                height: 400px;
+                z-index: 200;
+                border: 2.5px solid black;
+                background-color: grey;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center>
+            </br>
+        <div>
+        </br>
+            <p id = "1"> </p> </br>
+            <p id = "2"> </p> </br>
+            <p id = "3"> </p> </br>
+            <p id = "4"> </p> </br>
+            <p id = "5"> </p> </br>
+            <p id = "6"> </p> </br>
+            <p id = "7"> </p> </br>
+            <p id = "8"> </p> </br>
+            <p id = "9"> </p> </br>
+            <p id = "10"> </p> </br>
+            <p id = "11"> </p> </br>
+            <p id = "12"> </p> </br>
+            <p id = "13"> </p> </br>
+            <p id = "14"> </p> </br>
+            <p id = "15"> </p> </br>
+            <p id = "16"> </p> </br>
+            <p id = "17"> </p> </br>
+            <p id = "18"> </p> </br>
+            <p id = "19"> </p> </br>
+            <p id = "20"> </p> </br>
+        </div>
+        </center>
+    </body>
+</html>
+
+<script>
+
+    
+var t = 0;
+var temp1 = "";
+var temp2 = "";
+var temp3 = "";
+var temp4 = "";
+    /*
+        T   A   C   O   = [0,0][0,1][0,2][0,3]
+
+        F   A           = [0,0][0,1][1,1][1,2]
+            S   T
+
+            C   K       = [1,0][1,1][0,1][0,2]
+        L   U
+         
+        H   E           = [0,0][0,1][1,0][1,1]
+        L   P
+
+                A       = [1,0][1,1][1,2][0,2]
+        H   O   L
+
+        N   I   C       = [0,0][0,1][0,2][1,2]
+                E
+        
+        C   A   T       = [0,0][0,1][0,2][1,1]
+            S
+
+    */
+    var dict = [['T','A','C','O'],['F','A','S','T'],['L','U','C','K'],['H','E','L','P'],['H','O','L','A'],
+                ['N','I','C','E'],['C','A','T','S']];
+
+    var board = [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "] ];
+    
+                 
+                 for(var i = 0; i<20; i++){
+                    for(var j =0; j<10; j++){
+                        var rando = Math.floor(Math.random()*1000);
+                        board[i][j] = 'O';
+                        //dict[rando%7][rando%4];
+                                     
+                    }
+                    adds(board, i);
+                    
+                 }
+                 GFI(board); 
+    
+    function GFI(board){
+        //var spawner = setInterval(drop(), 500);
+        //var spawner = setInterval(color, 500);
+
+        var spawner = setInterval( function() { drop(board); }, 500 );
+    }
+
+
+    function color() {
+        // var rando2 = Math.floor(Math.random()*1000);
+        // var colors = ["lightblue", "lightgreen"];
+        // var var2 = document.body;
+        // var2.style.backgroundColor = colors[rando2%2];
+
+        if(t<20){
+            //alert("yeah" + t);
+             board[t][0] = 'X';
+             adds(board, t);
+             t++;
+         }
+         else{
+            return;
+         }
+    }
+
+    
+
+    var rando2 = Math.floor(Math.random()*1000);
+    function drop(){
+         if(t==0){
+            temp1 = board[t][rando2%10];
+            board[t][rando2%10] = 'X';
+            adds(board, t);
+            t++;
+         }   
+         if(t<20 && t>0){
+            //alert("yeah" + t);
+             board[t-1][rando2%10] = temp1; 
+             temp1 = board[t][rando2%10];
+             board[t][rando2%10] = 'X';
+             adds(board, t);
+             t++;
+         }
+         else{
+            t=0;
+            newRando();
+            return;
+         }
+    }
+    
+    function newRando(){
+        rando2 = Math.floor(Math.random()*1000);
+    }
+
+    function adds(board, index){
+         
+         if(index>0){    
+            var curCol = document.getElementById(index+1);
+            var preCol = document.getElementById(index);
+            preCol.innerHTML = board[index-1].join("");
+            curCol.innerHTML = board[index].join("");
+         }
+         else{
+            var curCol = document.getElementById(index+1);
+            curCol.innerHTML = board[index].join("");
+         }
+    }
+    
+</script>
