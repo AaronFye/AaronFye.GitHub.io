@@ -3,7 +3,7 @@
 <html>
     <head>
         <style>
-            p {
+            p{
                 margin-bottom: 0;
                 margin-top: 0;
                 margin-left: 0;
@@ -213,10 +213,10 @@ var temp4 = "";
     }
 
     function clearUp(board, index){
-        for(var i=0;i<10;i++){
-            if(index != 0){
-                for(var j=0; j<index;j++){
-                    board[index][i] = board[index-(j+1)][i];
+        for(var i=0;i<10;i++){ // loop for each column
+            if(index != 0){ // if it is not the first line
+                for(var j=0; j<index;j++){ // loop for each line above the current one
+                    board[index-j][i] = board[(index-1)][i]; // set [19][0] to [18][0]  
                     adds(board, index-j);
                 }
                 
