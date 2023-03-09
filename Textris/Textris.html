@@ -53,6 +53,9 @@
             <p id = "19"> </p> </br>
             <p id = "20"> </p> </br>
         </div>
+        <input type="button" value="<" onclick="left()">
+        <input type="button" value="   " onclick="rotate()">
+        <input type="button" value=">" onclick="right()">
         </center>
     </body>
 </html>
@@ -61,6 +64,8 @@
 
     
 var t = 0;
+var glish = 0;
+var count = 0;
 var temp1 = "";
 var temp2 = "";
 var temp3 = "";
@@ -127,7 +132,7 @@ var temp4 = "";
         //var spawner = setInterval(drop(), 500);
         //var spawner = setInterval(color, 500);
 
-        var spawner = setInterval( function() { drop(board); }, 500 );
+        var spawner = setInterval( function() { drop(board); }, 1000 );
     }
 
 
@@ -154,35 +159,37 @@ var temp4 = "";
     function drop(){
         var blocked = 0;
         slot = rando2%10;
+        if(slot+glish >9){ glish = 9-slot;}
+        if(slot+glish <0){ glish = 0-slot;}
          if(t==0){
-            temp1 = board[t][slot];
-            board[t][slot] = '<span class=\"blocks\">X</span>';
+            temp1 = board[t][slot+glish];
+            board[t][slot+glish] = '<span class=\"blocks\">X</span>';
             adds(board, t);
             t++;
             return;
          }   
          if(t<19 && t>0){
-            if(board[t+1][slot]=='<span class=\"blocks\">X</span>'){
-             board[t-1][slot] = temp1; 
-             temp1 = board[t][slot];
-             board[t][slot] = '<span class=\"blocks\">X</span>';
+            if(board[t+1][slot+glish]=='<span class=\"blocks\">X</span>'){
+             board[t-1][slot+glish] = temp1; 
+             temp1 = board[t][slot+glish];
+             board[t][slot+glish] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              t=20;   
                return; 
             }
             //alert("yeah" + t);
-             board[t-1][slot] = temp1; 
-             temp1 = board[t][slot];
-             board[t][slot] = '<span class=\"blocks\">X</span>';
+             board[t-1][slot+glish] = temp1; 
+             temp1 = board[t][slot+glish];
+             board[t][slot+glish] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              t++;
              return;
             }
             
          if(t == 19){
-             board[t-1][slot] = temp1; 
-             temp1 = board[t][slot];
-             board[t][slot] = '<span class=\"blocks\">X</span>';
+             board[t-1][slot+glish] = temp1; 
+             temp1 = board[t][slot+glish];
+             board[t][slot+glish] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              t++;
          }
@@ -190,6 +197,8 @@ var temp4 = "";
             t=0;
             newRando();
             checkIt(board);
+            glish = 0;
+            count++;
             return;
          }
     }
@@ -216,8 +225,13 @@ var temp4 = "";
         for(var i=0;i<10;i++){ // loop for each column
             if(index != 0){ // if it is not the first line
                 for(var j=0; j<index;j++){ // loop for each line above the current one
-                    board[index-j][i] = board[(index-1)][i]; // set [19][0] to [18][0]  
+                    board[index-j][i] = board[((index-j)-1)][i]; // set [19][0] to [18][0]  
                     adds(board, index-j);
+                }
+                for(var k = 0; k<10; k++){
+                    board[0][k] = dict[rando2%7][rando2%4];
+                    newRando();
+                    adds(board, 0);
                 }
                 
             }
@@ -246,6 +260,15 @@ var temp4 = "";
             var curCol = document.getElementById(index+1);
             curCol.innerHTML = board[index].join("");
          }
+    }
+
+    function left(){
+        glish--;
+        return;
+    }
+    function right(){
+        glish++;
+        return;
     }
     
 </script>
