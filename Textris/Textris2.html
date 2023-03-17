@@ -70,7 +70,6 @@ var temp1 = "";
 var temp2 = "";
 var temp3 = "";
 var temp4 = "";
-var moved = 0;
     /*
         T   A   C   O   = [0,0][0,1][0,2][0,3]
 
@@ -121,6 +120,7 @@ var moved = 0;
                  for(var i = 0; i<20; i++){
                     for(var j =0; j<10; j++){
                         var rando = Math.floor(Math.random()*1000);
+                        //board[i][j] = 'O';
                         board[i][j] = dict[rando%7][rando%4];
                                      
                     }
@@ -130,8 +130,30 @@ var moved = 0;
                  GFI(board); 
     
     function GFI(board){
-        var spawner = setInterval( function() { drop(board); }, 300 );
+        //var spawner = setInterval(drop(), 500);
+        //var spawner = setInterval(color, 500);
+
+        var spawner = setInterval( function() { drop(board); }, 500 );
     }
+
+
+    function color() {
+        // var rando2 = Math.floor(Math.random()*1000);
+        // var colors = ["lightblue", "lightgreen"];
+        // var var2 = document.body;
+        // var2.style.backgroundColor = colors[rando2%2];
+
+        if(t<20){
+            //alert("yeah" + t);
+             board[t][0] = '<span class=\"blocks\">X</span>';
+             adds(board, t);
+             t++;
+         }
+         else{
+            return;
+         }
+    }
+
     
 
     var rando2 = Math.floor(Math.random()*1000);
@@ -141,28 +163,33 @@ var moved = 0;
         if(slot+glish >9){ glish = 9-slot;}
         if(slot+glish <0){ glish = 0-slot;}
          if(t==0){
-            temp1 = JSON.parse(JSON.stringify(board[t]));
+            temp1 = board[t];
             board[t][slot+glish] = '<span class=\"blocks\">X</span>';
             adds(board, t);
             t++;
             return;
          }   
          if(t<19 && t>0){
+            if(board[t+1][slot+glish]=='<span class=\"blocks\">X</span>'){
              board[t-1] = temp1; 
-             temp1 = JSON.parse(JSON.stringify(board[t]));
+             temp1 = board[t];
              board[t][slot+glish] = '<span class=\"blocks\">X</span>';
              adds(board, t);
-             if(board[t+1][slot+glish]=='<span class=\"blocks\">X</span>'){
-                t = 20;}
-            else{
-                t++;
+             t=20;   
+             return; 
             }
+            //alert("yeah" + t);
+             board[t-1] = temp1;
+             temp1 = board[t];
+             board[t][slot+glish] = '<span class=\"blocks\">X</span>';
+             adds(board, t);
+             t++;
              return;
             }
             
          if(t == 19){
-             board[t-1]= temp1; 
-             temp1 = JSON.parse(JSON.stringify(board[t]));
+             board[t-1] = temp1; 
+             temp1 = board[t];
              board[t][slot+glish] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              t++;
@@ -172,7 +199,6 @@ var moved = 0;
             newRando();
             checkIt(board);
             glish = 0;
-            moved=0;
             count++;
             return;
          }
@@ -228,24 +254,20 @@ var moved = 0;
          if(index>0){    
             var curCol = document.getElementById(index+1);
             var preCol = document.getElementById(index);
-            preCol.innerHTML = board[index-1].join("");
-            curCol.innerHTML = board[index].join("");
+            preCol.innerHTML = board[index-1];
+            curCol.innerHTML = board[index];
          }
          else{
             var curCol = document.getElementById(index+1);
-            curCol.innerHTML = board[index].join("");
+            curCol.innerHTML = board[index];
          }
     }
 
     function left(){
-        temp2 = glish;
-        moved = 1;
         glish--;
         return;
     }
     function right(){
-        temp2 = glish;
-        moved = 1;
         glish++;
         return;
     }

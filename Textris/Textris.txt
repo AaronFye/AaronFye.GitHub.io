@@ -130,8 +130,30 @@ var moved = 0;
                  GFI(board); 
     
     function GFI(board){
+        //var spawner = setInterval(drop(), 500);
+        //var spawner = setInterval(color, 500);
+
         var spawner = setInterval( function() { drop(board); }, 300 );
     }
+
+
+    function color() {
+        // var rando2 = Math.floor(Math.random()*1000);
+        // var colors = ["lightblue", "lightgreen"];
+        // var var2 = document.body;
+        // var2.style.backgroundColor = colors[rando2%2];
+
+        if(t<20){
+            //alert("yeah" + t);
+             board[t][0] = '<span class=\"blocks\">X</span>';
+             adds(board, t);
+             t++;
+         }
+         else{
+            return;
+         }
+    }
+
     
 
     var rando2 = Math.floor(Math.random()*1000);
@@ -141,15 +163,19 @@ var moved = 0;
         if(slot+glish >9){ glish = 9-slot;}
         if(slot+glish <0){ glish = 0-slot;}
          if(t==0){
-            temp1 = JSON.parse(JSON.stringify(board[t]));
+            temp1 = board[t][slot+glish];
+            //alert("temp1 = " + temp1 + "  board["+t+"]["+(slot+glish)+"] =" +board[t][slot+glish]);
             board[t][slot+glish] = '<span class=\"blocks\">X</span>';
             adds(board, t);
             t++;
             return;
          }   
          if(t<19 && t>0){
-             board[t-1] = temp1; 
-             temp1 = JSON.parse(JSON.stringify(board[t]));
+            //alert("yeah" + t);
+             board[t-1][slot+glish] = temp1; 
+             //alert(temp1 + " = temp1, board["+(t-1)+"]["+(slot+glish)+"] =" +board[t-1][slot+glish]);
+             temp1 = board[t][slot+glish];
+             //alert("temp1 = " + temp1 + "  board["+t+"]["+(slot+glish)+"] =" +board[t][slot+glish]);
              board[t][slot+glish] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              if(board[t+1][slot+glish]=='<span class=\"blocks\">X</span>'){
@@ -161,8 +187,8 @@ var moved = 0;
             }
             
          if(t == 19){
-             board[t-1]= temp1; 
-             temp1 = JSON.parse(JSON.stringify(board[t]));
+             board[t-1][slot+glish] = temp1; 
+             temp1 = board[t][slot+glish];
              board[t][slot+glish] = '<span class=\"blocks\">X</span>';
              adds(board, t);
              t++;
