@@ -54,7 +54,7 @@
             <p id = "20"> </p> </br>
         </div>
         <input type="button" value="<" onclick="left()">
-        <input type="button" value="   " onclick="rotate()">
+        <input id="score" type="button" value="0" onclick="rotate()">
         <input type="button" value=">" onclick="right()">
         </center>
     </body>
@@ -65,12 +65,12 @@
     
 var t = 0;
 var glish = 0;
+var spawner;
 var count = 0;
 var temp1 = "";
 var temp2 = "";
-var temp3 = "";
+var score = 0;
 var temp4 = "";
-var moved = 0;
     /*
         T   A   C   O   = [0,0][0,1][0,2][0,3]
 
@@ -130,7 +130,7 @@ var moved = 0;
                  GFI(board); 
     
     function GFI(board){
-        var spawner = setInterval( function() { drop(board); }, 300 );
+        spawner = setInterval( function() { drop(board); }, 600 );
     }
     
 
@@ -189,6 +189,16 @@ var moved = 0;
                 if(total == 10){ //if total is all the blocks in a row
                     clearUp(board, i);
                     total = 0;
+                    score++;
+                    document.getElementById("score").value = score;
+                    clearTimeout(spawner);
+                    if(score>590){
+                        spawner = setInterval( function() { drop(board); }, 10 );    
+                    }
+                    else{
+                        spawner = setInterval( function() { drop(board); }, (600-score) );
+                    }
+                    
                 }
 
             }
@@ -236,6 +246,22 @@ var moved = 0;
             curCol.innerHTML = board[index].join("");
          }
     }
+
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+
+        e = e || window.event;
+
+        if (e.keyCode == '37'){ 
+        left();
+        }
+        else if (e.keyCode == '39') {
+        right();
+        }
+
+}
+
 
     function left(){
         temp2 = glish;
