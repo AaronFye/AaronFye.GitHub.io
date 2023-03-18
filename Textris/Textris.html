@@ -304,7 +304,8 @@ var temp4 = "";
 
     function clearUpVert(board, index){
         for(var i = 0; i<20;i++){
-            board[i][index] = dict[rando2%7][rando2%4];
+            //board[i][index] = dict[rando2%7][rando2%4];
+            board[i][index]  = 'O';
             newRando();
             adds(board, i);
         }
