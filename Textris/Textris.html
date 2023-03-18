@@ -24,6 +24,9 @@
             .blocks{
                 color: white;
             }
+            .list{
+                white-space: pre-line;
+            }
         </style>
     </head>
 
@@ -56,6 +59,8 @@
         <input type="button" value="<" onclick="left()">
         <input id="score" type="button" value="0" onclick="rotate()">
         <input type="button" value=">" onclick="right()">
+        </br> </br> </br>
+        <p id="list"> </p>
         </center>
     </body>
 </html>
@@ -135,8 +140,8 @@ var temp4 = "";
                  for(var i = 0; i<20; i++){
                     for(var j =0; j<10; j++){
                         var rando = Math.floor(Math.random()*1000);
-                        board[i][j] = dict[rando%7][rando%4];
-                        //board[i][j] = 'O';
+                        //board[i][j] = dict[rando%7][rando%4];
+                        board[i][j] = 'O';
                                      
                     }
                     adds(board, i);
@@ -145,7 +150,7 @@ var temp4 = "";
                  GFI(board); 
     
     function GFI(board){
-        spawner = setInterval( function() { drop(board); }, 100 );
+        spawner = setInterval( function() { drop(board); }, 400 );
     }
     
 
@@ -211,11 +216,11 @@ var temp4 = "";
                     score++;
                     document.getElementById("score").value = score;
                     clearTimeout(spawner);
-                    if(score>590){
+                    if(score>490){
                         spawner = setInterval( function() { drop(board); }, 10 );    
                     }
                     else{
-                        spawner = setInterval( function() { drop(board); }, (600-score) );
+                        spawner = setInterval( function() { drop(board); }, (500-score) );
                     }
                     
                 }
@@ -265,6 +270,16 @@ var temp4 = "";
         for(var t = 0; t <1997; t++){
             if(check == words[t].toUpperCase()){
                 clearUpVert(board, place);
+                score++;
+                    document.getElementById("score").value = score;
+                    clearTimeout(spawner);
+                    if(score>390){
+                        spawner = setInterval( function() { drop(board); }, 10 );    
+                    }
+                    else{
+                        spawner = setInterval( function() { drop(board); }, (400-score) );
+                    }
+                    document.getElementById('list').innerHTML = document.getElementById('list').innerHTML + "\n" + words[t]; 
             }
         }
     }
@@ -273,6 +288,16 @@ var temp4 = "";
         for(var t = 0; t <1997; t++){
             if(check.indexOf(words[t].toUpperCase()) >= 0){
                 clearUp(board, place);
+                score++;
+                    document.getElementById("score").value = score;
+                    clearTimeout(spawner);
+                    if(score>390){
+                        spawner = setInterval( function() { drop(board); }, 10 );    
+                    }
+                    else{
+                        spawner = setInterval( function() { drop(board); }, (400-score) );
+                    }
+                    document.getElementById('list').innerHTML = document.getElementById('list').innerHTML +  "\n" + words[t];
             }
         }
     }
@@ -293,7 +318,8 @@ var temp4 = "";
                     adds(board, index-j);
                 }
                 for(var k = 0; k<10; k++){
-                    board[0][k] = dict[rando2%7][rando2%4];
+                    //board[0][k] = dict[rando2%7][rando2%4];
+                    board[0][k] = 'O';
                     newRando();
                     adds(board, 0);
                 }
