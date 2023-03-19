@@ -168,7 +168,12 @@ var temp4 = "";
                     for(var j =0; j<10; j++){
                         var rando = Math.floor(Math.random()*1000);
                         //board[i][j] = dict[rando%7][rando%4];
-                        board[i][j] = 'O';
+                        if(j%2){
+                            board[i][j] = 'O';
+                        }
+                        else{
+                            board[i][j] = 'X';
+                        }
                                      
                     }
                     adds(board, i);
@@ -340,7 +345,13 @@ var temp4 = "";
     function clearUpVert(board, index){
         for(var i = 0; i<20;i++){
             //board[i][index] = dict[rando2%7][rando2%4];
-            board[i][index]  = 'O';
+            
+            if(index%2){
+                board[i][index]  = 'O';
+            }
+            else{
+                board[i][index]  = 'X';
+            }
             newRando();
             adds(board, i);
         }
