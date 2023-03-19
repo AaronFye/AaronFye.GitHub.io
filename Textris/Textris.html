@@ -13,7 +13,7 @@
                 line-height: 1px;
                 letter-spacing: 0px;
             }
-            div{
+            #board{
                 width: 150px;
                 height: 400px;
                 z-index: 200;
@@ -24,16 +24,39 @@
             .blocks{
                 color: white;
             }
-            .list{
-                white-space: pre-line;
+
+            #right{
+                position: absolute;
+                width: 50%;
+                right: 0;
+            }
+            #left{
+                position: absolute;
+                width: 50%;
+                left: 0;
+            }
+            #flR{
+                float: left;
+            }
+            #flL{
+                float: right;
             }
         </style>
     </head>
 
     <body>
+        <div id="left">
+            <div id ="flL">  
+            <p class="title"> Up next:</p>
+            <br>
+            <p id="next"> </p>
+        </div>
+        </div>
+        <div id="right">
+        <div id = "flR">
         <center>
             </br>
-        <div>
+        <div id ="board">
         </br>
             <p id = "1"> </p> </br>
             <p id = "2"> </p> </br>
@@ -62,6 +85,8 @@
         </br> </br> </br>
         <p id="list"> </p>
         </center>
+    </div>
+    </div>
     </body>
 </html>
 
@@ -76,6 +101,7 @@ var temp1 = "";
 var temp2 = "";
 var score = 0;
 var temp4 = "";
+
     /*
         T   A   C   O   = [0,0][0,1][0,2][0,3]
 
@@ -101,7 +127,8 @@ var temp4 = "";
     var dict = [['T','A','C','O'],['F','A','S','T'],['L','U','C','K'],['H','E','L','P'],['H','O','L','A'],
                 ['N','I','C','E'],['C','A','T','S']];
     var alph = ["E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","L","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","R","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","I","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","U","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","P","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","H","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","K","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","W","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","V","V","V","V","V","V","V","V","V","V","V","V","V","V","J","J","J","J","J","J","J","J","J","Z","Z","Z","Z","Z","Z","Z","Z","X","X","X","X","X","Q"];
-    
+    var next = [""]; 
+    fillUp();
 
     var words = ["abba", "able", "abut", "aced", "aces", "ache", "acid", "acme", "acne", "acre", "acts", "adds", "afar", "aged", "ages", "agin", "ahem", "ahoy", "aide", "aids", "ails", "aims", "airs", "ajar", "alan", "alas", "alec", "ales", "ally", "alma", "aloe", "also", "alto", "amah", "amen", "amin", "ammo", "anal", "anew", "anna", "anon", "ante", "anti", "ants", "apes", "apex", "aqua", "arch", "area", "aria", "arid", "arms", "army", "arse", "arts", "arty", "asks", "atom", "atop", "auld", "aunt", "aura", "auto", "avid", "away", "awed", "awol", "awry", "axel", "axis", "axle", "baba", "babe", "babu", "baby", "bach", "back", "bags", "bail", "bait", "bake", "bald", "bale", "balk", "ball", "balm", "band", "bane", "bang", "bank", "barb", "bard", "bare", "barf", "bark", "barn", "bars", "base", "bash", 
 "bask", "bass", "bath", "bats", "bawl", "bays", "beak", "beam", "bean", "bear", "beat", "beau", "beck", "beds", "beef", "been", "beep", "beer", "bees", "begs", "bell", "belt", "bend", "bene", "bent", "berg", "best", "beta", "beth", "bets", "bias", "bide", "bids", "biff", "bike", "bill", "bind", "bins", "bios", "bird", "bite", "bits", "blab", "blah", "blam", "bled", "blew", "blip", "blob", "bloc", "blot", "blow", "blue", "blur", "boar", "boat", "body", "bogs", "boil", "bold", "bolt", "bomb", "bond", "bone", "bong", "bony", "boob", "book", "boom", "boon", "boot", "bora", "bore", "born", "boss", "both", "bout", "bowl", "bows", "boys", "bozo", "brad", "brag", "bran", "bras", "brat", "bred", "bree", "bren", "brew", "brie", "brig", "brim", "brin", "bris", "brit", "bros", "brow", "buck", "buds", "buff", "bugs", "bulb", "bulk", "bull", "bump", "bums", "bunk", "buns", "bunt", "bura", "burn", "burp", "bury", "bush", "bust", "busy", "buts", "butt", "buys", "buzz", "byes", "cabs", "cafe", "caff", "cage", "cain", "cake", "calf", "call", "calm", "came", "camp", "cams", "cane", "cans", "cant", "cape", "capo", "caps", "carb", "card", "care", "carl", "carp", "carr", "cars", "cart", "casa", "case", "cash", "cast", "cats", "cave", "cell", "cent", "chad", "chap", "chat", "chef", "chew", "chez", "chic", "chin", "chip", "chit", "chop", "chow", "chug", "chum", "ciao", "cite", "city", "clad", "clam", "clan", "clap", "claw", "clay", "clef", "clip", "clod", "clop", "clot", "club", "clue", "coal", "coat", "coax", "cobb", "coca", "cock", "coco", "code", "coed", "coil", "coin", "coke", "cola", 
@@ -156,13 +183,14 @@ var temp4 = "";
 
     var rando2 = Math.floor(Math.random()*10000);
     function drop(){
+        document.getElementById("next").innerHTML = next[count+1];
         var blocked = 0;
         slot = rando2%10;
         if(slot+glish >9){ glish = 9-slot;}
         if(slot+glish <0){ glish = 0-slot;}
          if(t==0){
             temp1 = JSON.parse(JSON.stringify(board[t]));
-            board[t][slot+glish] = '<span class=\"blocks\">'+ alph[rando2%1579] +'</span>';
+            board[t][slot+glish] = '<span class=\"blocks\">'+ next[count] +'</span>';
             adds(board, t);
             t++;
             return;
@@ -170,7 +198,7 @@ var temp4 = "";
          if(t<19 && t>0){
              board[t-1] = temp1; 
              temp1 = JSON.parse(JSON.stringify(board[t]));
-             board[t][slot+glish] = '<span class=\"blocks\">'+ alph[rando2%1579] +'</span>';
+             board[t][slot+glish] = '<span class=\"blocks\">'+ next[count] +'</span>';
              adds(board, t);
              if(board[t+1][slot+glish].indexOf("blocks") >= 0){
                 checkWord(board, t, slot+glish);
@@ -184,7 +212,7 @@ var temp4 = "";
          if(t == 19){
              board[t-1]= temp1; 
              temp1 = JSON.parse(JSON.stringify(board[t]));
-             board[t][slot+glish] = '<span class=\"blocks\">'+ alph[rando2%1579] +'</span>';
+             board[t][slot+glish] = '<span class=\"blocks\">'+ next[count] +'</span>';
              adds(board, t);
              checkWord(board, t, slot+glish);
              t++;
@@ -198,6 +226,13 @@ var temp4 = "";
             count++;
             return;
          }
+    }
+
+    function fillUp(){
+        for(var k = 0; k<10000; k++){
+            newRando();
+            next[k] = alph[rando2%1579];
+        }
     }
     
     function checkIt(board){
