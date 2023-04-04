@@ -30,7 +30,7 @@ height_of_window = 600
 
 curLetter = alpha[math.floor((random.random()*100000))%1579 ]
 
-font = pygame.font.SysFont('freesanbold.ttf', 25)
+font = pygame.font.Font('font.ttf', 25)
 text = font.render(curLetter, True, (0, 255, 0))
 textRect = text.get_rect()
 
@@ -83,12 +83,12 @@ def drop():
             if board[y][x] != '?':
                 text = font.render(board[y][x], True, (0, 255, 0))
                 rect = pygame.Rect((x * 30) +1, (y * 30)+1, 28, 28)
-                pygame.draw.rect(window, (255, 100, 0), rect)
+                #pygame.draw.rect(window, (255, 100, 0), rect)
                 textRect.center = ((x*30)+15, (y*30)+15)
                 window.blit(text, textRect)     
                 
     pygame.display.update()
-    pygame.draw.rect(window, (255,100,0), [(posX*30)+1, (posY*30)+1, 28, 28], 0)
+    #pygame.draw.rect(window, (255,100,0), [(posX*30)+1, (posY*30)+1, 28, 28], 0)
     textRect.center = ((posX*30)+15, (posY*30)+15)
     text = font.render(curLetter, True, (0, 255, 0))
     window.blit(text, textRect)
@@ -103,7 +103,7 @@ def checkIt(x, y):
 
 DROP_IT = pygame.USEREVENT + 1
 
-pygame.time.set_timer(DROP_IT, 400)
+pygame.time.set_timer(DROP_IT, 100)
 
 posX = math.floor((random.random()*1000)%10)
 posY = 0
