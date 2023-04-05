@@ -2,7 +2,17 @@ import pygame
 import random
 import math
 import time
+import sys
+import os
 
+def resource_path(relative_path):
+    try:
+    # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 pygame.init()
@@ -10,6 +20,9 @@ pygame.init()
 score = 0
 points = 0
 pad = 0
+storedLetter = ""
+lastWord = ""
+swapped = 0
 
 pygame.display.set_caption('Textris')
 
@@ -46,14 +59,31 @@ nextLetter = queue[itt+1]
 font = pygame.font.Font('font.ttf', 25)
 text = font.render(curLetter, True, (0, 255, 0))
 textRect = text.get_rect()
+
 nex = font.render('NEXT:', True, (0, 255, 0))
 next = font.render(nextLetter, True, (0, 255, 0))
+
 sco = font.render('SCORE:', True, (0, 255, 0))
 scor = font.render(str(points), True, (0+(points/15), 255, 0+(points/15)))
+
+wo = font.render('WORD:', True, (0, 255, 0))
+wor = font.render("TEST", True, (0, 255, 0))
+
+sto = font.render('STORE:', True, (0, 255, 0))
+stor = font.render("X", True, (0, 255, 0))
+
 nexRect = nex.get_rect()
 nextRect = next.get_rect()
+
 scoRect = sco.get_rect()
 scorRect = scor.get_rect()
+
+woRect = wo.get_rect()
+worRect = wor.get_rect()
+
+stoRect = sto.get_rect()
+storRect = stor.get_rect()
+
 
 
 
@@ -126,18 +156,31 @@ def drop():
     nextRect.center = (400, 100)
     nexRect.center = (410,70)
     scoRect.center = (410, 170)
-    scorRect.center = (400-pad, 200) 
+    scorRect.center = (400-pad, 200)
+    woRect.center = (400, 270)
+    worRect.center = (400,300)
+    stoRect.center = (400, 370)
+    storRect.center = (400,400)
+
     text = font.render(curLetter, True, (0, 255, 0))
     next = font.render(nextLetter, True, (0, 255, 0))
     scor = font.render(str(points), True, (0+(points/15), 255, 0+(points/15)))
+    stor = font.render(storedLetter, True, (0, 255, 0))
+    wor = font.render(lastWord, True, (0, 255, 0))
     window.blit(text, textRect)
     window.blit(next, nextRect)
     window.blit(sco, scoRect)
     window.blit(scor, scorRect)
     window.blit(nex, nexRect)
+    window.blit(sto, stoRect)
+    window.blit(stor, storRect)
+    window.blit(wo, woRect)
+    window.blit(wor, worRect)
     pygame.display.update()  
 
 def scoreIt(curWord):
+    global lastWord
+    lastWord = curWord
     curWord = curWord.lower()
     for i in curWord:
         global points
@@ -213,7 +256,7 @@ def checkIt(x, y):
             if reverse(curWord.lower()) == i:
                 print(curWord)
                 clearUp(y, 2)
-                scoreIt(curWord)
+                scoreIt(reverse(curWord))
     if y < 7:
         curWord = board[x][y] + board[x][y+1] + board[x][y+2] + board[x][y+3]
         for i in words:
@@ -224,7 +267,7 @@ def checkIt(x, y):
             if reverse(curWord.lower()) == i:
                 print(curWord)
                 clearUp(x, 1)
-                scoreIt(curWord)
+                scoreIt(reverse(curWord))
     if y > 0 and y < 8:
         curWord = board[x][y-1] + board[x][y] + board[x][y+1] + board[x][y+2]
         for i in words:
@@ -235,7 +278,7 @@ def checkIt(x, y):
             if reverse(curWord.lower()) == i:
                 print(curWord)
                 clearUp(x, 1)
-                scoreIt(curWord)
+                scoreIt(reverse(curWord))
     if y > 1 and y < 9:
         curWord = board[x][y-2] + board[x][y-1] + board[x][y] + board[x][y+1]
         for i in words:
@@ -246,7 +289,7 @@ def checkIt(x, y):
             if reverse(curWord.lower()) == i:
                 print(curWord)
                 clearUp(x, 1)
-                scoreIt(curWord)
+                scoreIt(reverse(curWord))
     if y > 2:
         curWord = board[x][y-3] + board[x][y-2] + board[x][y-1] + board[x][y]
         for i in words:
@@ -257,7 +300,7 @@ def checkIt(x, y):
             if reverse(curWord.lower()) == i:
                 print(curWord)
                 clearUp(x, 1)
-                scoreIt(curWord)
+                scoreIt(reverse(curWord))
             
 
 def reverse(s):
@@ -292,7 +335,28 @@ def speed():
     global dropped
     dropped = 1
 def store():
-    print('up')
+    global posY
+    global curLetter
+    global nextLetter
+    global itt
+    global swapped
+    global storedLetter
+    if storedLetter == "" and swapped == 0:
+        storedLetter = curLetter
+        posY = 0
+        curLetter = queue[itt+1]
+        nextLetter = queue[itt+2]
+        itt+=1
+        swapped = 1
+
+    if storedLetter != "" and swapped == 0:
+        temp = storedLetter
+        storedLetter = curLetter
+        posY = 0
+        curLetter = temp
+        swapped = 1
+
+
 
 
 pygame.display.update()
@@ -318,6 +382,13 @@ while running:
             if posY <19 and board[posY+1][posX] == '?':
                 posY+=1
             else:
+                if dropped == 1:
+                    dropped = 0
+                    if score < 20:
+                        pygame.time.set_timer(DROP_IT, 500-(score*20))
+                    else:
+                        pygame.time.set_timer(DROP_IT, 100)
+
                 board[posY][posX] = curLetter
                 checkIt(posY, posX)
                 posY=0 
@@ -326,12 +397,8 @@ while running:
                 itt += 1
                 curLetter = queue[itt]
                 nextLetter = queue[itt+1]
-                if dropped == 1:
-                    dropped == 0
-                    if score < 20:
-                        pygame.time.set_timer(DROP_IT, 500-(score*20))
-                    else:
-                        pygame.time.set_timer(DROP_IT, 100)
+                swapped = 0
+                
                 
 
                 
