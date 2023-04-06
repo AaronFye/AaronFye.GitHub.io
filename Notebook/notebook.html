@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            
+        </style>
+    </head>
+
+    <body>
+        <center>
+        <input type="button" value="Make me a song" id="load" onclick="GFI()"> <br> <br> <br>
+        <input id="word" type="text"> 
+        <p id="notes"></p>
+
+        </center>
+    </body>
+</html>
+
+<script>
+
+LtoN = [];
+var finished = 1;
+function GFI(){
+    var j = 0;
+    word = document.getElementById("word").value;
+    for(var i = 0; i<word.length; i++){
+        LtoN[i] = makeNote(word.substring(i, i+1));
+        
+    }
+
+    document.getElementById("notes").innerHTML = LtoN;
+
+    while( j < LtoN.length){
+        console.log(LtoN[j]);
+        playIt(LtoN[j]);
+        j++;
+        
+    }
+   
+}
+
+function playIt(LtoN){
+    var audio = new Audio('piano/'+LtoN+'.ogg');
+    audio.load();  
+    audio.currentTime = 0;
+    audio.loop = false;
+    audio.play();
+}
+
+function makeNote(letter){
+    letter = letter.toLowerCase().charCodeAt(0) - 97;
+    note = letter % 7;
+    switch(note){
+        case 0:
+            return('A');
+            break;
+        case 1:
+            return('B');
+            break;
+        case 2:
+            return('C');
+            break;
+        case 3:
+            return('D');
+            break;
+        case 4:
+            return('E');
+            break;
+        case 5:
+            return('F');
+            break;
+        case 6:
+            return('G');
+            break;
+        default:
+            return('A');
+    }
+
+}
+
+</script>

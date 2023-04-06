@@ -1,9 +1,9 @@
 import pygame
 import random
 import math
-import time
 import sys
 import os
+from pygame import mixer
 
 def resource_path(relative_path):
     try:
@@ -16,6 +16,26 @@ def resource_path(relative_path):
 
 
 pygame.init()
+mixer.init()
+
+mixer.music.load("Textris\sounds\deek.mp3")
+
+leftSound = pygame.mixer.Sound("Textris\sounds\Left.wav")
+rightSound = pygame.mixer.Sound("Textris\sounds\\anti left.wav")
+fallDown = pygame.mixer.Sound("Textris\sounds\\fall down.wav")
+saveChar = pygame.mixer.Sound("Textris\sounds\save char.wav")
+
+sansUn = pygame.mixer.Sound("Textris\sounds\sans.mp3")
+sussSound = pygame.mixer.Sound("Textris\sounds\suss.wav")
+
+goodWord = pygame.mixer.Sound("Textris\sounds\good word.wav")
+niceWord = pygame.mixer.Sound("Textris\sounds\\nice word.wav")
+
+comeBack = pygame.mixer.Sound("Textris\sounds\come back soon.wav")
+dontQuit = pygame.mixer.Sound("Textris\sounds\don't quit play more.wav")
+mixer.music.set_volume(0.5)
+mixer.music.play(-1)
+
 
 score = 0
 points = 0
@@ -179,63 +199,91 @@ def drop():
     pygame.display.update()  
 
 def scoreIt(curWord):
+    egg = 0
     global lastWord
+    point = 0
     lastWord = curWord
     curWord = curWord.lower()
     for i in curWord:
         global points
         if i == 'e':
             points += 10
+            point +=10
         if i == 'a':
             points += 13
+            point += 13
         if i == 'i':
             points += 62
+            point += 62
         if i == 'l':
             points += 47
+            point += 47
         if i == 'n':
             points += 70
+            point += 70
         if i == 'o':
             points += 28
+            point += 28
         if i == 'r':
             points += 60
+            point += 60
         if i == 's':
             points += 19
+            point += 19
         if i == 't':
             points += 59
+            point += 59
         if i == 'u':
             points += 86
+            point += 86
         if i == 'd':
             points += 83
+            point += 83
         if i == 'g':
             points += 106
+            point += 106
         if i == 'b':
             points += 101
+            point += 101
         if i == 'c':
             points += 95
+            point += 95
         if i == 'm':
             points += 93
+            point += 93
         if i == 'p':
             points += 89
+            point += 89
         if i == 'f':
             points += 109
+            point += 109
         if i == 'h':
             points += 96
+            point += 96
         if i == 'v':
             points += 132
+            point += 132
         if i == 'w':
             points += 109
+            point += 109
         if i == 'y':
             points += 115
+            point += 115
         if i == 'k':
             points += 105
+            point += 105
         if i == 'j':
             points += 137
+            point += 137
         if i == 'x':
             points += 141
+            point += 141
         if i == 'q':
             points += 145
+            point += 145
         if i == 'z':
             points += 138
+            point += 138
     global pad
     if points > 100 and pad == 0:
         pad+= 20
@@ -243,6 +291,22 @@ def scoreIt(curWord):
         pad+= 25
     if points > 10000 and pad == 40:
         pad+= 25
+
+    if curWord == 'sans':
+        sansUn.play()
+        egg = 1
+    if curWord == 'left':
+        leftSound.play()
+        egg = 1
+    if curWord == 'suss':
+        sussSound.play()
+        egg = 1    
+    if point < 345 and egg == 0:
+        niceWord.play()
+    if point >= 345 and egg == 0:
+        goodWord.play()
+    
+
 
 def checkIt(x, y):
     if x <= 16:
@@ -318,22 +382,28 @@ posY = 0
 dropped = 0
 
 def left():
-     
-     global posX 
-     if posX > 0 and dropped == 0:
+    global posX 
+    if posX > 0 and dropped == 0:
         posX = posX-1
+    # if math.floor((random.random()*1000)%2) == 0:
+    #     leftSound.play()
 
 def right():
-     global posX 
-     if posX <9 and dropped == 0:
+    global posX 
+    if posX <9 and dropped == 0:
         posX = posX + 1
+    # if math.floor((random.random()*1000)%2) == 0:
+    #     rightSound.play()
 
 
 
 def speed():
     pygame.time.set_timer(DROP_IT, 50)
     global dropped
+    if dropped == 0:
+        fallDown.play()
     dropped = 1
+    
 def store():
     global posY
     global curLetter
@@ -347,6 +417,7 @@ def store():
         curLetter = queue[itt+1]
         nextLetter = queue[itt+2]
         itt+=1
+        saveChar.play()
         swapped = 1
 
     if storedLetter != "" and swapped == 0:
@@ -355,11 +426,14 @@ def store():
         posY = 0
         curLetter = temp
         swapped = 1
-
+        saveChar.play()
 
 
 
 pygame.display.update()
+
+
+hostage = math.floor((random.random()*1000)%10)
 
 while running:  
     
@@ -404,10 +478,19 @@ while running:
                 
                 
 
-
             
     
-    if event.type == pygame.QUIT:  
-           running = False
+    if event.type == pygame.QUIT: 
+        if(hostage > 0):
+            playing = comeBack.play()
+            while playing.get_busy():
+                pygame.time.wait(10) 
+            running = False
+        else:
+            dontQuit.play() 
+            hostage+=1
+        
+
+        
 
 
