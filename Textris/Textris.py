@@ -28,13 +28,26 @@ saveChar = pygame.mixer.Sound("sounds\save char.wav")
 
 sansUn = pygame.mixer.Sound("sounds\sans.mp3")
 sussSound = pygame.mixer.Sound("sounds\suss.wav")
+YEET = pygame.mixer.Sound("sounds\yeet.mp3")
+jems = pygame.mixer.Sound("sounds\jems.wav")
 
 goodWord = pygame.mixer.Sound("sounds\good word.wav")
 niceWord = pygame.mixer.Sound("sounds\\nice word.wav")
+makeWord = pygame.mixer.Sound("sounds\make word stop evil.wav")
+makeWord2 = pygame.mixer.Sound("sounds\make word stop good.wav")
+
+story0 = pygame.mixer.Sound("sounds\ANHWUH.wav")
+
+story1 = pygame.mixer.Sound("sounds\GOKMWWBE.wav")
+story2 = pygame.mixer.Sound("sounds\HBEKPMMW.wav")
+
+story3 = pygame.mixer.Sound("sounds\JFMWBE.wav")
+story4 = pygame.mixer.Sound("sounds\ewqwdt.wav")
+end = pygame.mixer.Sound("sounds\FFKPASDS.wav")
 
 comeBack = pygame.mixer.Sound("sounds\come back soon.wav")
 dontQuit = pygame.mixer.Sound("sounds\don't quit play more.wav")
-mixer.music.set_volume(0.5)
+mixer.music.set_volume(0.3)
 mixer.music.play(-1)
 
 
@@ -105,6 +118,8 @@ howTo6Rect = howTo.get_rect()
 
 howTo7 = font.render("SPACE:     START", True, (0, 255, 0))
 howTo7Rect = howTo.get_rect()
+
+story0.play()
 
 howToRect.center = (250,150)
 howTo2Rect.center = (150,200)
@@ -347,6 +362,27 @@ def scoreIt(curWord):
     if curWord == 'suss':
         sussSound.play()
         egg = 1    
+    if curWord == 'yeet':
+        YEET.play()
+        egg = 1 
+    if curWord == 'jems':
+        jems.play()
+        egg = 1      
+    if score == 5 and egg == 0:
+        story1.play()
+        egg = 1
+    if score == 10 and egg == 0:
+        story2.play()
+        egg = 1
+    if score == 15 and egg == 0:
+        story3.play()
+        egg = 1
+    if score == 20 and egg == 0:
+        story4.play()
+        egg = 1 
+    if score == 21 and egg == 0:
+        end.play()
+        egg = 1 
     if point < 345 and egg == 0:
         niceWord.play()
     if point >= 345 and egg == 0:
@@ -444,7 +480,7 @@ def right():
 def speed():
     pygame.time.set_timer(DROP_IT, 50)
     global dropped
-    if dropped == 0:
+    if dropped == 0 and math.floor((random.random()*1000)%2) == 0:
         fallDown.play()
     dropped = 1
     
@@ -477,7 +513,7 @@ def store():
 pygame.display.update()
 
 
-hostage = math.floor((random.random()*1000)%10)
+hostage = math.floor((random.random()*1000)%25)
 
 start = 0
 
@@ -500,7 +536,7 @@ while running:
                 start = 1
                 pygame.time.set_timer(DROP_IT, 500)
             if event.key == pygame.K_ESCAPE:
-                if(hostage > 0):
+                if hostage > 0:
                     playing = comeBack.play()
                     while playing.get_busy():
                         pygame.time.wait(10) 
@@ -539,7 +575,7 @@ while running:
             
     
     if event.type == pygame.QUIT: 
-        if(hostage > 0):
+        if hostage > 0:
             playing = comeBack.play()
             while playing.get_busy():
                 pygame.time.wait(10) 
