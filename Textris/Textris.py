@@ -502,19 +502,17 @@ def right():
 
 
 def speed():
-    pygame.time.set_timer(DROP_IT, 50)
-    global dropped
-    if dropped == 0 and math.floor((random.random()*1000)%2) == 0 and ended == 0 and over == 0:
-        fallDown.play()
-    dropped = 1
+    global posY, posX, dropped
+    if posY > 0:
+        for row in range(20):
+            if board[row][posX] == '?':
+                posY = row
+        dropped = 1
+    
     
 def store():
-    global posY
-    global curLetter
-    global nextLetter
-    global itt
-    global swapped
-    global storedLetter
+    global posY, curLetter, nextLetter, itt, swapped, storedLetter, dropped
+    dropped = 0
     if storedLetter == "" and swapped == 0 and ended == 0 and over == 0:
         storedLetter = curLetter
         posY = 0
@@ -589,13 +587,6 @@ while running:
                 if posY <19 and board[posY+1][posX] == '?':
                     posY+=1
                 else:
-                    if dropped == 1:
-                        dropped = 0
-                        if score < 20:
-                            pygame.time.set_timer(DROP_IT, 500-(score*20))
-                        else:
-                            pygame.time.set_timer(DROP_IT, 100)
-
                     board[posY][posX] = curLetter
                     checkIt(posY, posX)
                     posY=0 
@@ -605,6 +596,7 @@ while running:
                     curLetter = queue[itt]
                     nextLetter = queue[itt+1]
                     swapped = 0
+                    dropped = 0
                 
                 
 
