@@ -54,6 +54,7 @@ function GFI(){
         if(guess == word){
             document.body.style.backgroundColor = "#00FF11";
             document.getElementById("image").src = "win.gif";
+            PlaySound();
         }
 	
 		for(var i = 0; i< 5; i++){
@@ -74,6 +75,11 @@ function GFI(){
 
 }
 
+PlaySound = function () {
+    var audio = new Audio('music.wav');
+    audio.loop = true;
+    audio.play(); 
+}
 
 </script>
 
