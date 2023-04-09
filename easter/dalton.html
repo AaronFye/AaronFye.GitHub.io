@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            input, p, button{
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center>
+        <!-- <input id="word" type="text"> -->
+        <input id="word" value="">
+        <button id="load" onclick="GFI()">Guess</button> <br><br>
+        <!-- <input type="button" value="Guess" id="load" onclick="GFI()"> <br> <br> <br> -->
+        <img id="image" src="">
+        <div id="ans"></div>
+        </center>
+    </body>
+</html>
+
+<script>
+    var input = document.getElementById("word");
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("load").click();
+      }
+    });
+    
+word = "watch";
+
+
+
+function GFI(){
+    corr = ["🟥","🟥","🟥","🟥","🟥"];
+    guess = document.getElementById("word").value;
+    document.getElementById("word").value = "";
+    guess = guess.toLowerCase();
+    if(guess.length < 5){
+        alert("Too short");
+        document.getElementById("word").value = guess;
+    }
+    if(guess.length > 5){
+        alert("Too long");
+        document.getElementById("word").value = guess;
+    }
+    if(guess.length == 5){
+        if(guess == word){
+            document.body.style.backgroundColor = "#00FF11";
+            document.getElementById("image").src = "win.gif";
+        }
+	
+		for(var i = 0; i< 5; i++){
+			for(var j = 0; j<5;j++){
+				if(guess[i] == word[j]){
+					corr[i] = "🟨";
+				}
+			}
+			if(guess[i] == word[i]){
+				corr[i] = "🟩";
+			}
+		}
+		document.getElementById("ans").innerHTML += "<p>" + guess+ ": "+ corr[0] + corr[1] + corr[2] + corr[3] + corr[4] + "</p>";
+        
+        
+        
+    }
+
+}
+
+
+</script>
+

@@ -535,7 +535,7 @@ def store():
 pygame.display.update()
 
 
-hostage = math.floor((random.random()*1000)%25)
+hostage = math.floor((random.random()*1000)%50)
 
 start = 0
 
