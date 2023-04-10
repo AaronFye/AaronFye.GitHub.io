@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+         <title>Devrick's Easter Hunt</title>
+         <link rel="icon" type="image/x-icon" href="egg2.png">
+        <style>
+            input, p, button{
+                font-family: "Comic Sans MS", "Comic Sans";
+                font-size: xx-large;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center>
+        <!-- <input id="word" type="text"> -->
+        <input id="word" value="">
+        <button id="load" onclick="GFI()">Guess</button> <br><br>
+        <!-- <input type="button" value="Guess" id="load" onclick="GFI()"> <br> <br> <br> -->
+        <img id="image" src="">
+        <div id="ans"></div>
+        </center>
+    </body>
+</html>
+
+<script>
+    var input = document.getElementById("word");
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("load").click();
+      }
+    });
+    
+var words = ["taco","cats","spider","man","lego","massachusetts", "elephant", "football", "shirt","watch","goal","snoopy","easter", "returns","aaron","super","mario","donkey","monkey","nintendo","noun","guess","falcon","pokemon","waluigi","party","burger","splatoon","chibirobo","yoshi","playstation","uncharted","waters","waiters"];
+
+var today = new Date();
+
+var place = (Math.floor(today.getDate()*today.getMonth()*(today.getFullYear()-2000) % words.length));
+
+var word = words[place];
+
+
+function GFI(){
+    var corr = [];
+    for (var f = 0; f<word.length; f++){
+        corr[f] = "🟥";
+    }
+    
+    guess = document.getElementById("word").value;
+    document.getElementById("word").value = "";
+    guess = guess.toLowerCase();
+    if(guess.length < word.length){
+        alert("Too short, try a " +word.length + " letter word.");
+        document.getElementById("word").value = guess;
+    }
+    if(guess.length > word.length){
+        alert("Too long, try a " +word.length + " letter word.");
+        document.getElementById("word").value = guess;
+    }
+    if(guess.length == word.length){
+        if(guess == word){
+            document.body.style.backgroundColor = "#00FF11";
+            document.getElementById("image").src = "win.gif";
+            PlaySound();
+        }
+	
+		for(var i = 0; i< word.length; i++){
+			for(var j = 0; j<word.length;j++){
+				if(guess[i] == word[j]){
+					corr[i] = "🟨";
+				}
+			}
+			if(guess[i] == word[i]){
+				corr[i] = "🟩";
+			}
+		}
+		document.getElementById("ans").innerHTML += "<p>" + guess+ ": "; 
+        for(var g = 0; g< word.length;g++){
+            document.getElementById("ans").innerHTML += corr[g]; 
+        }
+        document.getElementById("ans").innerHTML += "</p>";
+        
+        
+        
+    }
+
+}
+
+PlaySound = function () {
+    var audio = new Audio('music.wav');
+    audio.loop = true;
+    audio.play(); 
+}
+
+</script>
+
