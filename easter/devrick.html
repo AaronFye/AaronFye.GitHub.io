@@ -33,32 +33,36 @@
       }
     });
     
-word = "shirt";
+word = "sly";
 
 
 
 function GFI(){
-    corr = ["🟥","🟥","🟥","🟥","🟥"];
+    var corr = [];
+    for (var f = 0; f<word.length; f++){
+        corr[f] = "🟥";
+    }
+    
     guess = document.getElementById("word").value;
     document.getElementById("word").value = "";
     guess = guess.toLowerCase();
-    if(guess.length < 5){
-        alert("Too short");
+    if(guess.length < word.length){
+        alert("Too short, try a " +word.length + " letter word.");
         document.getElementById("word").value = guess;
     }
-    if(guess.length > 5){
-        alert("Too long");
+    if(guess.length > word.length){
+        alert("Too long, try a " +word.length + " letter word.");
         document.getElementById("word").value = guess;
     }
-    if(guess.length == 5){
+    if(guess.length == word.length){
         if(guess == word){
             document.body.style.backgroundColor = "#00FF11";
             document.getElementById("image").src = "win.gif";
             PlaySound();
         }
 	
-		for(var i = 0; i< 5; i++){
-			for(var j = 0; j<5;j++){
+		for(var i = 0; i< word.length; i++){
+			for(var j = 0; j<word.length;j++){
 				if(guess[i] == word[j]){
 					corr[i] = "🟨";
 				}
@@ -67,6 +71,7 @@ function GFI(){
 				corr[i] = "🟩";
 			}
 		}
+        todo 
 		document.getElementById("ans").innerHTML += "<p>" + guess+ ": "+ corr[0] + corr[1] + corr[2] + corr[3] + corr[4] + "</p>";
         
         
