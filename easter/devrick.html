@@ -33,8 +33,13 @@
       }
     });
     
-word = "sly";
+var words = ["taco","cats","spider","man","lego","massachusetts", "elephant", "football", "shirt","watch","goal","snoopy","easter", "returns","aaron","super","mario","donkey","monkey","nintendo","noun","guess","falcon","pokemon","waluigi","party","burger","splatoon","chibirobo","yoshi","playstation","uncharted","waters","waiters"];
 
+var today = new Date();
+
+var place = (Math.floor(today.getDate()*today.getMonth()*(today.getFullYear()-2000) % words.length));
+
+var word = words[place];
 
 
 function GFI(){
@@ -71,8 +76,11 @@ function GFI(){
 				corr[i] = "🟩";
 			}
 		}
-        todo 
-		document.getElementById("ans").innerHTML += "<p>" + guess+ ": "+ corr[0] + corr[1] + corr[2] + corr[3] + corr[4] + "</p>";
+		document.getElementById("ans").innerHTML += "<p>" + guess+ ": "; 
+        for(var g = 0; g< word.length;g++){
+            document.getElementById("ans").innerHTML += corr[g]; 
+        }
+        document.getElementById("ans").innerHTML += "</p>";
         
         
         

@@ -25,19 +25,26 @@ over = 0
 mixer.music.load("sounds\deek.mp3")
 
 leftSound = pygame.mixer.Sound("sounds\Left.wav")
-rightSound = pygame.mixer.Sound("sounds\\anti left.wav")
-fallDown = pygame.mixer.Sound("sounds\\fall down.wav")
+# rightSound = pygame.mixer.Sound("sounds\\anti left.wav")
+# fallDown = pygame.mixer.Sound("sounds\\fall down.wav")
 saveChar = pygame.mixer.Sound("sounds\save char.wav")
+saveCharb = pygame.mixer.Sound("sounds\save char B.mp3")
+
+click = pygame.mixer.Sound("sounds\click.wav")
 
 sansUn = pygame.mixer.Sound("sounds\sans.mp3")
 sussSound = pygame.mixer.Sound("sounds\suss.wav")
 YEET = pygame.mixer.Sound("sounds\yeet.mp3")
 jems = pygame.mixer.Sound("sounds\jems.wav")
+boom = pygame.mixer.Sound("sounds\\boom.mp3")
 
 goodWord = pygame.mixer.Sound("sounds\good word.wav")
 niceWord = pygame.mixer.Sound("sounds\\nice word.wav")
-makeWord = pygame.mixer.Sound("sounds\make word stop evil.wav")
-makeWord2 = pygame.mixer.Sound("sounds\make word stop good.wav")
+goodWordb = pygame.mixer.Sound("sounds\good word b.mp3")
+niceWordb = pygame.mixer.Sound("sounds\\nice word b.mp3")
+
+# makeWord = pygame.mixer.Sound("sounds\make word stop evil.wav")
+# makeWord2 = pygame.mixer.Sound("sounds\make word stop good.wav")
 
 story0 = pygame.mixer.Sound("sounds\ANHWUH.wav")
 
@@ -51,16 +58,20 @@ end = pygame.mixer.Sound("sounds\FFKPASDS.wav")
 comeBack = pygame.mixer.Sound("sounds\come back soon.wav")
 dontQuit = pygame.mixer.Sound("sounds\don't quit play more.wav")
 fail = pygame.mixer.Sound("sounds\\fail.wav")
+
 mixer.music.set_volume(0.3)
 mixer.music.play(-1)
 
 
-score = 0
-points = 0
-pad = 0
-storedLetter = ""
+
 lastWord = ""
-swapped = 0
+storedLetter = ""
+score=0
+points=0
+pad=0
+swapped=0
+b=0
+m=0
 
 
 pygame.display.set_caption('Textris')
@@ -125,18 +136,26 @@ howTo6Rect = howTo6.get_rect()
 howTo7 = font.render("SPACE:     START", True, (0, 255, 0))
 howTo7Rect = howTo7.get_rect()
 
+howTo8 = font.render("M KEY:     MUTE", True, (0, 255, 0))
+howTo8Rect = howTo8.get_rect()
+
+howTo9 = font.render("R KEY:     RESTART", True, (0, 255, 0))
+howTo9Rect = howTo9.get_rect()
+
 gameOver = font.render("GAME OVER", True, (255, 0, 0))
 goRect = gameOver.get_rect()
 
 #story0.play()
 
-howToRect.center = (250,150)
-howTo2Rect.center = (250,200)
-howTo3Rect.center = (240,250)
-howTo4Rect.center = (250,300)
-howTo5Rect.center = (240,350)
-howTo6Rect.center = (250,400)
-howTo7Rect.center = (250,450)
+howToRect.center = (250,100)
+howTo2Rect.center = (250,150)
+howTo3Rect.center = (240,200)
+howTo4Rect.center = (250,250)
+howTo5Rect.center = (240,300)
+howTo6Rect.center = (250,350)
+howTo7Rect.center = (250,400)
+howTo8Rect.center = (240,450)
+howTo9Rect.center = (270,500)
 goRect.center = (400, 500)
 window.blit(howTo, howToRect)
 window.blit(howTo2, howTo2Rect)
@@ -145,6 +164,8 @@ window.blit(howTo4, howTo4Rect)
 window.blit(howTo5, howTo5Rect)
 window.blit(howTo6, howTo6Rect)
 window.blit(howTo7, howTo7Rect)
+window.blit(howTo8, howTo8Rect)
+window.blit(howTo9, howTo9Rect)
 
 
 
@@ -229,8 +250,8 @@ def clearUp(loc, Mode):
         pygame.time.set_timer(DROP_IT, 100)
 
 def drop():
-    global over
-    if over == 0:
+    global over, posY, posX
+    if over == 0:   
         window.fill((0,0,0))
         for x in range(10):
             for y in range(20):
@@ -242,6 +263,19 @@ def drop():
                     #pygame.draw.rect(window, (255, 100, 0), rect)
                     textRect.center = ((x*30)+15, (y*30)+15)
                     window.blit(text, textRect)     
+        if posY > -1:
+            #print("posY:" + str(posY))
+            for row in range(20):
+                #print("row: " + str(row))
+                if board[row][posX] != '?':
+                    curse = pygame.Rect((posX * 30) +1, ((row-1) * 30)+1, 28, 28)
+                    pygame.draw.rect(window, (255, 255, 255), curse)
+                    break
+                if board[row][posX] == '?' and row == 19:
+                    curse = pygame.Rect((posX * 30) +1, ((row) * 30)+1, 28, 28)
+                    pygame.draw.rect(window, (255, 255, 255), curse)
+                    break
+
                     
         pygame.display.update()
         #pygame.draw.rect(window, (255,100,0), [(posX*30)+1, (posY*30)+1, 28, 28], 0)
@@ -385,6 +419,9 @@ def scoreIt(curWord):
     if curWord == 'suss' and over == 0:
         sussSound.play()
         egg = 1    
+    if curWord == 'boom' and over == 0:
+        boom.play()
+        egg = 1    
     if curWord == 'yeet':
         YEET.play()
         egg = 1 
@@ -407,10 +444,16 @@ def scoreIt(curWord):
         end.play()
         ended = 1
         egg = 1 
-    if point < 345 and egg == 0 and ended == 0 and over == 0:
-        niceWord.play()
-    if point >= 345 and egg == 0 and ended == 0 and over == 0:
-        goodWord.play()
+    if point < 300 and egg == 0 and ended == 0 and over == 0:
+        if b==0:
+            niceWord.play()
+        if b==1:
+            niceWordb.play()
+    if point >= 300 and egg == 0 and ended == 0 and over == 0:
+        if b==0:
+            goodWord.play()
+        if b==1:
+            goodWordb.play()
     
 
 
@@ -486,15 +529,15 @@ posY = 0
 dropped = 0
 
 def left():
-    global posX 
-    if posX > 0 and dropped == 0:
+    global posX, posY 
+    if posX > 0 and dropped == 0 and board[posY][posX-1] == "?":
         posX = posX-1
     # if math.floor((random.random()*1000)%2) == 0:
     #     leftSound.play()
 
 def right():
     global posX 
-    if posX <9 and dropped == 0:
+    if posX <9 and dropped == 0 and board[posY][posX+1] == "?":
         posX = posX + 1
     # if math.floor((random.random()*1000)%2) == 0:
     #     rightSound.play()
@@ -519,7 +562,10 @@ def store():
         curLetter = queue[itt+1]
         nextLetter = queue[itt+2]
         itt+=1
-        saveChar.play()
+        if b==0:
+            saveChar.play()
+        if b==1:
+            saveCharb.play()
         swapped = 1
 
     if storedLetter != "" and swapped == 0 and ended == 0 and over == 0:
@@ -528,9 +574,17 @@ def store():
         posY = 0
         curLetter = temp
         swapped = 1
-        saveChar.play()
+        if b==0:
+            saveChar.play()
+        if b==1:
+            saveCharb.play()
 
 
+def mute(m):
+    if m%2 == 1:
+        mixer.music.pause()        
+    else:
+        mixer.music.play(-1)
 
 pygame.display.update()
 
@@ -538,6 +592,8 @@ pygame.display.update()
 hostage = math.floor((random.random()*1000)%50)
 
 start = 0
+
+m = 0
 
 while running:  
     
@@ -554,6 +610,36 @@ while running:
                 speed()
             if event.key == pygame.K_UP:
                 store()
+            if event.key == pygame.K_b:
+                b = 1
+            if event.key == pygame.K_m:
+                m +=1
+                mute(m)
+            if event.key == pygame.K_r and start == 1:
+                for i in range(20):
+                    for j in range(10):
+                        board[i][j] = '?'
+                lastWord = ""
+                storedLetter = ""
+                score=0
+                points=0
+                pad=0
+                posY = 0
+                posX = math.floor((random.random()*1000)%10)
+                swapped=0
+                over = 0
+                ended = 0
+                b=0
+                m=0
+                itt = 0
+                queue = []
+                for items in alpha:
+                    letter = alpha[math.floor((random.random()*100000))%1232]
+                    queue.append(letter)
+                curLetter = queue[itt] #alpha[math.floor((random.random()*100000))%1579 ]
+                nextLetter = queue[itt+1]
+                drop()
+
             if event.key == pygame.K_SPACE and start == 0:
                 start = 1
                 pygame.time.set_timer(DROP_IT, 500)
@@ -587,6 +673,7 @@ while running:
                 if posY <19 and board[posY+1][posX] == '?':
                     posY+=1
                 else:
+                    click.play()
                     board[posY][posX] = curLetter
                     checkIt(posY, posX)
                     posY=0 
