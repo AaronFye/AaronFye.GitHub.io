@@ -27,6 +27,7 @@ pygame.display.set_icon(logo)
 
 ended = 0
 over = 0
+paused = 0
 
 mixer.music.load("sounds\deek.mp3")
 
@@ -148,20 +149,24 @@ howTo8Rect = howTo8.get_rect()
 howTo9 = font.render("CTRL+R:    RESTART", True, (0, 255, 0))
 howTo9Rect = howTo9.get_rect()
 
+howTo10 = font.render("P KEY:     PAUSE", True, (0, 255, 0))
+howTo10Rect = howTo10.get_rect()
+
 gameOver = font.render("GAME OVER", True, (255, 0, 0))
 goRect = gameOver.get_rect()
 
 #story0.play()
 
-howToRect.center = (250,100)
-howTo2Rect.center = (250,150)
-howTo3Rect.center = (240,200)
-howTo4Rect.center = (250,250)
-howTo5Rect.center = (240,300)
-howTo6Rect.center = (250,350)
-howTo7Rect.center = (250,400)
-howTo8Rect.center = (240,450)
-howTo9Rect.center = (270,500)
+howToRect.center = (250,50)
+howTo2Rect.center = (250,100)
+howTo3Rect.center = (240,150)
+howTo4Rect.center = (250,200)
+howTo5Rect.center = (240,250)
+howTo6Rect.center = (250,300)
+howTo7Rect.center = (250,350)
+howTo8Rect.center = (240,400)
+howTo9Rect.center = (270,450)
+howTo10Rect.center = (250,500)
 goRect.center = (400, 500)
 window.blit(howTo, howToRect)
 window.blit(howTo2, howTo2Rect)
@@ -172,6 +177,7 @@ window.blit(howTo6, howTo6Rect)
 window.blit(howTo7, howTo7Rect)
 window.blit(howTo8, howTo8Rect)
 window.blit(howTo9, howTo9Rect)
+window.blit(howTo10, howTo10Rect)
 
 
 
@@ -257,13 +263,13 @@ def clearUp(loc, Mode):
 
 def drop():
     global over, posY, posX
-    if over == 0:   
+    if over == 0 and paused ==0:   
         window.fill((0,0,0))
         for x in range(10):
             for y in range(20):
                 rect = pygame.Rect(x * 30, y * 30, 30, 30)
                 pygame.draw.rect(window, (255, 255, 255), rect, 1)
-                if board[y][x] != '?'  and over == 0:
+                if board[y][x] != '?':
                     text = font.render(board[y][x], True, (0, 255, 0))
                     rect = pygame.Rect((x * 30) +1, (y * 30)+1, 28, 28)
                     #pygame.draw.rect(window, (255, 100, 0), rect)
@@ -536,14 +542,14 @@ dropped = 0
 
 def left():
     global posX, posY 
-    if posX > 0 and dropped == 0 and board[posY][posX-1] == "?":
+    if posX > 0 and dropped == 0 and board[posY][posX-1] == "?"  and paused ==0:
         posX = posX-1
     # if math.floor((random.random()*1000)%2) == 0:
     #     leftSound.play()
 
 def right():
     global posX 
-    if posX <9 and dropped == 0 and board[posY][posX+1] == "?":
+    if posX <9 and dropped == 0 and board[posY][posX+1] == "?" and paused ==0:
         posX = posX + 1
     # if math.floor((random.random()*1000)%2) == 0:
     #     rightSound.play()
@@ -552,7 +558,7 @@ def right():
 
 def speed():
     global posY, posX, dropped
-    if posY > 0:
+    if posY > 0 and paused == 0:
         for row in range(20):
             if board[row][posX] == '?':
                 posY = row
@@ -562,7 +568,7 @@ def speed():
 def store():
     global posY, curLetter, nextLetter, itt, swapped, storedLetter, dropped
     dropped = 0
-    if storedLetter == "" and swapped == 0 and ended == 0 and over == 0:
+    if storedLetter == "" and swapped == 0 and ended == 0 and over == 0 and paused == 0:
         storedLetter = curLetter
         posY = 0
         curLetter = queue[itt+1]
@@ -574,7 +580,7 @@ def store():
             saveCharb.play()
         swapped = 1
 
-    if storedLetter != "" and swapped == 0 and ended == 0 and over == 0:
+    if storedLetter != "" and swapped == 0 and ended == 0 and over == 0 and paused == 0:
         temp = storedLetter
         storedLetter = curLetter
         posY = 0
@@ -591,6 +597,18 @@ def mute(m):
         mixer.music.pause()        
     else:
         mixer.music.play(-1)
+
+def pause():
+    global paused
+    if paused == 0:
+        paused = 1
+        click.play()
+        mixer.music.pause()  
+    else:
+        paused = 0
+        click.play()
+        mixer.music.play(-1)
+    
 
 pygame.display.update()
 
@@ -621,6 +639,8 @@ while running:
             if event.key == pygame.K_m:
                 m +=1
                 mute(m)
+            if event.key == pygame.K_p:
+                pause()
             if event.key == pygame.K_r and (pygame.key.get_mods() & pygame.KMOD_CTRL) and start == 1:
                 for i in range(20):
                     for j in range(10):
@@ -674,7 +694,7 @@ while running:
                         running = False
 
     if event.type == DROP_IT:
-            if over == 0:
+            if over == 0 and paused ==0:
                 drop()
                 if posY <19 and board[posY+1][posX] == '?':
                     posY+=1
