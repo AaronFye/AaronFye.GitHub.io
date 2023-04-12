@@ -19,6 +19,12 @@ def resource_path(relative_path):
 pygame.init()
 mixer.init()
 
+
+
+logo = pygame.image.load('logo.png')
+pygame.display.set_icon(logo)
+
+
 ended = 0
 over = 0
 
@@ -139,7 +145,7 @@ howTo7Rect = howTo7.get_rect()
 howTo8 = font.render("M KEY:     MUTE", True, (0, 255, 0))
 howTo8Rect = howTo8.get_rect()
 
-howTo9 = font.render("R KEY:     RESTART", True, (0, 255, 0))
+howTo9 = font.render("CTRL+R:    RESTART", True, (0, 255, 0))
 howTo9Rect = howTo9.get_rect()
 
 gameOver = font.render("GAME OVER", True, (255, 0, 0))
@@ -268,11 +274,11 @@ def drop():
             for row in range(20):
                 #print("row: " + str(row))
                 if board[row][posX] != '?':
-                    curse = pygame.Rect((posX * 30) +1, ((row-1) * 30)+1, 28, 28)
+                    curse = pygame.Rect((posX * 30) +1, ((row-1) * 30)+24, 28, 6)
                     pygame.draw.rect(window, (255, 255, 255), curse)
                     break
                 if board[row][posX] == '?' and row == 19:
-                    curse = pygame.Rect((posX * 30) +1, ((row) * 30)+1, 28, 28)
+                    curse = pygame.Rect((posX * 30) +1, ((row) * 30)+24, 28, 6)
                     pygame.draw.rect(window, (255, 255, 255), curse)
                     break
 
@@ -615,7 +621,7 @@ while running:
             if event.key == pygame.K_m:
                 m +=1
                 mute(m)
-            if event.key == pygame.K_r and start == 1:
+            if event.key == pygame.K_r and (pygame.key.get_mods() & pygame.KMOD_CTRL) and start == 1:
                 for i in range(20):
                     for j in range(10):
                         board[i][j] = '?'
