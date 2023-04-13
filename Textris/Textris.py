@@ -20,11 +20,10 @@ pygame.init()
 mixer.init()
 
 
-
-logo = pygame.image.load('logo.png')
+logo = pygame.image.load('img\logoBig.png')
 pygame.display.set_icon(logo)
 
-
+opening = 0
 ended = 0
 over = 0
 paused = 0
@@ -66,8 +65,20 @@ comeBack = pygame.mixer.Sound("sounds\come back soon.wav")
 dontQuit = pygame.mixer.Sound("sounds\don't quit play more.wav")
 fail = pygame.mixer.Sound("sounds\\fail.wav")
 
-mixer.music.set_volume(0.3)
-mixer.music.play(-1)
+
+bg = pygame.image.load('img\logoScreen2.png')
+anyKey = pygame.image.load('img\\anyKey.png')
+anyKeyB = pygame.image.load('img\\anyKeyB.png')
+banner1 = pygame.image.load('img\\banner1.png')
+banner1.set_alpha(44)
+banner2 = pygame.image.load('img\\banner2.png')
+banner2.set_alpha(44)
+banner3 = pygame.image.load('img\\banner3.png')
+banner3.set_alpha(44)
+banner4 = pygame.image.load('img\\banner4.png')
+banner4.set_alpha(44)
+banner5 = pygame.image.load('img\\banner5.png')
+banner5.set_alpha(44)
 
 
 
@@ -79,6 +90,7 @@ pad=0
 swapped=0
 b=0
 m=0
+blink = 0
 
 
 pygame.display.set_caption('Textris')
@@ -163,23 +175,15 @@ howTo3Rect.center = (240,150)
 howTo4Rect.center = (250,200)
 howTo5Rect.center = (240,250)
 howTo6Rect.center = (250,300)
-howTo7Rect.center = (250,350)
+howTo7Rect.center = (250,500)
 howTo8Rect.center = (240,400)
 howTo9Rect.center = (270,450)
-howTo10Rect.center = (250,500)
+howTo10Rect.center = (250,350)
 goRect.center = (400, 500)
-window.blit(howTo, howToRect)
-window.blit(howTo2, howTo2Rect)
-window.blit(howTo3, howTo3Rect)
-window.blit(howTo4, howTo4Rect)
-window.blit(howTo5, howTo5Rect)
-window.blit(howTo6, howTo6Rect)
-window.blit(howTo7, howTo7Rect)
-window.blit(howTo8, howTo8Rect)
-window.blit(howTo9, howTo9Rect)
-window.blit(howTo10, howTo10Rect)
 
-
+SLIDE_IT = pygame.USEREVENT + 2
+#window.blit(bg,(0,0))
+pygame.time.set_timer(SLIDE_IT, 40)
 
 text = font.render(curLetter, True, (0, 255, 0))
 textRect = text.get_rect()
@@ -534,6 +538,8 @@ def reverse(s):
         str = i + str
     return str
 
+pad2 = 0
+
 DROP_IT = pygame.USEREVENT + 1
 
 posX = math.floor((random.random()*1000)%10)
@@ -544,6 +550,7 @@ def left():
     global posX, posY 
     if posX > 0 and dropped == 0 and board[posY][posX-1] == "?"  and paused ==0:
         posX = posX-1
+        drop()
     # if math.floor((random.random()*1000)%2) == 0:
     #     leftSound.play()
 
@@ -551,6 +558,7 @@ def right():
     global posX 
     if posX <9 and dropped == 0 and board[posY][posX+1] == "?" and paused ==0:
         posX = posX + 1
+        drop()
     # if math.floor((random.random()*1000)%2) == 0:
     #     rightSound.play()
 
@@ -596,7 +604,7 @@ def mute(m):
     if m%2 == 1:
         mixer.music.pause()        
     else:
-        mixer.music.play(-1)
+        mixer.music.unpause()
 
 def pause():
     global paused
@@ -607,7 +615,7 @@ def pause():
     else:
         paused = 0
         click.play()
-        mixer.music.play(-1)
+        mixer.music.unpause()
     
 
 pygame.display.update()
@@ -666,9 +674,29 @@ while running:
                 nextLetter = queue[itt+1]
                 drop()
 
-            if event.key == pygame.K_SPACE and start == 0:
+            if event.key == pygame.K_SPACE and start == 0 and opening ==1:
                 start = 1
+                mixer.music.set_volume(0.3)
+                mixer.music.play(-1)
                 pygame.time.set_timer(DROP_IT, 500)
+
+            if opening == 0:
+                window.fill((0,0,0))
+                window.blit(howTo, howToRect)
+                window.blit(howTo2, howTo2Rect)
+                window.blit(howTo3, howTo3Rect)
+                window.blit(howTo4, howTo4Rect)
+                window.blit(howTo5, howTo5Rect)
+                window.blit(howTo6, howTo6Rect)
+                window.blit(howTo7, howTo7Rect)
+                window.blit(howTo8, howTo8Rect)
+                window.blit(howTo9, howTo9Rect)
+                window.blit(howTo10, howTo10Rect)
+                pygame.display.update()  
+                opening = 1
+            
+
+
             if event.key == pygame.K_ESCAPE:
                 quiting = 0
                 if hostage > 0:
@@ -710,7 +738,26 @@ while running:
                     nextLetter = queue[itt+1]
                     swapped = 0
                     dropped = 0
-                
+
+    if event.type == SLIDE_IT:
+        if opening == 0:
+            blink = blink + 1
+            window.fill((0,0,0))
+            window.blit(banner1, (-2500+(pad2*-1),0))
+            window.blit(banner2, (-44+(pad2*1),114))
+            window.blit(banner3, (-2500+(pad2*-1),228))
+            window.blit(banner4, (-44+(pad2*1),342))
+            window.blit(banner5, (-2500+(pad2*-1),456))
+            window.blit(bg, (0, 0))
+            window.blit(anyKey, (0, 0))
+            if blink%3!=0:
+                window.blit(anyKeyB, (0, 0))
+            if(pad2 <= -2500):
+                pad2 = 0
+            pad2+=-10
+            pygame.display.update()  
+        else:
+            pygame.time.set_timer(SLIDE_IT, 0)
                 
 
                 
