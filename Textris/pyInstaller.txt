@@ -1,0 +1,1 @@
+pyinstaller --onefile Textris.py  --collect-data assetschars --collect-data assetstiles --collect-data assetsfonts

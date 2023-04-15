@@ -327,7 +327,7 @@ def drop():
         pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 140, 120, 90), 4)
         pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 240, 120, 90), 4)
         pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 340, 120, 90), 4)
-
+        pygame.draw.rect(window, (0, 255, 0), pygame.Rect(300, 0, 200, 600), 4)
         if score >=5:
             pygame.draw.rect(window, (0, 255, 0), pygame.Rect(340, 340, 120, 90), 4)
         if score >=10:
@@ -694,6 +694,8 @@ while running:
             if event.key == pygame.K_m:
                 m +=1
                 mute(m)
+            if event.key == pygame.K_s:
+                pygame.image.save(window, "image"+str(random.random())+".png")
             if event.key == pygame.K_h:
                 pygame.time.set_timer(DROP_IT, 100)
                 hc = 1
