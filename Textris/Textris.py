@@ -27,14 +27,24 @@ opening = 0
 ended = 0
 over = 0
 paused = 0
+m = 0
 
-mixer.music.load("sounds\deek.mp3")
+music1 = "sounds\deek.mp3"
+music2 = "sounds\deek2.mp3"
+musicGO = "sounds\gameOver.mp3" 
+musicOpen = "sounds\open.mp3"
+musicMenu = "sounds\menu.mp3"
+musicSpeed = "sounds\speed.mp3"
+mixer.music.load(musicMenu)
+mixer.music.play()
 
 leftSound = pygame.mixer.Sound("sounds\Left.wav")
 # rightSound = pygame.mixer.Sound("sounds\\anti left.wav")
 # fallDown = pygame.mixer.Sound("sounds\\fall down.wav")
 saveChar = pygame.mixer.Sound("sounds\save char.wav")
 saveCharb = pygame.mixer.Sound("sounds\save char B.mp3")
+
+hardCore = pygame.mixer.Sound("sounds\hardCore.wav")
 
 click = pygame.mixer.Sound("sounds\click.wav")
 
@@ -70,15 +80,15 @@ bg = pygame.image.load('img\logoScreen2.png')
 anyKey = pygame.image.load('img\\anyKey.png')
 anyKeyB = pygame.image.load('img\\anyKeyB.png')
 banner1 = pygame.image.load('img\\banner1.png')
-banner1.set_alpha(44)
+banner1.set_alpha(64)
 banner2 = pygame.image.load('img\\banner2.png')
-banner2.set_alpha(44)
+banner2.set_alpha(54)
 banner3 = pygame.image.load('img\\banner3.png')
 banner3.set_alpha(44)
 banner4 = pygame.image.load('img\\banner4.png')
-banner4.set_alpha(44)
+banner4.set_alpha(34)
 banner5 = pygame.image.load('img\\banner5.png')
-banner5.set_alpha(44)
+banner5.set_alpha(24)
 
 
 
@@ -90,6 +100,7 @@ pad=0
 swapped=0
 b=0
 m=0
+hc = 0
 blink = 0
 
 
@@ -251,6 +262,7 @@ for i in range(20):
                                     
 
 def clearUp(loc, Mode):
+    global hc
     if Mode == 1:
         for i in range(loc):
             board[loc-i] = board[(loc-i)-1]
@@ -260,7 +272,7 @@ def clearUp(loc, Mode):
             board[i][loc] = '?'
     global score
     score += 1
-    if score < 20:
+    if score < 20 and hc == 0:
         pygame.time.set_timer(DROP_IT, 500-(score*20))
     else:
         pygame.time.set_timer(DROP_IT, 100)
@@ -327,14 +339,15 @@ def drop():
                 global ended
                 if ended == 0:
                     fail.play()
+                    mixer.music.load(musicGO)
+                    mixer.music.play(0)
                 
 
         pygame.display.update()  
 
 def scoreIt(curWord):
     egg = 0
-    global lastWord
-    global ended
+    global lastWord, ended, pad, m
     point = 0
     lastWord = curWord
     curWord = curWord.lower()
@@ -418,7 +431,10 @@ def scoreIt(curWord):
         if i == 'z':
             points += 138
             point += 138
-    global pad
+
+    if hc == 1:
+        points+=150
+
     if points > 100 and pad == 0:
         pad+= 20
     if points > 1000 and pad == 20:
@@ -441,6 +457,9 @@ def scoreIt(curWord):
     if curWord == 'yeet':
         YEET.play()
         egg = 1 
+    if curWord == 'mute':
+        mixer.music.pause()
+        m = 1
     if curWord == 'jems' and ended == 0 and over == 0:
         jems.play()
         egg = 1      
@@ -450,6 +469,9 @@ def scoreIt(curWord):
     if score == 10 and egg == 0 and over == 0:
         story2.play()
         egg = 1
+        if hc == 0:
+            mixer.music.load(music2)
+            mixer.music.play(-1)
     if score == 15 and egg == 0 and over == 0:
         story3.play()
         egg = 1
@@ -600,7 +622,7 @@ def store():
             saveCharb.play()
 
 
-def mute(m):
+def mute(m):  
     if m%2 == 1:
         mixer.music.pause()        
     else:
@@ -625,7 +647,6 @@ hostage = math.floor((random.random()*1000)%50)
 
 start = 0
 
-m = 0
 
 while running:  
     
@@ -647,6 +668,13 @@ while running:
             if event.key == pygame.K_m:
                 m +=1
                 mute(m)
+            if event.key == pygame.K_h:
+                pygame.time.set_timer(DROP_IT, 100)
+                hc = 1
+                hardCore.play()
+                mixer.music.load(musicSpeed)
+                mixer.music.set_volume(0.5)
+                mixer.music.play(-1)
             if event.key == pygame.K_p:
                 pause()
             if event.key == pygame.K_r and (pygame.key.get_mods() & pygame.KMOD_CTRL) and start == 1:
@@ -655,6 +683,7 @@ while running:
                         board[i][j] = '?'
                 lastWord = ""
                 storedLetter = ""
+                hc = 0
                 score=0
                 points=0
                 pad=0
@@ -663,6 +692,9 @@ while running:
                 swapped=0
                 over = 0
                 ended = 0
+                mixer.music.load(music1)
+                mixer.music.set_volume(0.3)
+                mixer.music.play(-1)
                 b=0
                 m=0
                 itt = 0
@@ -672,10 +704,12 @@ while running:
                     queue.append(letter)
                 curLetter = queue[itt] #alpha[math.floor((random.random()*100000))%1579 ]
                 nextLetter = queue[itt+1]
+                pygame.time.set_timer(DROP_IT, 500)
                 drop()
 
             if event.key == pygame.K_SPACE and start == 0 and opening ==1:
                 start = 1
+                mixer.music.load(music1)
                 mixer.music.set_volume(0.3)
                 mixer.music.play(-1)
                 pygame.time.set_timer(DROP_IT, 500)
