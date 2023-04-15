@@ -199,16 +199,16 @@ pygame.time.set_timer(SLIDE_IT, 40)
 text = font.render(curLetter, True, (0, 255, 0))
 textRect = text.get_rect()
 
-nex = font.render('NEXT:', True, (0, 255, 0))
+nex = font.render('NEXT ', True, (0, 255, 0))
 next = font.render(nextLetter, True, (0, 255, 0))
 
-sco = font.render('SCORE:', True, (0, 255, 0))
-scor = font.render(str(points), True, (0+(points/15), 255, 0+(points/15)))
+sco = font.render('SCORE ', True, (0, 255, 0))
+scor = font.render(str(points), True, (0, 255, 0))
 
-wo = font.render('WORD:', True, (0, 255, 0))
+wo = font.render('WORD ', True, (0, 255, 0))
 wor = font.render("TEST", True, (0, 255, 0))
 
-sto = font.render('STORE:', True, (0, 255, 0))
+sto = font.render('STORE ', True, (0, 255, 0))
 stor = font.render("X", True, (0, 255, 0))
 
 nexRect = nex.get_rect()
@@ -312,16 +312,30 @@ def drop():
         nexRect.center = (410,70)
         scoRect.center = (410, 170)
         scorRect.center = (400-pad, 200)
-        woRect.center = (400, 270)
+        woRect.center = (410, 270)
         worRect.center = (400,300)
-        stoRect.center = (400, 370)
+        stoRect.center = (410, 370)
         storRect.center = (400,400)
 
         text = font.render(curLetter, True, (0, 255, 0))
         next = font.render(nextLetter, True, (0, 255, 0))
-        scor = font.render(str(points), True, (0+(points/15), 255, 0+(points/15)))
+        scor = font.render(str(points), True, (0, 255, 0))
         stor = font.render(storedLetter, True, (0, 255, 0))
         wor = font.render(lastWord, True, (0, 255, 0))
+        #pygame.draw.rect(window, (255, 255, 255), pygame.Rect(400, 1, 1, 500), 1)
+        pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 40, 120, 90), 4)
+        pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 140, 120, 90), 4)
+        pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 240, 120, 90), 4)
+        pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 340, 120, 90), 4)
+
+        if score >=5:
+            pygame.draw.rect(window, (0, 255, 0), pygame.Rect(340, 340, 120, 90), 4)
+        if score >=10:
+            pygame.draw.rect(window, (0, 255, 0), pygame.Rect(340, 240, 120, 90), 4)
+        if score >=15:
+            pygame.draw.rect(window, (0, 255, 0), pygame.Rect(340, 140, 120, 90), 4)
+        if score >=20:
+            pygame.draw.rect(window, (0, 255, 0), pygame.Rect(340, 40, 120, 90), 4)
         window.blit(text, textRect)
         window.blit(next, nextRect)
         window.blit(sco, scoRect)
@@ -338,6 +352,10 @@ def drop():
                 over = 1
                 global ended
                 if ended == 0:
+                    pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 40, 120, 90), 4)
+                    pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 140, 120, 90), 4)
+                    pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 240, 120, 90), 4)
+                    pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 340, 120, 90), 4)
                     fail.play()
                     mixer.music.load(musicGO)
                     mixer.music.play(0)
@@ -435,12 +453,12 @@ def scoreIt(curWord):
     if hc == 1:
         points+=150
 
-    if points > 100 and pad == 0:
+    if points >= 100 and pad == 0:
         pad+= 20
-    if points > 1000 and pad == 20:
-        pad+= 25
-    if points > 10000 and pad == 40:
-        pad+= 25
+    if points >= 1000 and pad == 20:
+        pad+= 10
+    if points >= 10000 and pad == 30:
+        pad+= 10
 
     if curWord == 'sans' and over == 0:
         sansUn.play()
@@ -665,6 +683,14 @@ while running:
                 store()
             if event.key == pygame.K_b:
                 b = 1
+            if event.key == pygame.K_c:
+                points+=100               
+                if points >= 100 and pad == 0:
+                    pad+= 20
+                if points >= 1000 and pad == 20:
+                    pad+= 10
+                if points >= 10000 and pad == 30:
+                    pad+= 10
             if event.key == pygame.K_m:
                 m +=1
                 mute(m)
