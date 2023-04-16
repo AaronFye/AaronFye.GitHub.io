@@ -28,6 +28,7 @@ ended = 0
 over = 0
 paused = 0
 m = 0
+curMusic = ""
 
 music1 = "sounds\deek.mp3"
 music2 = "sounds\deek2.mp3"
@@ -35,8 +36,11 @@ musicGO = "sounds\gameOver.mp3"
 musicOpen = "sounds\open.mp3"
 musicMenu = "sounds\menu.mp3"
 musicSpeed = "sounds\speed.mp3"
+musicSpeedLoop = "sounds\speedLoop.mp3"
+music2Loop = "sounds\deek2Loop.mp3"
 mixer.music.load(musicMenu)
-mixer.music.play()
+curMusic = musicMenu
+mixer.music.play(-1)
 
 leftSound = pygame.mixer.Sound("sounds\Left.wav")
 # rightSound = pygame.mixer.Sound("sounds\\anti left.wav")
@@ -230,7 +234,7 @@ storRect = stor.get_rect()
 
 running  = True
 
-fps = pygame.time.Clock()
+#fps = pygame.time.Clock()
 
 
 
@@ -327,7 +331,7 @@ def drop():
         pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 140, 120, 90), 4)
         pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 240, 120, 90), 4)
         pygame.draw.rect(window, (255, 255, 255), pygame.Rect(340, 340, 120, 90), 4)
-        pygame.draw.rect(window, (0, 255, 0), pygame.Rect(300, 0, 200, 600), 4)
+        #pygame.draw.rect(window, (0, 255, 0), pygame.Rect(300, 0, 200, 600), 4)
         if score >=5:
             pygame.draw.rect(window, (0, 255, 0), pygame.Rect(340, 340, 120, 90), 4)
         if score >=10:
@@ -350,15 +354,16 @@ def drop():
             if board[0][letr] != '?':
                 window.blit(gameOver, goRect)
                 over = 1
-                global ended
+                global ended, curMusic
                 if ended == 0:
                     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 40, 120, 90), 4)
                     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 140, 120, 90), 4)
                     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 240, 120, 90), 4)
                     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(340, 340, 120, 90), 4)
                     fail.play()
-                    mixer.music.load(musicGO)
-                    mixer.music.play(0)
+                mixer.music.load(musicGO)
+                curMusic =  musicGO
+                mixer.music.play(0)
                 
 
         pygame.display.update()  
@@ -488,8 +493,10 @@ def scoreIt(curWord):
         story2.play()
         egg = 1
         if hc == 0:
+            global curMusic
             mixer.music.load(music2)
-            mixer.music.play(-1)
+            curMusic =  music2
+            mixer.music.play()
     if score == 15 and egg == 0 and over == 0:
         story3.play()
         egg = 1
@@ -660,6 +667,9 @@ def pause():
 
 pygame.display.update()
 
+MUSIC_END = pygame.USEREVENT+3
+pygame.mixer.music.set_endevent(MUSIC_END)
+
 
 hostage = math.floor((random.random()*1000)%50)
 
@@ -668,190 +678,204 @@ start = 0
 
 while running:  
     
-   
- 
- for event in pygame.event.get():
+    
+    for event in pygame.event.get():
 
-    if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                left()
-            if event.key == pygame.K_RIGHT:
-                right()
-            if event.key == pygame.K_DOWN:
-                speed()
-            if event.key == pygame.K_UP:
-                store()
-            if event.key == pygame.K_b:
-                b = 1
-            if event.key == pygame.K_c:
-                points+=100               
-                if points >= 100 and pad == 0:
-                    pad+= 20
-                if points >= 1000 and pad == 20:
-                    pad+= 10
-                if points >= 10000 and pad == 30:
-                    pad+= 10
-            if event.key == pygame.K_m:
-                m +=1
-                mute(m)
-            if event.key == pygame.K_s:
-                pygame.image.save(window, "image"+str(random.random())+".png")
-            if event.key == pygame.K_h:
-                pygame.time.set_timer(DROP_IT, 100)
-                hc = 1
-                hardCore.play()
-                mixer.music.load(musicSpeed)
+        if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    left()
+                if event.key == pygame.K_RIGHT:
+                    right()
+                if event.key == pygame.K_DOWN:
+                    speed()
+                if event.key == pygame.K_UP:
+                    store()
+                if event.key == pygame.K_b:
+                    b = 1
+                if event.key == pygame.K_c:
+                    points+=100               
+                    if points >= 100 and pad == 0:
+                        pad+= 20
+                    if points >= 1000 and pad == 20:
+                        pad+= 10
+                    if points >= 10000 and pad == 30:
+                        pad+= 10
+                if event.key == pygame.K_m:
+                    m +=1
+                    mute(m)
+                if event.key == pygame.K_s:
+                    pygame.image.save(window, "image"+str(random.random())+".png")
+                if event.key == pygame.K_h:
+                    pygame.time.set_timer(DROP_IT, 100)
+                    hc = 1
+                    if ended == 0:
+                        hardCore.play()
+                    mixer.music.load(musicSpeed)
+                    curMusic =  musicSpeed
+                    mixer.music.set_volume(0.5)
+                    mixer.music.play()
+                if event.key == pygame.K_p:
+                    pause()
+                if event.key == pygame.K_r and (pygame.key.get_mods() & pygame.KMOD_CTRL) and start == 1:
+                    for i in range(20):
+                        for j in range(10):
+                            board[i][j] = '?'
+                    lastWord = ""
+                    storedLetter = ""
+                    hc = 0
+                    score=0
+                    points=0
+                    pad=0
+                    posY = 0
+                    posX = math.floor((random.random()*1000)%10)
+                    swapped=0
+                    over = 0
+                    ended = 0
+                    mixer.music.load(music1)
+                    curMusic =  music1
+                    mixer.music.set_volume(0.3)
+                    mixer.music.play(-1)
+                    b=0
+                    m=0
+                    itt = 0
+                    queue = []
+                    for items in alpha:
+                        letter = alpha[math.floor((random.random()*100000))%1232]
+                        queue.append(letter)
+                    curLetter = queue[itt] #alpha[math.floor((random.random()*100000))%1579 ]
+                    nextLetter = queue[itt+1]
+                    pygame.time.set_timer(DROP_IT, 500)
+                    drop()
+
+                if event.key == pygame.K_SPACE and start == 0 and opening ==1:
+                    start = 1
+                    mixer.music.load(music1)
+                    curMusic =  music1
+                    mixer.music.set_volume(0.3)
+                    mixer.music.play(-1)
+                    pygame.time.set_timer(DROP_IT, 500)
+
+                if opening == 0:
+                    window.fill((0,0,0))
+                    window.blit(howTo, howToRect)
+                    window.blit(howTo2, howTo2Rect)
+                    window.blit(howTo3, howTo3Rect)
+                    window.blit(howTo4, howTo4Rect)
+                    window.blit(howTo5, howTo5Rect)
+                    window.blit(howTo6, howTo6Rect)
+                    window.blit(howTo7, howTo7Rect)
+                    window.blit(howTo8, howTo8Rect)
+                    window.blit(howTo9, howTo9Rect)
+                    window.blit(howTo10, howTo10Rect)
+                    pygame.display.update()  
+                    opening = 1
+                
+
+
+                if event.key == pygame.K_ESCAPE:
+                    quiting = 0
+                    if hostage > 0:
+                        if ended == 0 and quiting == 0:
+                            quiting = 1
+                            playing = comeBack.play()
+                            while playing.get_busy():
+                                pygame.time.wait(10) 
+                            running = False
+                        else:
+                            running = False
+                    if hostage == 0 and ended == 0 and over ==0:
+                        dontQuit.play() 
+                        hostage+=1
+                    else:
+                        if ended == 0 and quiting == 0:
+                            quiting = 1
+                            playing = comeBack.play()
+                            while playing.get_busy():
+                                pygame.time.wait(10) 
+                            running = False
+                        else:
+                            running = False
+
+        if event.type == DROP_IT:
+                if over == 0 and paused ==0:
+                    drop()
+                    if posY <19 and board[posY+1][posX] == '?':
+                        posY+=1
+                    else:
+                        click.play()
+                        board[posY][posX] = curLetter
+                        checkIt(posY, posX)
+                        posY=0 
+                        posX = math.floor((random.random()*1000)%10)
+                        text = font.render(curLetter, True, (0, 255, 0))
+                        itt += 1
+                        curLetter = queue[itt]
+                        nextLetter = queue[itt+1]
+                        swapped = 0
+                        dropped = 0
+
+        if event.type == SLIDE_IT:
+            if opening == 0:
+                blink = blink + 1
+                window.fill((0,0,0))
+                window.blit(banner1, (-2500+(pad2*-1),0))
+                window.blit(banner2, (-44+(pad2*1),114))
+                window.blit(banner3, (-2500+(pad2*-1),228))
+                window.blit(banner4, (-44+(pad2*1),342))
+                window.blit(banner5, (-2500+(pad2*-1),456))
+                window.blit(bg, (0, 0))
+                window.blit(anyKey, (0, 0))
+                if blink%3!=0:
+                    window.blit(anyKeyB, (0, 0))
+                if(pad2 <= -2500):
+                    pad2 = 0
+                pad2+=-10
+                pygame.display.update()  
+            else:
+                pygame.time.set_timer(SLIDE_IT, 0)
+                    
+
+        if event.type == MUSIC_END:
+            if curMusic == musicSpeed:
+                mixer.music.load(musicSpeedLoop)
+                curMusic =  musicSpeedLoop
                 mixer.music.set_volume(0.5)
                 mixer.music.play(-1)
-            if event.key == pygame.K_p:
-                pause()
-            if event.key == pygame.K_r and (pygame.key.get_mods() & pygame.KMOD_CTRL) and start == 1:
-                for i in range(20):
-                    for j in range(10):
-                        board[i][j] = '?'
-                lastWord = ""
-                storedLetter = ""
-                hc = 0
-                score=0
-                points=0
-                pad=0
-                posY = 0
-                posX = math.floor((random.random()*1000)%10)
-                swapped=0
-                over = 0
-                ended = 0
-                mixer.music.load(music1)
-                mixer.music.set_volume(0.3)
+            if curMusic==music2:
+                mixer.music.load(music2Loop)
+                curMusic =  music2Loop
+                mixer.music.set_volume(0.5)
                 mixer.music.play(-1)
-                b=0
-                m=0
-                itt = 0
-                queue = []
-                for items in alpha:
-                    letter = alpha[math.floor((random.random()*100000))%1232]
-                    queue.append(letter)
-                curLetter = queue[itt] #alpha[math.floor((random.random()*100000))%1579 ]
-                nextLetter = queue[itt+1]
-                pygame.time.set_timer(DROP_IT, 500)
-                drop()
-
-            if event.key == pygame.K_SPACE and start == 0 and opening ==1:
-                start = 1
-                mixer.music.load(music1)
-                mixer.music.set_volume(0.3)
-                mixer.music.play(-1)
-                pygame.time.set_timer(DROP_IT, 500)
-
-            if opening == 0:
-                window.fill((0,0,0))
-                window.blit(howTo, howToRect)
-                window.blit(howTo2, howTo2Rect)
-                window.blit(howTo3, howTo3Rect)
-                window.blit(howTo4, howTo4Rect)
-                window.blit(howTo5, howTo5Rect)
-                window.blit(howTo6, howTo6Rect)
-                window.blit(howTo7, howTo7Rect)
-                window.blit(howTo8, howTo8Rect)
-                window.blit(howTo9, howTo9Rect)
-                window.blit(howTo10, howTo10Rect)
-                pygame.display.update()  
-                opening = 1
-            
-
-
-            if event.key == pygame.K_ESCAPE:
-                quiting = 0
-                if hostage > 0:
-                    if ended == 0 and quiting == 0:
-                        quiting = 1
-                        playing = comeBack.play()
-                        while playing.get_busy():
-                            pygame.time.wait(10) 
-                        running = False
-                    else:
-                        running = False
-                if hostage == 0 and ended == 0 and over ==0:
-                    dontQuit.play() 
-                    hostage+=1
-                else:
-                    if ended == 0 and quiting == 0:
-                        quiting = 1
-                        playing = comeBack.play()
-                        while playing.get_busy():
-                            pygame.time.wait(10) 
-                        running = False
-                    else:
-                        running = False
-
-    if event.type == DROP_IT:
-            if over == 0 and paused ==0:
-                drop()
-                if posY <19 and board[posY+1][posX] == '?':
-                    posY+=1
-                else:
-                    click.play()
-                    board[posY][posX] = curLetter
-                    checkIt(posY, posX)
-                    posY=0 
-                    posX = math.floor((random.random()*1000)%10)
-                    text = font.render(curLetter, True, (0, 255, 0))
-                    itt += 1
-                    curLetter = queue[itt]
-                    nextLetter = queue[itt+1]
-                    swapped = 0
-                    dropped = 0
-
-    if event.type == SLIDE_IT:
-        if opening == 0:
-            blink = blink + 1
-            window.fill((0,0,0))
-            window.blit(banner1, (-2500+(pad2*-1),0))
-            window.blit(banner2, (-44+(pad2*1),114))
-            window.blit(banner3, (-2500+(pad2*-1),228))
-            window.blit(banner4, (-44+(pad2*1),342))
-            window.blit(banner5, (-2500+(pad2*-1),456))
-            window.blit(bg, (0, 0))
-            window.blit(anyKey, (0, 0))
-            if blink%3!=0:
-                window.blit(anyKeyB, (0, 0))
-            if(pad2 <= -2500):
-                pad2 = 0
-            pad2+=-10
-            pygame.display.update()  
-        else:
-            pygame.time.set_timer(SLIDE_IT, 0)
                 
+                    
 
                 
-                
-
-            
-    
-    if event.type == pygame.QUIT:
-        quiting = 0 
-        if hostage > 0:
-            if ended == 0 and quiting == 0:
-                quiting = 1
-                playing = comeBack.play()
-                while playing.get_busy():
-                    pygame.time.wait(10) 
-                running = False
-            else:
-                running = False
-        if hostage == 0 and ended == 0 and over ==0:
-            dontQuit.play() 
-            hostage+=1
-        else:
-            if ended == 0 and quiting == 0:
-                quiting = 1
-                playing = comeBack.play()
-                while playing.get_busy():
-                    pygame.time.wait(10) 
-                running = False
-            else:
-                running = False
-            
-
         
+        if event.type == pygame.QUIT:
+            quiting = 0 
+            if hostage > 0:
+                if ended == 0 and quiting == 0:
+                    quiting = 1
+                    playing = comeBack.play()
+                    while playing.get_busy():
+                        pygame.time.wait(10) 
+                    running = False
+                else:
+                    running = False
+            if hostage == 0 and ended == 0 and over ==0:
+                dontQuit.play() 
+                hostage+=1
+            else:
+                if ended == 0 and quiting == 0:
+                    quiting = 1
+                    playing = comeBack.play()
+                    while playing.get_busy():
+                        pygame.time.wait(10) 
+                    running = False
+                else:
+                    running = False
+                
+
+            
 
 
