@@ -496,7 +496,7 @@ def scoreIt(curWord):
             global curMusic
             mixer.music.load(music2)
             curMusic =  music2
-            mixer.music.play()
+            mixer.music.play(-1)
     if score == 15 and egg == 0 and over == 0:
         story3.play()
         egg = 1
@@ -713,7 +713,7 @@ while running:
                     mixer.music.load(musicSpeed)
                     curMusic =  musicSpeed
                     mixer.music.set_volume(0.5)
-                    mixer.music.play()
+                    mixer.music.play(-1)
                 if event.key == pygame.K_p:
                     pause()
                 if event.key == pygame.K_r and (pygame.key.get_mods() & pygame.KMOD_CTRL) and start == 1:
@@ -835,17 +835,17 @@ while running:
                 pygame.time.set_timer(SLIDE_IT, 0)
                     
 
-        if event.type == MUSIC_END:
-            if curMusic == musicSpeed:
-                mixer.music.load(musicSpeedLoop)
-                curMusic =  musicSpeedLoop
-                mixer.music.set_volume(0.5)
-                mixer.music.play(-1)
-            if curMusic==music2:
-                mixer.music.load(music2Loop)
-                curMusic =  music2Loop
-                mixer.music.set_volume(0.5)
-                mixer.music.play(-1)
+        # if event.type == MUSIC_END:
+        #     if curMusic == musicSpeed:
+        #         mixer.music.load(musicSpeedLoop)
+        #         curMusic =  musicSpeedLoop
+        #         mixer.music.set_volume(0.5)
+        #         mixer.music.play(-1)
+        #     if curMusic==music2:
+        #         mixer.music.load(music2Loop)
+        #         curMusic =  music2Loop
+        #         mixer.music.set_volume(0.5)
+        #         mixer.music.play(-1)
                 
                     
 
