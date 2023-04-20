@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Aaron Fye's PBC </title>
+		<link rel="icon" href="img/mex2.gif">
+		<meta name="author" content="Aaron Fye">
+		
+    </head>
+    
+<body>
+<center>
+<script>
+	document.write("<h1>Birthday Prime?</h1> </br>");
+
+	var month = [1,2,3,4,5,6,7,8,9,10,11,12]
+	var mDays = [2,0,2,1,2,1,2,2,1,2,1,2]
+	var days = [29,30,31]
+	var userM = 0;
+	var userD = 0;
+	userM = prompt("What Month is Your Birthday? (Numerically)", 1);
+	userD = prompt("What Day is Your Birthday? (Also Numerically)", 1);
+	var userB = userM * userD;
+	var i;
+	var j;
+	var prod = [];
+	for(i=0;i<month.length;i++){
+		
+		for(j=0;j<days[mDays[i]];j++){
+						
+			if(j*i == userB && j != userD){
+				var pM = i.toString();
+				var pD = j.toString();
+				prod[prod.length] = pM +"/" + pD +"</br>";
+				}
+		}
+		
+	}
+	var k;
+	
+
+	for(k=0;k<prod.length;k++){
+		document.write(prod[k]);
+	}
+		if(k==0){
+	    document.write("Well done, your birthday is a Birthday Prime!")
+	}
+	else{
+	    document.write("Oh well, it looks like your birthday isn't prime. Here are it's Birthday Friends.<br/>")
+	}
+</script>
+<br/>
+<h1>What is a Birthday Prime?</h1>
+<p>A Birthday Prime is a day where the month and day of your birthday multiply to be a completely unique number when compared to every other day of the year. 
+</p>
+<br/>
+<p>For example: </p>
+
+<p>October 8th = 10*8 = 80. </p>
+
+<p>May 16th = 5*16 = 80.</p>
+
+<p>So they are both not Birthday Primes.</p>
+<h1>Is there any use for this?</h1>
+<p>no.</p>
+</center>
+</body>
+</html> 
