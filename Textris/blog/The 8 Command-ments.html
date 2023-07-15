@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+
+<body>
+    <center>
+    <h1>The 8 Command-ments</h1>
+    <br/>
+
+    <p>This blog is going to be a bit different in that I am going to do short descriptors for a lot of things, instead of going in depth for a few. This blog will cover common command prompt commands.</p> 
+    <p>Startings with the most helpful one, “/?”. This is used at the end of any command to get the rundown on how that command works, a “how to guide” as it were. Don’t know how to use ping? Just type ping /? and the command prompt itself will tell you how.</p>
+    <p>Speaking of ping, let’s cover that since it is so common. Ping is the most basic of networking tools, allowing you to send packets to an IP address and see if they get sent back. Basically just a test to see if the IP address is on and connected to a network. Very useful in troubleshooting network issues as a first step.</p>
+    <p>Speaking of networking, let’s look at IPConfig now. IPConfig, as the name implies, helps with configuring IP. Running this command in command prompt will inundate you with tons of network info, from IPv4 address, IPv6 address, your network mask, and more. But that is just the start, using /? Will reveal all the other things you can do, like flushing the DNS and other network things that are too high level to cover in this quick rundown.</p>
+    <p>To finish out on network topics now, let’s look at TraceRt (Trace Route, not Tracer T as you might read it) It can show you the hops your packets take while reaching a specific destination, and how long it took them to get there. This is important for things like troubleshooting network issues, as it allows you to tell exactly where it is getting hung up. So if you can see it makes it all the way to the target destination (Which I’ve not mentioned yet, but the target is often an IP address, but you can also put in a url, like ‘google.com’) you know that the issue isn’t with the connection, but if it only gets half way thru, then you know something along the way is causing the issue.</p>
+    <p>Now let’s look at one that I use almost everyday in my job, GPUpdate (or Group Policy Update). This command will connect to your Group Policy and make sure you are up to date. This is only really useful in enterprise IT, as you probably don’t have a Group Policy on your local network.</p>
+    <p>Next up, let’s look at ChkDsk (Check Disk). This one is one that you have to be in Admin mode for (by simply running Command Prompt in Admin mode) otherwise, it will tell you it cannot run. Once you run it, it will reveal quite a lot about the disk you are specifying, mainly just verifying that there are no issues with the hard drive.</p>
+    <p>On the topic of disks, let’s look at DiskPart (Disk Partition). It can take a single disk, and split it into multiple sectors, mainly used to side load another OS (Like running Windows and Linux on the same computer) or for security reasons (So the files from one disk cannot interact with files from a different partition)</p>
+    <p>Finally, let’s look at shutdown, now I know what you must be thinking, “no way is it that simple”, yes, it is. Shutdown, shuts down your computer / server / device.</p>
+    <p>With that being said…</p>
+    <p>>shutdown</p>
+
+    </center>
+</body>
