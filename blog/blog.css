@@ -11,13 +11,20 @@ a{
     color: white;
     font-family: "sleek", 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-decoration: none;
+}
+
+.butt{    
     margin-left: 5px;
     border: 2px;
     border-style: solid;
     border-radius: 5px;
-    border-color: white;
+    border-color: orangered;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.lin{
+    margin-top: 25px;
 }
 
 div{
@@ -37,5 +44,6 @@ p{
 h1{
     color: white;
     font-family: "sleek", 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+    display: inline;
+    margin-bottom: 15px;
 }
