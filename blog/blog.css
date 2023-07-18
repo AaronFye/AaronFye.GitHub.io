@@ -50,6 +50,10 @@ p{
         font-size: large;
         text-align: left;
     }    
+
+    div{
+        position: relative;
+    }
 }
 
 
