@@ -32,14 +32,26 @@ div{
     margin-left:  5%;
 }
 
-p{
-    color: white;
-    font-family: "sleek", 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin-left: 30%;
-    margin-right: 30%;
-    font-size: large;
-    text-align: left;
+@media screen and (max-width: 786px) {
+    p{
+        color: white;
+        font-family: "sleek", 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: large;
+        text-align: left;
+    }    
 }
+
+p{
+        color: white;
+        font-family: "sleek", 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        margin-left: 30%;
+        margin-right: 30%;
+        font-size: large;
+        text-align: left;
+}    
+
 
 h1{
     color: white;
