@@ -55,6 +55,10 @@ p{
         position: relative;
         font-size: x-large;
     }
+
+    span{
+        font-size: xx-large;
+    }
 }
 
 
