@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            @font-face {
+                font-family: Fancy;
+                src: url(fancy.ttf);
+            }
+        </style>
+    </head>
+
+    <body style="background-color: black; color: red; font-family: Fancy;">
+        <center>
+        <span>Universe:</span> 
+
+        <select name="uni" id="uni">
+            <option value="Marvel">Marvel</option>
+            <option value="Harry Potter">Harry Potter</option>
+            <option value="Star Wars">Star Wars</option>
+            <option value="Full Metak Alchemist">Full Metal Alchemist</option>
+            <option value="Splatoon">Splatoon</option>
+        </select>
+
+
+        <br><br>
+        <span>Genre:</span>
+
+        <select name="genre" id="genre">
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Romance">Romance</option>
+            <option value="Murder Mystery">Murder Mystery</option>
+            <option value="Drama">Drama</option>
+        </select>
+
+        <br><br>
+        <span>Character(s):</span> <input id="character" type="text">
+        
+        <div id="new"></div>
+        <br> <br>
+        
+        <input type="button" style="font-family: Fancy;" value="Write the Story" id="write" onclick="GFI()">
+
+        <p id="story" style="font-family: 'Courier New', Courier, monospace;">***Story here*** </p>
+        </center>
+    </body>
+</html>
+
+<script>
+
+function GFI(){
+    words = document.getElementById("story");
+    uni = document.getElementById("uni");
+    genre = document.getElementById("genre");
+    character = document.getElementById("character");
+
+    if(character.value != ""){
+        words.innerHTML = "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe, staring " + character.value;
+    }
+    else{
+        words.innerHTML = "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe";
+    }
+    //alert(words.);
+}
+
+</script>
