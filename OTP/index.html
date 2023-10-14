@@ -1,5 +1,68 @@
 <!DOCTYPE html>
 
+<script>
+var ran = 0;
+
+// var test = fetch('http://www.appdomain.com/users', {method: 'get'});
+// alert (test);
+
+function httpGet(url)
+{
+    fetch(url).then(function(response) {
+            return response;
+        }).then(function(data) {
+            console.log(data);
+        }).catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        });
+    //fetch(url).then(response => response.json()).then(data => console.log(data)).catch(error => console.error(error));
+}
+
+
+// import {config} from '../node_modules/dotenv';
+// config()
+
+// import OpenAI from "../node_modules/openai";
+
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
+
+async function GFI() {
+    words = document.getElementById("story");
+    uni = document.getElementById("uni");
+    genre = document.getElementById("genre");
+    character = document.getElementById("character");
+
+    if(ran == 0){
+        if(character.value != ""){
+            httpGet('https://api-ai.glitch.me/Create a fan fiction in the '+ genre.value +' genre in the ' + uni.value + ' universe, staring ' + character.value);
+            // const completion = await openai.chat.completions.create({
+            //     messages: [{ role: "system", content: "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe, staring " + character.value }],
+            //     model: "gpt-3.5-turbo",
+            //     max_tokens: 3,
+            // });
+        }
+        else{
+            httpGet('https://api-ai.glitch.me/Create a fan fiction in the '+ genre.value +' genre in the ' + uni.value + ' universe');
+            // const completion = await openai.chat.completions.create({
+            //     messages: [{ role: "system", content: "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe" }],
+            //     model: "gpt-3.5-turbo",
+            //     max_tokens: 3,
+            // });
+        }
+    }
+  
+    ran = 1;
+    
+    //alert
+  
+    // words.innerHTML = completion.choices[0].message.content;
+}
+
+</script>
+
+
 <html>
     <head>
         <style>
@@ -47,21 +110,4 @@
     </body>
 </html>
 
-<script>
 
-function GFI(){
-    words = document.getElementById("story");
-    uni = document.getElementById("uni");
-    genre = document.getElementById("genre");
-    character = document.getElementById("character");
-
-    if(character.value != ""){
-        words.innerHTML = "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe, staring " + character.value;
-    }
-    else{
-        words.innerHTML = "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe";
-    }
-    //alert(words.);
-}
-
-</script>
