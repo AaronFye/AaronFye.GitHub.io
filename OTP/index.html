@@ -6,15 +6,21 @@ var ran = 0;
 // var test = fetch('http://www.appdomain.com/users', {method: 'get'});
 // alert (test);
 
-function httpGet(url)
+async function httpGet(url)
 {
-    fetch(url).then(function(response) {
-            return response;
-        }).then(function(data) {
-            console.log(data);
-        }).catch(function(err) {
-            console.log('Fetch Error :-S', err);
-        });
+    // fetch(url).then(function(response) {
+    //     }).then(function(data) {
+    //         return data;
+    //     }).catch(function(err) {
+    //         console.log('Fetch Error :-S', err);
+    //     });
+
+        const response = await fetch(url);
+        const movies = await response.text();
+        words = document.getElementById("story");
+        words.innerHTML = movies;
+        //console.log(movies);
+    
     //fetch(url).then(response => response.json()).then(data => console.log(data)).catch(error => console.error(error));
 }
 
