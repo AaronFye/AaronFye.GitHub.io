@@ -42,7 +42,7 @@ async function GFI() {
 
     if(ran == 0){
         if(character.value != ""){
-            httpGet('https://api-ai.glitch.me/Create a fan fiction in the '+ genre.value +' genre in the ' + uni.value + ' universe, staring ' + character.value);
+            httpGet('https://api-ai.glitch.me/Create a short fan fiction in the '+ genre.value +' genre in the ' + uni.value + ' universe, staring ' + character.value);
             // const completion = await openai.chat.completions.create({
             //     messages: [{ role: "system", content: "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe, staring " + character.value }],
             //     model: "gpt-3.5-turbo",
@@ -50,7 +50,7 @@ async function GFI() {
             // });
         }
         else{
-            httpGet('https://api-ai.glitch.me/Create a fan fiction in the '+ genre.value +' genre in the ' + uni.value + ' universe');
+            httpGet('https://api-ai.glitch.me/Create a short fan fiction in the '+ genre.value +' genre in the ' + uni.value + ' universe');
             // const completion = await openai.chat.completions.create({
             //     messages: [{ role: "system", content: "Create a fan fiction in the "+ genre.value +" genre in the " + uni.value + " universe" }],
             //     model: "gpt-3.5-turbo",
