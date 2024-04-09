@@ -39,7 +39,30 @@ p{
     margin-right: 30%;
     font-size: large;
     text-align: left;
+}    
+
+@media screen and (max-width: 1200px) {
+    p{
+        color: white;
+        font-family: "sleek", 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: large;
+        text-align: left;
+    }    
+
+    div{
+        position: relative;
+        font-size: x-large;
+    }
+
+    span{
+        font-size: 70px;
+    }
 }
+
+
+
 
 h1{
     color: white;

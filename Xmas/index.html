@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            
+        </style>
+    </head>
+
+    <body>
+        <center>
+            <h1>Score 25 to Unlock Code</h1>
+            <h3 id="score">0</h3>
+        <p id="Step1"><input type="button" value="+1" id="start" onclick="GFI(1)"></p>
+        <p id="Step2"></p>
+        <p id="Step3"></p>
+        <p id="Step4"></p>
+        <h1 id="code"></h1>
+        </center>
+    </body>
+</html>
+
+<script>
+
+var score = 0;
+var step = 1;
+var uses2 = 3;
+button2 = 0;
+button3 = 0;
+level1 = 0;
+
+function GFI(level){
+    level1 = level;
+    if(score == 25-level){
+        if(level == 5){
+            score = score +level;
+        }
+        else{
+            score = score + level + 1;
+        }
+    }    
+    else{
+        score = score + level;
+    }
+    if(score == 25){
+        document.getElementById("code").innerHTML = "The Code is: ";
+    }
+    document.getElementById('score').innerHTML = score;
+    if(score > 25){
+        if(button2 == 1){
+            if(step == 2){
+                Step3();
+            }
+            if(button3 == 1){
+                if(step == 3){
+                    Step4();
+                }
+            }
+        }
+        if(step == 1){
+            Step2();
+        }
+        
+    }
+
+}
+
+function Step2(){
+    step = 2;
+    document.getElementById('Step2').innerHTML = "Stuck? Buy a new button for 50 points: <input type=\"button\" value=\"-50 points\" id=\"buy2\" onclick=\"buy2()\">";
+}
+
+function Step3(){
+    step = 3;
+    document.getElementById('Step3').innerHTML = "Stuck? Buy a new button for 90 points: <input type=\"button\" value=\"-90 points\" id=\"buy3\" onclick=\"buy3()\">";
+}
+
+function buy2(){
+    button2 = 1;
+    if(score >= 50){
+    if(score == 75){
+        score = score - 49;
+    }
+    else{
+        score = score -50;
+    }
+    document.getElementById('score').innerHTML = score;
+    document.getElementById('Step2').innerHTML = "<input type=\"button\" value=\"+3\" id=\"plus3\" onclick=\"plus3()\">";
+    }
+}
+
+function buy3(){
+    button3 = 1;
+    if(score >= 90){
+    if(score == 115){
+        score = score - 89;
+    }
+    else{
+        score = score -90;
+    }
+    document.getElementById('score').innerHTML = score;
+    document.getElementById('Step3').innerHTML = "<input type=\"button\" value=\"x2\" id=\"times2\" onclick=\"times2()\"> <p>🟢🟢🟢</p>";
+    document.getElementById('Step1').innerHTML = "<input type=\"button\" value=\"+1\" id=\"start\" onclick=\"GFI(1)\"> <input type=\"button\" value=\"-100\" id=\"upgrade\" onclick=\"up1()\"> "
+    }
+}
+
+function plus3(){
+    if(score == 22){
+        score = score + 4;
+    }
+    else{
+        score = score + 3;
+    }
+
+    if(score > 25){
+        if(button2 == 1){
+            if(step == 2){
+                Step3();
+            }
+            if(button3 == 1){
+                if(step == 3){
+                    Step4();
+                }
+            }
+        }
+        if(step == 1){
+            Step2();
+        }
+        
+    }
+
+    document.getElementById('score').innerHTML = score;
+}
+
+function times2(){
+    if(uses2 > 0){
+        uses2 = uses2 - 1;
+        score = score * 2;
+        document.getElementById('score').innerHTML = score;
+        if(uses2 == 2){
+            document.getElementById('Step3').innerHTML = "<input type=\"button\" value=\"x2\" id=\"times2\" onclick=\"times2()\"> <p>🟢🟢🔴</p>";
+        }
+        if(uses2 == 1){
+            document.getElementById('Step3').innerHTML = "<input type=\"button\" value=\"x2\" id=\"times2\" onclick=\"times2()\"> <p>🟢🔴🔴</p>";
+        }
+        if(uses2 == 0){
+            document.getElementById('Step3').innerHTML = "<input type=\"button\" value=\"x2\" id=\"times2\" onclick=\"times2()\"> <p>🔴🔴🔴</p>";
+        }
+    }
+    
+}
+
+function up1(){
+    if(score >= 100 * level1){
+        document.getElementById('Step1').innerHTML = "<input type=\"button\" value=\"+"+(level1+1)+"\" id=\"start\" onclick=\"GFI("+(level1+1)+")\"> <input type=\"button\" value=\"-"+(100 * (level1 + 1))+"\" id=\"upgrade\" onclick=\"up1()\"> "
+        score = score - 100 * level1;
+        document.getElementById('score').innerHTML = score;
+        level1 = level1 + 1;
+    }
+    
+}
+
+function Step4(){
+    step = 4;
+    document.getElementById('Step4').innerHTML = "Stuck? Buy a new button for 1000 points: <input type=\"button\" value=\"-1000 points\" id=\"buy4\" onclick=\"buy4()\">";
+}
+
+function buy4(){
+    if(score >= 1000){
+    if(score == 1025){
+        score = score - 1001;
+    }
+    else{
+        score = score -1000;
+    }
+    document.getElementById('score').innerHTML = score;
+    document.getElementById('Step4').innerHTML = "<input type=\"button\" value=\"x0\" id=\"times0\" onclick=\"times0()\">";
+    }
+}
+
+
+function times0(){
+    score = 0;
+    document.getElementById('score').innerHTML = score;
+}
+
+</script>
