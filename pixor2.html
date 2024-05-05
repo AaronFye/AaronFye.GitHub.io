@@ -8,7 +8,7 @@
     <body>
         <center>
         <input id="inp" type="text"> <input id="butto" type="button" value="Art me up" onclick="start()"> <br> <br>
-        <canvas id="main" width="300" height="500">    
+        <canvas id="main" width="160" height="160">    
         </canvas>
         <br>
         <!-- <a id="downloadLnk" download="pixor.png"> <input type="button" onclick="download()" value="Save Me!"/></a>-->
@@ -18,9 +18,12 @@
 </html>
 
 <script>
+    var seedFile;
+    var colors2 = ["red","brown","white", "orange", "black", "yellow","green","blue","indigo","violet","grey","pink"];
+    var colors = ["#000000", "#fcfcfc", "#f8f8f8", "#bcbcbc", "#7c7c7c", "#a4e4fc", "#3cbcfc", "#0078f8", "#0000fc", "#b8b8f8", "#6888fc", "#0058f8", "#0000bc", "#d8b8f8", "#9878f8", "#6844fc", "#4428bc", "#f8b8f8", "#f878f8", "#d800cc", "#940084", "#f8a4c0", "#f85898", "#e40058", "#a80020", "#f0d0b0", "#f87858", "#f83800", "#a81000", "#fce0a8", "#fca044", "#e45c10", "#881400", "#f8d878", "#f8b800", "#ac7c00", "#503000", "#d8f878", "#b8f818", "#00b800", "#007800", "#b8f8b8", "#58d854", "#00a800", "#006800", "#b8f8d8", "#58f898", "#00a844", "#005800", "#00fcfc", "#00e8d8", "#008888", "#004058", "#f8d8f8", "#787878"];
 
-    var colors = ["black","orange","yellow","green","blue","indigo","violet","brown","white","red","grey","pink"];
 
+    
     // Get the input field
     var inputVal = document.getElementById("inp");
 
@@ -37,8 +40,9 @@
     });
 
     function start(){
-        for(var x = 0; x<300; x+=10){
-            for(var y = 0; y<500; y+=10){
+        seedIt();
+        for(var x = 0; x<160; x+=10){
+            for(var y = 0; y<160; y+=10){
                 drawIt(x, y);
             }
         }
@@ -60,39 +64,61 @@
 					alert("Please use Chrome");
 				}
 			}
-    function rando(salt_x, salt_y){
-        var randy = 0;
+    function seedIt(seed){
         var inp = document.getElementById("inp");
         var seed = inp.value;
-      //  alert(seed.length);
-        for(var x = 0; x < seed.length; x++){
-            if(x == 0){
-                randy += seed.charCodeAt(x)*salt_y;
-                //alert(randy);
-            }
-             
-            else{
-                randy = randy * (seed.charCodeAt(x)+salt_x);
-           //     alert(randy);
-            } 
-    
-            /* for(var y = 0; y < seed.length; y++){
-                //alert(x+ " " +y);
-                if(y%2 == 0){
-                    randy += randy;
-                }
-                else{
-                    randy = randy * randy;
-                }
-            } */
-        
-        
+        if(seed == ""){
+            seed = "Aaron";
         }
-      //  alert("emnd");
-        return (randy*(salt_x*salt_y))%26;
-    };
+        seedFile =
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']],
+        [['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x'],['x']];
+        while(seed.length < 256){
+            seed+=seed;
+        }
+        if(seed.length > 256){
+            var dif = seed.length - 256;
+            seed = seed.substring(0,(seed.length-dif));
+        }
+        var index = 0;
+        for (var i = 0; i < 16; i++){
+            for (var j = 0; j < 16; j++){
+                seedFile[j][i] = seed[index];
+                index++;
+            }
+        }
+        console.log(seedFile);
+        return seedFile;
+    }
+
+    function rando(salt_x, salt_y){
+        seed = seedFile;
+        // console.log("salt x =" + salt_x);
+        // console.log("salt y =" + salt_y);
+        // console.log("seed is " + seed);
+        // console.log("seed length is " + seed.length);
+        // console.log("the hash is " + hashy);
+        // console.log("the char is " + seed[hashy]);
+        // console.log("the code is " + seed[hashy].charCodeAt(0));
+        console.log()
+        return ((seed[Math.floor(salt_x/10)][Math.floor(salt_y/10)]).charCodeAt(0));
+     };
 /*
-    function download() {
+//     function download() {
     var dt = canvas.toDataURL('image/png');
     this.href = dt;
     var pix = document.getElementById("downloadLnk");
@@ -108,7 +134,7 @@
 
     con.beginPath();
     con.rect(x, y, 10, 10);  
-    con.fillStyle = colors[(rando((x+1), (y+1))%12)];
+    con.fillStyle = colors[(rando((x+1), (y+1))%55)];
     con.fill();
     };
 
