@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<title>Aaron+ Blog</title>
+<link rel="icon" type="image/x-icon" href="logo2.png">
+<link rel="stylesheet" href="blog.css">
+</head>
+    
+<body>
+    <div> <a class="butt" href="http://aaronfye.com">Home</a> <a class="butt" href="http://aaronfye.com/blog/blog.html">Blog</a> </div>
+    <center>
+    <h1>The 8 </h1> <h1 style="color: orangered;">Command-ments</h1>
+    <br/>
+
+<p>This blog is going to be a little different,   we’re going rapid-fire with short descriptions instead of diving deep. Sometimes you just need the highlights to know what’s worth remembering. Whether you're studying for the CompTIA A+ exam or just learning your way around Command Prompt, these common commands are the bread and butter of troubleshooting and IT work.</p>
+
+  <h2><code>/?</code>,   Your Built-In Help Guide</h2>
+  <p>If there’s only one thing you take away from this post, let it be this: <code>/?</code> is your friend. Adding it to the end of any command gives you the rundown on how that command works,   syntax, options, flags, and all. For example, <code>ping /?</code> will show you every way to customize the ping command. No Googling necessary!</p>
+
+  <h2><code>ping</code>,   See If Something's Alive</h2>
+  <p><code>ping</code> sends out packets to a given IP address or URL and waits to see if a response comes back. If the target device is up and reachable, you'll get replies. If not, you'll get timeouts. It’s often the very first step in network troubleshooting, and it tells you whether or not a device is connected to the network,  or if the problem lies elsewhere.</p>
+
+  <h2><code>ipconfig</code>,   View Your Network Info</h2>
+  <p><code>ipconfig</code> dumps out your IP address, subnet mask, default gateway, and DNS settings. Run it and you’ll know what your computer thinks its network identity is. It’s also helpful for releasing and renewing your IP address, flushing DNS, or just confirming your IPv4 vs. IPv6 info.</p>
+
+  <h2><code>tracert</code>,   Follow the Path</h2>
+  <p>Short for “trace route,” this command shows you all the hops (routers or switches) that your network traffic passes through on the way to its destination. It’s a great way to diagnose where connectivity is failing. If you see timeouts halfway through, the issue is probably upstream from you.</p>
+
+  <h2><code>gpupdate</code>,   Sync Group Policy</h2>
+  <p>This command pulls down the latest Group Policy settings from your domain controller. It’s not super relevant for home users, but for IT professionals in enterprise environments, it’s essential. Think of it as a way to “refresh” the rules that govern what your machine can and can’t do.</p>
+
+  <h2><code>chkdsk</code>,   Check the Drive</h2>
+  <p>Short for “Check Disk,” this command scans a storage drive for file system errors and bad sectors. You need to run Command Prompt as Administrator for it to work properly. It’s particularly useful when a drive starts behaving strangely or you suspect corruption.</p>
+
+  <h2><code>diskpart</code>,   Partition Like a Pro</h2>
+  <p><code>diskpart</code> is your go-to for managing disk partitions. Want to split a physical drive into multiple volumes? This is how you do it. It's often used for setting up dual-boot environments or preparing a drive for OS installation. Just be careful,   this command has the power to wipe entire disks.</p>
+
+  <h2><code>shutdown</code>,   Turn Off the Lights</h2>
+  <p>Yes, it really is that simple. Typing <code>shutdown</code> initiates a system shutdown. Add <code>/r</code> to reboot, <code>/s</code> to shut down, or <code>/t 0</code> to do it immediately. It’s a nice tool when remote-controlling servers or scheduling restarts for updates.</p>
+
+  <h2>Wrapping Up</h2>
+  <p>Command Prompt might look intimidating at first, but these commands give you real power over your system and network. Once you get comfortable with them, you’ll wonder how you ever managed without them. Practice makes perfect, and there’s no harm in experimenting,   just remember to use <code>/?</code> to stay safe.</p>
+
+  <blockquote>
+    <code>&gt; shutdown</code>
+  </blockquote>
+    </center>
+</body>

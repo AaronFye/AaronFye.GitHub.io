@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+<title>Aaron+ Blog</title>
+<link rel="icon" type="image/x-icon" href="logo2.png">
+<link rel="stylesheet" href="blog.css">
+</head>
+    
+<body>
+    <div> <a class="butt" href="http://aaronfye.com">Home</a> <a class="butt" href="http://aaronfye.com/blog/blog.html">Blog</a> </div>
+    <center>
+    <h1>Port </h1> <h1 style="color: orangered;">Authority</h1>
+    <br/>
+
+    <!-- <p>In this blog, we will be looking at ports, and no, not the boat kind. I’m going to try to fit in all the ports you will need to know for the A+ exam, but there are a lot, so I’ll try my best.</p>
+    <p>We will be going in numerical order here, so the first port is, of course, port 21, FTP (File Transfer Protocol) This one is pretty self explanatory, especially if you have ever used something like Filezilla (A 3rd party file transfer program) that allows you to transfer files over FTP. This is commonly done to transfer files to IoT devices, like a Raspberry Pi and the like, so you don’t have to keep moving the SD card back and forth. As of 2021 however, browsers no longer support FTP by default, so you would need a 3rd party software like mentioned before if you want to transfer files.</p>
+    <p>SSH (Secure Shell … Protocol, don’t ask why it isn’t SSP) is at port 22 is used to securely connect to a remote (as in not the one you are using, not necessarily far away) computer (and in the most cases servers) and run commands on it. Harking back to the FTP use case, this is also very useful for a Raspberry Pi, so you don’t have to hook up a monitor and keyboard to the device, you can just use SSH to remotely run commands off your own machine.</p>
+    <p>Next up is Telnet at port 23. Now, what do you think Telnet stands for? I bet you are thinking “Something network”, but would you have guessed it is short for “Teletype Network”? Telnet is, similar to SSH, used to remotely type on a keyboard. It is not a huge system still tho, mostly due to it becoming obsolete and being replaced by better, more secure protocols.</p>
+    <p>Next up, of course, is port 25, SMTP or Simple Mail Transfer Protocol, just like the name says, it is a simple protocol for transferring mail. Or maybe a protocol to transfer simple mail. Either way, you have mail, it’ll deliver it. If you are using a 3rd party email software (gmail, yahoo, etc.) they do all this work for you, but if you want to set up your own email server, you need to configure it as an SMTP server. Then you need to get into the nitty gritty with IMAP and POP3, but that is out of the scope of this blog, we are just doing a quick run down on the ports.</p>
+    <p>We are getting close to the end of this blog, so it looks like we will be having to split up this topic, but for the final one on here, let’s look at DNS or Domain Name Service. It lies on port 53 and might be the most useful of all the ports. Without DNS, you wouldn’t be able to go to google.com, you would have to google’s IP address directly. See the way DNS works is it takes the domain name provided by you, and does a look up for the ip address associated with it. And depending on where you are in the world, it might be a different IP, as Google is not stored on one single IP, but on many all over the place, so knowing exactly which IP to go to wherever you are would be very confusing.</p> -->
+
+    <p>In this blog, we’re diving into the world of <strong>ports</strong>—and no, not the boat kind. We’re talking about the numbered network ports you’ll need to recognize for the A+ certification exam. There are quite a few, so I’ll try to cover as many as I can without making your eyes glaze over.</p>
+
+    <p>We’ll be going in numerical order, because that just makes life easier. Let’s get started!</p>
+
+    <h2>Port 21 – FTP (File Transfer Protocol)</h2>
+    <p><strong>FTP</strong> is short for File Transfer Protocol, and as the name suggests, it’s used for transferring files. This port is commonly associated with programs like <em>FileZilla</em>, which let you move files between a local machine and a remote device.</p>
+
+    <p>One common use case: transferring files to an IoT device like a Raspberry Pi. It beats pulling out the SD card every time. It’s worth noting, though, that most modern web browsers no longer support FTP natively (as of 2021), so you'll need third-party software for this task.</p>
+
+    <h2>Port 22 – SSH (Secure Shell)</h2>
+    <p><strong>SSH</strong> stands for Secure Shell (not “SSP,” I know, weird). It allows you to securely connect to another computer—typically a server—and run commands remotely. If you’ve ever used a Raspberry Pi without a monitor and keyboard, SSH is your best friend.</p>
+
+    <p>It’s a secure and efficient way to access remote systems without needing a full graphical interface.</p>
+
+    <h2>Port 23 – Telnet</h2>
+    <p>Next up is <strong>Telnet</strong>, which operates on port 23. Now, fun fact: Telnet stands for <em>Teletype Network</em>—not “Telecom Network” like you might expect. Telnet is also used to remotely access computers, similar to SSH.</p>
+
+    <p>The downside? It’s <strong>not secure</strong>. Data sent via Telnet is in plain text, so it's mostly been replaced by more secure alternatives like SSH. It still pops up in legacy systems, though, so it's worth knowing.</p>
+
+    <h2>Port 25 – SMTP (Simple Mail Transfer Protocol)</h2>
+    <p><strong>SMTP</strong> is the protocol used to send emails. Whether you think of it as a “simple protocol to transfer mail” or a “protocol to transfer simple mail,” the end result is the same: it helps your messages get from point A to point B.</p>
+
+    <p>Most people don’t interact with SMTP directly, since third-party email providers like Gmail or Yahoo handle all the backend work. But if you're running your own email server, configuring SMTP is a must. (POP3 and IMAP also come into play here—but we’ll save those for another day.)</p>
+
+    <h2>Port 53 – DNS (Domain Name System)</h2>
+    <p>Let’s finish this post with a heavy hitter: <strong>DNS</strong>, which runs on port 53. This one might be the most important protocol of all, because without it, you wouldn’t be able to type in <em>google.com</em> and end up at Google’s homepage.</p>
+
+    <p>DNS works by taking a domain name and translating it into an IP address. The cool part? That IP address might be different depending on your location, since companies like Google have data centers all over the world. So DNS helps route you to the fastest or nearest server, making the experience smoother for everyone.</p>
+
+    <h2>Wrapping Up</h2>
+    <p>We’ve just scratched the surface of the many ports you’ll need to remember for the A+ exam. From file transfers and remote access to sending email and navigating the web, these protocols make up the foundation of modern network communication.</p>
+
+    <p>We’ll cover more ports in a future blog, but for now, you’ve got a solid start on the essentials. Memorize those port numbers—they’re guaranteed to show up on the test (and in real-world scenarios too).</p>
+
+    </center>
+</body>
